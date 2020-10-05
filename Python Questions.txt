@@ -1,0 +1,62 @@
+Syntax Questions: 
+1. How would you declare a class named Foo with a variable for 'name' set to "Espresso"?
+	A. class Foo:
+		def name = "Espresso"
+	B. class Foo:
+		def __init__(self):
+			self.name = "Espresso"
+	C. def class Foo: 
+		name = "Espresso"
+	D. class Foo:
+		__init__(name)
+			name = "Espresso"
+
+2. 
+Vocabulary Questions:
+1. What is the purpose of a class in Python?
+	A. To divide local and global variables
+	B. To access memory from the heap
+	C. To separate objects in code by their attributes
+	D. To debug a program without exiting it
+2. What does it mean for an attribute to be static?
+	A. It is shared by all instances of a class
+	B. It is defined at runtime
+	C. It may be overwritten
+	D. It allows you to modify it later in the program
+3. Dynamically-allocated memory is stored _____?
+	A. In class variables
+	B. On the heap
+	C. On the stack 
+	D. Globally
+4. What characterizes a high-level programming language?
+	A. It is difficult to learn 
+	B. It is used for database systems
+	C. It employs strong abstraction from the details of the computer
+	D. It operates "close to the metal" of the computer
+Logic Questions:
+1. What is the output of the following code?
+
+a = True
+b = True
+c = False
+
+if not a or not b:
+	print 1
+elif not a or b and c:
+	print 2
+elif not a or not b or b and a:
+	print 3
+else:
+	print 4
+
+A. 1
+B. 2
+C. 3
+D. 4 
+
+Number Conversion Questions:
+1. What is the hexadecimal representation of the binary 100001?
+
+2. What is the binary representation of the hexadecimal de?
+
+Generate random questions converting between the two, limit to fff in hexadecimal for ease of use. 
