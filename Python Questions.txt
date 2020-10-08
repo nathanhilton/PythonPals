@@ -1,0 +1,158 @@
+Syntax Questions: 
+1. How would you declare a class named Foo with a variable for 'name' set to "Espresso"?
+	A. class Foo:
+		def name = "Espresso"
+	B. class Foo: ***
+		def __init__(self):
+			self.name = "Espresso"
+	C. def class Foo: 
+		name = "Espresso"
+	D. class Foo:
+		__init__(name)
+			name = "Espresso"
+
+2. Which of these code snippets will compile in Python?
+A. if 4 == 3
+	print(True)
+
+B. if 4 == 3:
+    print(True)
+
+C. if 4 == 3:  ***
+	print(True)
+
+D. if 4 == 3
+     print(true)	
+
+3. Which of these is not a reserved Python keyword?
+A. 'True'
+B. 'Boolean' ***
+C. 'try'
+D. 'None'
+
+4. Which of these is not a reserved Python keyword?
+A. with
+B. do ***
+C. break
+D. class
+
+5. For which of these concepts does Python have built in support
+A. Arrays
+B. Pointers
+C. Vectors
+D. Tuples ***
+Vocabulary Questions:
+
+1. What is the purpose of a class in Python?
+	A. To divide local and global variables
+	B. To access memory from the heap
+	C. To separate objects in code by their attributes ***
+	D. To debug a program without exiting it
+
+2. What does it mean for an attribute to be static?
+	A. It is shared by all instances of a class ***
+	B. It is defined at runtime
+	C. It may be overwritten
+	D. It allows you to modify it later in the program
+
+3. Dynamically-allocated memory is stored _____?
+	A. In class variables
+	B. On the heap ***
+	C. On the stack 
+	D. Globally
+
+4. What characterizes a high-level programming language?
+	A. It is difficult to learn 
+	B. It is used for database systems
+	C. It employs strong abstraction from the details of the computer ***
+	D. It operates "close to the metal" of the computer
+
+5. What is the name of the output of a compiler after it translates the program?
+A. Object Code ***
+B. Source Code
+C. Preprocessor
+D. Script
+
+Logic Questions:
+1. What is the output of the following code?
+
+a = True
+b = True
+c = False
+
+if not a or not b:
+	print 1
+elif not a or b and c:
+	print 2
+elif not a or not b or b and a:
+	print 3
+else:
+	print 4
+
+A. 1
+B. 2
+C. 3 ***
+D. 4 
+
+2. What is the output of the following code?
+
+names = ['John', 'Paul', 'George', 'Ringo']
+print names[1][-2]
+
+A. h
+B. u ***
+C. o
+D. a
+
+3. What is the output of the following code?
+
+list = [ 'one', 'two']
+for i in list:
+	list.append(i.upper())
+	print(list)
+
+A. ['one', 'two']
+B. ['one, 'two', 'one', 'two']
+C. ['one', 'two', 'one']
+D. No Output ***
+
+
+4. What is the output of the following code?
+
+dictionary = {1: 'first', 2: 'second', 3: 'third', 4: 'fourth'}
+del dictionary[1]
+dictionary[1] = '42'
+del dictionary[2]
+print len(dictionary)
+
+
+A. 1
+B. 2
+C. 3 ***
+D. 4
+
+5. What is the output of the following code?
+
+arbitraryTuple = (2, 5)
+print 2 * arbitraryTuple
+
+A. (2, 5, 2, 5) ***
+B. (4, 10)
+C. 20
+D. (2, 2, 5, 5)
+
+Number Conversion Questions:
+
+1. What is the hexadecimal representation of the binary 100001?
+A. a1
+B. 21 ***
+C. 149
+D. fe
+
+2. What is the binary representation of the hexadecimal de?
+A. 11011110 ***
+B. 110
+C. 1101
+D. 11111000
+ 
+Generate random questions converting between the two, limit to fff in hexadecimal for ease of use. 
