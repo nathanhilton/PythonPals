@@ -27,3 +27,24 @@ class button():
                 return True
 
         return False
+
+class healthBar():
+    def __init__(self, x, y, width, height, health, orientation):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.health = health
+        self.orientation = orientation
+
+    def set_health(self, newHealth):
+        self.height = newHealth
+
+    def draw(self, screen):
+        pygame.draw.rect(screen, (0,0,0), (self.x,self.y, self.width, self.height))
+        pygame.draw.rect(screen, (0,128,0), (self.x, self.y, self.width, self.height))
+        font = pygame.font.SysFont('comicsans', 60)
+        text = font.render("HP:", 1, (0, 0, 0), (204,204,0))
+        text_rect = text.get_rect()
+        screen.blit(text, text_rect)
+        pygame.display.update()
