@@ -1,5 +1,6 @@
 import Button
 import pygame
+import Player
 
 pygame.init()
 
@@ -52,6 +53,12 @@ def theBattle():
     screen.fill(white)
     while True:
         userHealth.draw(screen)
+        # player = Player()
+        # player.rect.x = 0
+        # player.rect.y = 0
+        # player_list = pygame.sprite.Group()
+        # player_list.add(player)
+
         for ev in pygame.event.get():
             if ev.type == pygame.QUIT:
                 pygame.quit()
