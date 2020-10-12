@@ -38,13 +38,22 @@ class healthBar():
         self.orientation = orientation
 
     def set_health(self, newHealth):
-        self.height = newHealth
+        self.health = newHealth
 
     def draw(self, screen):
-        pygame.draw.rect(screen, (0,0,0), (self.x,self.y, self.width, self.height))
-        pygame.draw.rect(screen, (0,128,0), (self.x, self.y, self.width, self.height))
-        font = pygame.font.SysFont('comicsans', 60)
-        text = font.render("HP:", 1, (0, 0, 0), (204,204,0))
-        text_rect = text.get_rect()
-        screen.blit(text, text_rect)
+        pygame.draw.rect(screen, (255,255,255), (self.x - 2, self.y - 2, self.width + 4, self.height + 4))
+        pygame.draw.rect(screen, (0, 0, 0), (self.x, self.y, self.width, self.height))
+        if self.health != 0:
+            if self.health >= 55:
+                pygame.draw.rect(screen, (0,128,0), (self.x, self.y, self.width - (self.width * ((100-self.health)/100)), self.height))
+            elif self.health < 25:
+                pygame.draw.rect(screen, (255, 0, 0), (self.x, self.y, self.width - (self.width * ((100 - self.health) / 100)), self.height))
+            else:
+                pygame.draw.rect(screen, (255, 255, 0), (self.x, self.y, self.width - (self.width * ((100 - self.health) / 100)), self.height))
+            print(self.health)
+            # font = pygame.font.SysFont('comicsans', 40)
+            # text = font.render("HP:", 1, (0, 0, 0), (204,204,0))
+            # text_rect = text.get_rect()
+            # text_rect.center = (self.x + (self.width * 0.15), self.y + (self.height * 0.5))
+            # screen.blit(text, text_rect)
         pygame.display.update()
