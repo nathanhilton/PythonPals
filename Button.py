@@ -9,6 +9,12 @@ class button():
         self.height = height
         self.text = text
 
+    def modify(self, x, y, width, height):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+
     def draw(self, screen, outline=None):
         # Call this method to draw the button on the screen
         if outline:
