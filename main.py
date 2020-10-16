@@ -73,6 +73,7 @@ def theBattle():
     coffee = pygame.transform.rotozoom(coffee, 0, 0.5)
     snake = pygame.transform.rotozoom(snake, 0, 0.7)
     health = 100
+    userHealth.set_health(health)
     extraButton.draw(screen)
 
     extraButton2.draw(screen)
@@ -84,7 +85,8 @@ def theBattle():
     enemyHealth.draw(screen)
     userHealth.draw(screen)
     #questions.load_question()
-    while True:
+    battle = True
+    while battle:
         for ev in pygame.event.get():
             pos = pygame.mouse.get_pos()
             if ev.type == pygame.QUIT:
@@ -103,6 +105,9 @@ def theBattle():
                     health = health - 10
                     userHealth.set_health(health)
                     userHealth.draw(screen)
+            if health <= 0:
+                print("You lost!")
+                battle = False
 
 """
 def options():
@@ -121,16 +126,18 @@ def options():
     startscreen()
 """
 
-# start screen
-menuOption = startscreen(width, height)
 
-#  go to start, options, or quit
-if menuOption == "start":
-    theBattle()
-elif menuOption == "options":
-    print('this is the options')
-    #options()
-elif menuOption == "quit":
-    pygame.quit()
+enter_game = True
+while enter_game:
+    # start screen
+    menuOption = startscreen(width, height)
+
+    #  go to start, options, or quit
+    if menuOption == "start":
+        theBattle()
+    elif menuOption == "options":
+        print('this is the options')
+    elif menuOption == "quit":
+        enter_game = False
 
 pygame.quit()
