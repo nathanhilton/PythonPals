@@ -15,7 +15,7 @@ class button():
         self.width = width
         self.height = height
 
-    def draw(self, screen, outline=None):
+    def draw(self, screen, fontSize, outline=None):
         # Call this method to draw the button on the screen
         if outline:
             pygame.draw.rect(screen, outline, (round(self.x - 2, self.y - 2), round(self.width + 4, self.height + 4)), 0)
@@ -23,9 +23,11 @@ class button():
         pygame.draw.rect(screen, self.color, (round(self.x), round(self.y), round(self.width), round(self.height)), 0)
 
         if self.text != '':
-            font = pygame.font.SysFont('comicsans', 60)
+            font = pygame.font.SysFont('comicsans', fontSize)
             text = font.render(self.text, 1, (0, 0, 0))
             screen.blit(text, (round(self.x + (self.width / 2 - text.get_width() / 2)), round(self.y + (self.height / 2 - text.get_height() / 2))))
+
+        pygame.display.update()
 
     def isOver(self, pos):
         if pos[0] > self.x and pos[0] < self.x + self.width:
