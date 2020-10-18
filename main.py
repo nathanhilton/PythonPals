@@ -23,7 +23,7 @@ optionsButton = Button.button(color_light, (width * 0.25), (height * 6 / 12), (w
 quitButton = Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10), "Quit")
 userHealth = Button.healthBar(20, 20, 200, 30, 100, "left")
 enemyHealth = Button.healthBar(width - 20 - 200, 20, 200, 30, 100, "right")
-
+title = Button.text(gold, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150, "PythonPals")
 '''
 extraButton = Button.button(color_light, 200, 200, 50, 50, "minus 1")
 extraButton2 = Button.button(color_light, 200, 300, 50, 50, "minus 5")
@@ -42,9 +42,7 @@ d = Button.button(color_light, 200, 400, 50, 50, "d")
 
 def reDrawStartWindow(width, height):
     screen.fill(gold)
-    font = pygame.font.SysFont('comicsans', 150)
-    text = font.render("PythonPals", 1, (0, 0, 0))
-    screen.blit(text, (310, 50))
+    title.draw(screen)
     startButton.draw(screen, 60)
     optionsButton.draw(screen, 60)
     quitButton.draw(screen, 60)
@@ -65,6 +63,7 @@ def startscreen(width, height):
                 startButton.modify((startWidth * 0.25), (startHeight * 3 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
                 optionsButton.modify((startWidth * 0.25), (startHeight * 6 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
                 quitButton.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
+                title.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
                 reDrawStartWindow(startWidth, startHeight)
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if startButton.isOver(pos):

@@ -36,6 +36,31 @@ class button():
 
         return False
 
+class text():
+    def __init__(self, color, x, y, width, height, textSize, text=''):
+        self.color = color
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.text = text
+        self.textSize = textSize
+
+    def modify(self, x, y, width, height):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+
+    def draw(self, screen):
+        pygame.draw.rect(screen, self.color, (round(self.x), round(self.y), round(self.width), round(self.height)), 0)
+
+        if self.text != '':
+            font = pygame.font.SysFont('comicsans', self.textSize)
+            text = font.render(self.text, 1, (0, 0, 0))
+            screen.blit(text, (round(self.x + (self.width / 2 - text.get_width() / 2)), round(self.y + (self.height / 2 - text.get_height() / 2))))
+
+
 class healthBar():
     def __init__(self, x, y, width, height, health, orientation):
         self.x = x
