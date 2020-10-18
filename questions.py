@@ -41,7 +41,7 @@ def get_result(guess, answer):
         return False
 
 
-def get_question(category):
+def get_question_dontuse(category):
     wk = load_workbook(filename='python_questions.xlsx')
     ws = wk.active
     # list returned has the info
