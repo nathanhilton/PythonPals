@@ -70,6 +70,12 @@ class healthBar():
         self.health = health
         self.orientation = orientation
 
+    def modify(self, x, y, width, height):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+
     def set_health(self, newHealth):
         self.health = newHealth
 

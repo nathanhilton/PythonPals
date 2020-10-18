@@ -65,6 +65,8 @@ def startscreen(width, height):
                 optionsButton.modify((startWidth * 0.25), (startHeight * 6 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
                 quitButton.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
                 title.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
+                width = startWidth
+                height = startHeight
                 reDrawStartWindow(startWidth, startHeight)
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if startButton.isOver(pos):
@@ -79,7 +81,7 @@ def startscreen(width, height):
 
         pygame.display.update()
 
-def chooseCategory():
+def chooseCategory(playerGroup, enemyGroup):
     cat1.draw(screen, 60)
     cat2.draw(screen, 60)
     cat3.draw(screen, 60)
@@ -103,7 +105,18 @@ def chooseCategory():
                 elif cat5.isOver(pos):
                     return 5
 
-def chooseAnswer():
+            if ev.type == pygame.VIDEORESIZE:
+                print("you are in it")
+                startWidth = ev.w
+                startHeight = ev.h
+                userHealth.modify(0.02 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
+                enemyHealth.modify(0.88 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
+                drawBattle(playerGroup, enemyGroup, startWidth, startHeight)
+                #pygame.draw.rect(screen, (0, 0, 0), (0, 0, startWidth, startHeight * 0.07))
+                #enemyHealth.draw(screen)
+                #userHealth.draw(screen)
+
+def chooseAnswer(playerGroup, enemyGroup):
     a.draw(screen, 60)
     b.draw(screen, 60)
     c.draw(screen, 60)
@@ -123,8 +136,19 @@ def chooseAnswer():
                     return 'c'
                 elif d.isOver(pos):
                     return 'd'
+            if ev.type == pygame.VIDEORESIZE:
+                print("you are in it")
+                startWidth = ev.w
+                startHeight = ev.h
+                userHealth.modify(0.02 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
+                enemyHealth.modify(0.88 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
+                drawBattle(playerGroup, enemyGroup, startWidth, startHeight)
+                #pygame.draw.rect(screen, (0, 0, 0), (0, 0, startWidth, startHeight * 0.07))
+                #enemyHealth.draw(screen)
+                #userHealth.draw(screen)
 
-def drawBattle(playerGroup, enemyGroup):
+def drawBattle(playerGroup, enemyGroup, width, height):
+    pygame.display.update()
     screen.fill(white)
     # coffee = pygame.image.load("coffee1.png")
     # snake = pygame.image.load("snake1.png")
@@ -133,7 +157,7 @@ def drawBattle(playerGroup, enemyGroup):
     # coffee = pygame.transform.rotozoom(coffee, 0, 0.5)
     # snake = pygame.transform.rotozoom(snake, 0, 0.7)
 
-    pygame.draw.rect(screen, (0, 0, 0), (0, 0, width, height * 0.1))
+    pygame.draw.rect(screen, (0, 0, 0), (0, 0, width, height * 0.07))
     # screen.blit(snake, (75, 560))
     # screen.blit(coffee, (1000, 550))
     playerGroup.draw(screen)
@@ -162,21 +186,23 @@ def theBattle():
     pygame.display.update()
 
 
+
     battle = True
     while battle:
         clock.tick(27)
-        drawBattle(playerGroup, enemyGroup)
-        c = chooseCategory()
+
+        drawBattle(playerGroup, enemyGroup, screen.get_width(), screen.get_height())
+        c = chooseCategory(playerGroup, enemyGroup)
         questionNumber = questions.load_question(c)
         question, choices, answer = questions.get_question(questionNumber)
 
-        drawBattle(playerGroup, enemyGroup)
+        drawBattle(playerGroup, enemyGroup, screen.get_width(), screen.get_height())
         q = Button.button(white, 600, 100, 50, 50, textwrap.shorten(question, 100))
         c = Button.button(white, 600, 200, 50, 50, textwrap.shorten(choices, 100))
         q.draw(screen, 30)
         c.draw(screen, 30)
 
-        guess = chooseAnswer()
+        guess = chooseAnswer(playerGroup, enemyGroup)
         is_correct = questions.get_result(guess, answer)
 
         if is_correct:
