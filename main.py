@@ -150,16 +150,8 @@ def chooseAnswer(playerGroup, enemyGroup):
 def drawBattle(playerGroup, enemyGroup, width, height):
     pygame.display.update()
     screen.fill(white)
-    # coffee = pygame.image.load("coffee1.png")
-    # snake = pygame.image.load("snake1.png")
-    # coffee.convert()
-    # snake.convert()
-    # coffee = pygame.transform.rotozoom(coffee, 0, 0.5)
-    # snake = pygame.transform.rotozoom(snake, 0, 0.7)
 
     pygame.draw.rect(screen, (0, 0, 0), (0, 0, width, height * 0.07))
-    # screen.blit(snake, (75, 560))
-    # screen.blit(coffee, (1000, 550))
     playerGroup.draw(screen)
     enemyGroup.draw(screen)
     enemyHealth.draw(screen)
@@ -176,12 +168,10 @@ def theBattle():
 
     myPlayer = Player()
     playerGroup = pygame.sprite.Group(myPlayer)
-    # pygame.draw.rect(screen, white, (200, 500, 500, 500))
     playerGroup.draw(screen)
 
     myEnemy = Coffee()
     enemyGroup = pygame.sprite.Group(myEnemy)
-    # pygame.draw.rect(screen, white, (700, 500, 500, 500))
     enemyGroup.draw(screen)
     pygame.display.update()
 
@@ -206,7 +196,7 @@ def theBattle():
         is_correct = questions.get_result(guess, answer)
 
         if is_correct:
-            enemy_health = enemy_health - 10
+            enemy_health = enemy_health - 25
             enemyHealth.set_health(enemy_health)
             enemyHealth.draw(screen)
 
@@ -218,8 +208,23 @@ def theBattle():
             clock.tick(2)
             pygame.draw.rect(screen, white, (200, 500, 500, 500))
             playerGroup.update()
+            playerGroup.update()
             playerGroup.draw(screen)
             pygame.display.update()
+
+            pygame.draw.rect(screen, white, (700, 400, 500, 500))
+            enemyGroup.update()
+            enemyGroup.update()
+            enemyGroup.update()
+            enemyGroup.draw(screen)
+            pygame.display.update()
+            clock.tick(3)
+            pygame.draw.rect(screen, white, (700, 400, 500, 500))
+            enemyGroup.update()
+            enemyGroup.draw(screen)
+            pygame.display.update()
+
+
         else:
             health = health - 10
             userHealth.set_health(health)
@@ -238,56 +243,52 @@ def theBattle():
             clock.tick(3)
             pygame.draw.rect(screen, white, (700, 400, 500, 500))
             enemyGroup.update()
+            enemyGroup.update()
             enemyGroup.draw(screen)
+            pygame.display.update()
+
+
+            pygame.draw.rect(screen, white, (200, 500, 500, 500))
+            playerGroup.update()
+            playerGroup.update()
+            playerGroup.draw(screen)
+            pygame.display.update()
+            clock.tick(2)
+            pygame.draw.rect(screen, white, (200, 500, 500, 500))
+            playerGroup.update()
+            playerGroup.draw(screen)
             pygame.display.update()
 
         if health <= 0:
             print("You lost!")
             battle = False
+            screen.fill((100,100,100))
+            snake = pygame.image.load("snake5.png")
+            snake.convert()
+            snake = pygame.transform.rotozoom(snake, 0, 0.7)
+            screen.blit(snake, (75, 560))
+            gameOver = Button.text(gold, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
+                                "GameOver")
+            gameOver.draw(screen)
+            clock.tick(2)
+            pygame.display.update()
+            pygame.time.delay(4000)
+
         if enemy_health <= 0:
             print("You won!")
             battle = False
-'''
-    battle = True
-    while battle:
-        for ev in pygame.event.get():
-            pos = pygame.mouse.get_pos()
-            if ev.type == pygame.QUIT:
-                pygame.quit()
-                quit()
-            if ev.type == pygame.MOUSEBUTTONDOWN:
-                if extraButton.isOver(pos):
-                    health = health - 1
-                    userHealth.set_health(health)
-                    userHealth.draw(screen)
-                elif extraButton2.isOver(pos):
-                    health = health - 5
-                    userHealth.set_health(health)
-                    userHealth.draw(screen)
-                elif extraButton3.isOver(pos):
-                    health = health - 10
-                    userHealth.set_health(health)
-                    userHealth.draw(screen)
-            if health <= 0:
-                print("You lost!")
-                battle = False
+            screen.fill((100,100,100))
+            snake = pygame.image.load("snake6.png")
+            snake.convert()
+            snake = pygame.transform.rotozoom(snake, 0, 0.7)
+            screen.blit(snake, (75, 560))
+            winScreen = Button.text(gold, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
+                                    "You win!")
+            winScreen.draw(screen)
+            clock.tick(2)
+            pygame.display.update()
+            pygame.time.delay(4000)
 
-
-def options():
-    screen.fill(white)
-    menuButton = Button.button(color_light, 200, 200, 50, 50, "Return To Menu")
-    print("hi")
-    while True:
-        for ev in pygame.event.get():
-            pos = pygame.mouse.get_pos()
-            if ev.type == pygame.QUIT:
-                pygame.quit()
-                quit()
-            if ev.type == pygame.MOUSEBUTTONDOWN:
-                if mouseButton.isOver(pos):
-                    break
-    startscreen()
-'''
 
 
 enter_game = True
@@ -297,7 +298,7 @@ while enter_game:
 
     #  go to start, options, or quit
     if menuOption == "start":
-        theBattle()
+        result = theBattle()
     elif menuOption == "options":
         print('this is the options')
     elif menuOption == "quit":
