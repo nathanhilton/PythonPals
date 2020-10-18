@@ -2,6 +2,7 @@ import Button
 import questions
 import pygame
 import textwrap
+from player import Player, Coffee
 
 pygame.init()
 
