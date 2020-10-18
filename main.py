@@ -124,20 +124,23 @@ def chooseAnswer():
                 elif d.isOver(pos):
                     return 'd'
 
-def drawBattle():
+def drawBattle(playerGroup, enemyGroup):
     screen.fill(white)
-    coffee = pygame.image.load("coffee1.png")
-    snake = pygame.image.load("snake1.png")
-    coffee.convert()
-    snake.convert()
-    coffee = pygame.transform.rotozoom(coffee, 0, 0.5)
-    snake = pygame.transform.rotozoom(snake, 0, 0.7)
+    # coffee = pygame.image.load("coffee1.png")
+    # snake = pygame.image.load("snake1.png")
+    # coffee.convert()
+    # snake.convert()
+    # coffee = pygame.transform.rotozoom(coffee, 0, 0.5)
+    # snake = pygame.transform.rotozoom(snake, 0, 0.7)
 
     pygame.draw.rect(screen, (0, 0, 0), (0, 0, width, height * 0.1))
-    screen.blit(snake, (75, 560))
-    screen.blit(coffee, (1000, 550))
+    # screen.blit(snake, (75, 560))
+    # screen.blit(coffee, (1000, 550))
+    playerGroup.draw(screen)
+    enemyGroup.draw(screen)
     enemyHealth.draw(screen)
     userHealth.draw(screen)
+    pygame.display.update()
 
 def theBattle():
     health = 100
@@ -145,14 +148,29 @@ def theBattle():
     userHealth.set_health(health)
     enemyHealth.set_health(enemy_health)
 
+    clock = pygame.time.Clock()
+
+    myPlayer = Player()
+    playerGroup = pygame.sprite.Group(myPlayer)
+    # pygame.draw.rect(screen, white, (200, 500, 500, 500))
+    playerGroup.draw(screen)
+
+    myEnemy = Coffee()
+    enemyGroup = pygame.sprite.Group(myEnemy)
+    # pygame.draw.rect(screen, white, (700, 500, 500, 500))
+    enemyGroup.draw(screen)
+    pygame.display.update()
+
+
     battle = True
     while battle:
-        drawBattle()
+        clock.tick(27)
+        drawBattle(playerGroup, enemyGroup)
         c = chooseCategory()
         questionNumber = questions.load_question(c)
         question, choices, answer = questions.get_question(questionNumber)
 
-        drawBattle()
+        drawBattle(playerGroup, enemyGroup)
         q = Button.button(white, 600, 100, 50, 50, textwrap.shorten(question, 100))
         c = Button.button(white, 600, 200, 50, 50, textwrap.shorten(choices, 100))
         q.draw(screen, 30)
@@ -165,10 +183,37 @@ def theBattle():
             enemy_health = enemy_health - 10
             enemyHealth.set_health(enemy_health)
             enemyHealth.draw(screen)
+
+            clock.tick(2)
+            pygame.draw.rect(screen, white, (200, 500, 500, 500))
+            playerGroup.update()
+            playerGroup.draw(screen)
+            pygame.display.update()
+            clock.tick(2)
+            pygame.draw.rect(screen, white, (200, 500, 500, 500))
+            playerGroup.update()
+            playerGroup.draw(screen)
+            pygame.display.update()
         else:
             health = health - 10
             userHealth.set_health(health)
             userHealth.draw(screen)
+
+            clock.tick(3)
+            pygame.draw.rect(screen, white, (700, 400, 500, 500))
+            enemyGroup.update()
+            enemyGroup.draw(screen)
+            pygame.display.update()
+            clock.tick(3)
+            pygame.draw.rect(screen, white, (700, 400, 500, 500))
+            enemyGroup.update()
+            enemyGroup.draw(screen)
+            pygame.display.update()
+            clock.tick(3)
+            pygame.draw.rect(screen, white, (700, 400, 500, 500))
+            enemyGroup.update()
+            enemyGroup.draw(screen)
+            pygame.display.update()
 
         if health <= 0:
             print("You lost!")
