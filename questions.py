@@ -1,15 +1,16 @@
 import random
-import Button
+import PythonPals.Button
 from openpyxl import load_workbook
 
-wk = load_workbook(filename='python_questions.xlsx')
+wk = load_workbook(filename='PythonPals\python_questions.xlsx')
 ws = wk.active
-    
+
+
 def load_question(category):
     print("Question Categories: ")
     print("1 Syntax\n2 Vocabulary\n3 Logic\n4 Number Conversion\n5 General\n")
     value = 0
-    
+
     if category == '1':
         value = random.randrange(2, 7)
     elif category == '2':
@@ -23,6 +24,7 @@ def load_question(category):
 
     return value
 
+
 '''
 def get_question(value):
     question = ws['B' + str(value)].value
@@ -34,12 +36,13 @@ def get_question(value):
     return question, choices, answer 
 '''
 
+
 def get_result(guess, answer):
     if guess == answer or guess == answer.capitalize() or guess == answer + '.' or guess == answer.capitalize() + '.':
-        #print("Correct!")
+        # print("Correct!")
         return True
     else:
-        #print("Incorrect")
+        # print("Incorrect")
         return False
 
 
@@ -71,6 +74,7 @@ def get_question(value):
     the_question[5] = ws['E' + str(value)].value
 
     return the_question
+
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
