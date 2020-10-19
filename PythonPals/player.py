@@ -27,10 +27,10 @@ class Coffee(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.images = []
-        self.images.append(pygame.image.load('PythonPals\coffee1.png'))
-        self.images.append(pygame.image.load('PythonPals\coffee2.png'))
-        self.images.append(pygame.image.load('PythonPals\coffee3.png'))
-        self.images.append(pygame.image.load('PythonPals\coffee4.png'))
+        self.images.append(pygame.image.load('PythonPals/coffee1.png'))
+        self.images.append(pygame.image.load('PythonPals/coffee2.png'))
+        self.images.append(pygame.image.load('PythonPals/coffee3.png'))
+        self.images.append(pygame.image.load('PythonPals/coffee4.png'))
 
         self.index = 0
         self.image = self.images[self.index]
