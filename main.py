@@ -81,7 +81,7 @@ def startscreen(width, height):
 
         pygame.display.update()
 
-def chooseCategory():
+def chooseCategory(playerGroup, enemyGroup):
     chooseCat = Button.text(fuschia, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 100, "Choose a category:")
     chooseCat.draw(screen)
     cat1.draw(screen, 50)
@@ -183,7 +183,7 @@ def theBattle():
     while battle:
         clock.tick(27)
         drawBattle(playerGroup, enemyGroup, width, height)
-        choose = chooseCategory()
+        choose = chooseCategory(playerGroup, enemyGroup)
         questionNumber = questions.load_question(choose)
         question = questions.get_question(questionNumber)
 
