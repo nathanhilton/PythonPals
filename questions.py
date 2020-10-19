@@ -23,6 +23,7 @@ def load_question(category):
 
     return value
 
+'''
 def get_question(value):
     question = ws['B' + str(value)].value
     #print(ws[question].value)
@@ -31,6 +32,7 @@ def get_question(value):
     answer = ws['E' + str(value)].value
 
     return question, choices, answer 
+'''
 
 def get_result(guess, answer):
     if guess == answer or guess == answer.capitalize() or guess == answer + '.' or guess == answer.capitalize() + '.':
@@ -41,9 +43,7 @@ def get_result(guess, answer):
         return False
 
 
-def get_question_dontuse(category):
-    wk = load_workbook(filename='python_questions.xlsx')
-    ws = wk.active
+def get_question(value):
     # list returned has the info
     # 0 has the question
     # 1 has answer A
@@ -52,24 +52,6 @@ def get_question_dontuse(category):
     # 4 has answer D
     # 5 has the correct answer (ex "A")
     the_question = ["", "", "", "", "", ""]
-    while True:
-        if category == '1':
-            value = random.randrange(2, 7)
-            break
-        elif category == '2':
-            value = random.randrange(7, 12)
-            break
-        elif category == '3':
-            value = random.randrange(12, 17)
-            break
-        elif category == '4':
-            value = random.randrange(17, 22)
-            break
-        elif category == '5':
-            value = random.randrange(2, 22)
-            break
-        else:
-            print("Invalid Entry: Please enter a number between 1 and 5")
 
     question = 'B' + str(value)
     the_question[0] = ws[question].value

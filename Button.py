@@ -1,4 +1,5 @@
 import pygame
+from pygame.locals import *
 
 class button():
     def __init__(self, color, x, y, width, height, text=''):
@@ -15,7 +16,7 @@ class button():
         self.width = width
         self.height = height
 
-    def draw(self, screen, fontSize, outline=None):
+    def draw(self, screen, fontSize, center=False, outline=None):
         # Call this method to draw the button on the screen
         if outline:
             pygame.draw.rect(screen, outline, (round(self.x - 2, self.y - 2), round(self.width + 4, self.height + 4)), 0)
@@ -25,7 +26,10 @@ class button():
         if self.text != '':
             font = pygame.font.SysFont('comicsans', fontSize)
             text = font.render(self.text, 1, (0, 0, 0))
-            screen.blit(text, (round(self.x + (self.width / 2 - text.get_width() / 2)), round(self.y + (self.height / 2 - text.get_height() / 2))))
+            if center:
+                screen.blit(text, (round(self.x + (self.width / 2 - text.get_width() / 2)), round(self.y + (self.height / 2 - text.get_height() / 2))))
+            else:
+                screen.blit(text, (round(self.x + self.width), round(self.y)))
 
         pygame.display.update()
 

@@ -30,23 +30,23 @@ extraButton = Button.button(color_light, 200, 200, 50, 50, "minus 1")
 extraButton2 = Button.button(color_light, 200, 300, 50, 50, "minus 5")
 extraButton3 = Button.button(color_light, 200, 400, 50, 50, "minus 10")
 '''
-cat1 = Button.button(fuschia, 200, 100, 50, 50, "cat 1")
-cat2 = Button.button(fuschia, 200, 200, 50, 50, "cat 2")
-cat3 = Button.button(fuschia, 200, 300, 50, 50, "cat 3")
-cat4 = Button.button(fuschia, 200, 400, 50, 50, "cat 4")
-cat5 = Button.button(fuschia, 200, 500, 50, 50, "cat 5")
+cat1 = Button.button(fuschia, 200, 200, 30, 30, "Syntax")
+cat2 = Button.button(fuschia, 450, 200, 30, 30, "Vocabulary")
+cat3 = Button.button(fuschia, 700, 200, 30, 30, "Logic")
+cat4 = Button.button(fuschia, 150, 350, 30, 30, "Number Conversion")
+cat5 = Button.button(fuschia, 550, 350, 30, 30, "General")
 
-a = Button.button(color_light, 200, 100, 50, 50, "a")
-b = Button.button(color_light, 200, 200, 50, 50, "b")
-c = Button.button(color_light, 200, 300, 50, 50, "c")
-d = Button.button(color_light, 200, 400, 50, 50, "d")
+a = Button.button(color_light, 200, 175, 25, 25)
+b = Button.button(color_light, 200, 225, 25, 25)
+c = Button.button(color_light, 200, 275, 25, 25)
+d = Button.button(color_light, 200, 325, 25, 25)
 
 def reDrawStartWindow(width, height):
     screen.fill(gold)
     title.draw(screen)
-    startButton.draw(screen, 60)
-    optionsButton.draw(screen, 60)
-    quitButton.draw(screen, 60)
+    startButton.draw(screen, 60, True)
+    optionsButton.draw(screen, 60, True)
+    quitButton.draw(screen, 60, True)
 
 def startscreen(width, height):
     reDrawStartWindow(width, height)
@@ -81,12 +81,14 @@ def startscreen(width, height):
 
         pygame.display.update()
 
-def chooseCategory(playerGroup, enemyGroup):
-    cat1.draw(screen, 60)
-    cat2.draw(screen, 60)
-    cat3.draw(screen, 60)
-    cat4.draw(screen, 60)
-    cat5.draw(screen, 60)
+def chooseCategory():
+    chooseCat = Button.text(fuschia, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 100, "Choose a category:")
+    chooseCat.draw(screen)
+    cat1.draw(screen, 50)
+    cat2.draw(screen, 50)
+    cat3.draw(screen, 50)
+    cat4.draw(screen, 50)
+    cat5.draw(screen, 50)
     while True:
         for ev in pygame.event.get():
             pos = pygame.mouse.get_pos()
@@ -180,20 +182,25 @@ def theBattle():
     battle = True
     while battle:
         clock.tick(27)
+        drawBattle(playerGroup, enemyGroup, width, height)
+        choose = chooseCategory()
+        questionNumber = questions.load_question(choose)
+        question = questions.get_question(questionNumber)
 
-        drawBattle(playerGroup, enemyGroup, screen.get_width(), screen.get_height())
-        c = chooseCategory(playerGroup, enemyGroup)
-        questionNumber = questions.load_question(c)
-        question, choices, answer = questions.get_question(questionNumber)
-
-        drawBattle(playerGroup, enemyGroup, screen.get_width(), screen.get_height())
-        q = Button.button(white, 600, 100, 50, 50, textwrap.shorten(question, 100))
-        c = Button.button(white, 600, 200, 50, 50, textwrap.shorten(choices, 100))
-        q.draw(screen, 30)
-        c.draw(screen, 30)
+        drawBattle(playerGroup, enemyGroup, width, height)
+        q = Button.button(white, 600, 100, 50, 50, textwrap.shorten(question[0], 100))
+        A = Button.button(white, a.x, a.y, 50, 50, textwrap.shorten(question[1], 100))
+        B = Button.button(white, b.x, b.y, 50, 50, textwrap.shorten(question[2], 100))
+        C = Button.button(white, c.x, c.y, 50, 50, textwrap.shorten(question[3], 100))
+        D = Button.button(white, d.x, d.y, 50, 50, textwrap.shorten(question[4], 100))
+        q.draw(screen, 30, True)
+        A.draw(screen, 30)
+        B.draw(screen, 30)
+        C.draw(screen, 30)
+        D.draw(screen, 30)
 
         guess = chooseAnswer(playerGroup, enemyGroup)
-        is_correct = questions.get_result(guess, answer)
+        is_correct = questions.get_result(guess, question[5])
 
         if is_correct:
             enemy_health = enemy_health - 25
