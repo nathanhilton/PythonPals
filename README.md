@@ -10,9 +10,11 @@ the player loses if their own HP reaches zero. While the initial project will ha
 relating to Python, we will be adding functionality allowing users to create their own question decks
 for use in a variety of fields.`
 
-//Package name for PIP installation
+## Package name for PIP installation
+pip install PythonPals
 
-//Run executable command and, if application, initialization commmand
+## Run executable command 
+python-pals
 
-GitHub repository:
+## GitHub repository:
 https://github.com/nathanhilton/PythonPals
