@@ -21,4 +21,4 @@ pip install .
 python-pals
 
 ## GitHub repository:
-https://github.com/nathanhilton/PythonPals/tree/development
+https://github.com/nathanhilton/PythonPals
