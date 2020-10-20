@@ -10,7 +10,7 @@ the player loses if their own HP reaches zero. While the initial project will ha
 relating to Python, we will be adding functionality allowing users to create their own question decks
 for use in a variety of fields.`
 
-`**Note about bugs: In the current version PythonPals, the window resize function has intended effects on the functionality of battle scene. To avoid glitching in the battle scene display, do not resize the game window unless in the main menu screen. In addition, in the questions menu within the battle scene, some of the longer questions have been cut off instead of continuing to the next line. For now, the readability of the majority of questions has been prioritized over displaying the entirety of the longer ones.`
+`**Note about bugs: In the current version of PythonPals, the window resize function has unintended effects on the functionality of the battle scene. To avoid glitching in the battle scene display, do not resize the game window unless in the main menu screen. In addition, in the questions menu within the battle scene, some of the longer questions have been cut off instead of continuing to the next line. For now, the readability of the majority of the questions has been prioritized over displaying the entirety of the longer ones. Lastly, the 'Options' button in the main menu, meant to change certain settings and let the user enter their own questions, currently has no functionality as it would serve no purpose at this stage.`
 
 ## Package name for PIP installation
 pip install PythonPals
