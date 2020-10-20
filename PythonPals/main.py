@@ -6,6 +6,11 @@ from PythonPals.player import Player, Coffee
 
 pygame.init()
 
+class Screen():
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+
 screen = pygame.display.set_mode((0, 0), pygame.RESIZABLE)
 white = (255, 255, 255)
 color_light = (170, 170, 170)
@@ -16,6 +21,8 @@ gold = (197, 179, 88)
 width = screen.get_width()
 height = screen.get_height()
 screen.fill(gold)
+
+theScreen = Screen(screen.get_width(), screen.get_height())
 
 # all the things needed
 startButton = PythonPals.Button.button(color_light, (width * 0.25), (height * 3 / 12), (width * 0.5), (height * 2 / 10),
@@ -73,8 +80,8 @@ def startscreen(width, height):
                 quitButton.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5),
                                   (startHeight * 2 / 10))
                 title.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
-                width = startWidth
-                height = startHeight
+                theScreen.width = startWidth
+                theScreen.height = startHeight
                 reDrawStartWindow(startWidth, startHeight)
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if startButton.isOver(pos):
@@ -91,7 +98,8 @@ def startscreen(width, height):
 
 
 def chooseCategory(playerGroup, enemyGroup):
-    chooseCat = PythonPals.Button.text(fuschia, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10),
+    #chooseCat = PythonPals.Button.button.text(fuschia, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5), (theScreen.height * 1 / 10), 100, "Choose a category:")
+    chooseCat = PythonPals.Button.text(fuschia, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5), (theScreen.height * 1 / 10),
                                        100, "Choose a category:")
     chooseCat.draw(screen)
     cat1.draw(screen, 50)
@@ -124,6 +132,8 @@ def chooseCategory(playerGroup, enemyGroup):
                 userHealth.modify(0.02 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
                 enemyHealth.modify(0.88 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
                 drawBattle(playerGroup, enemyGroup, startWidth, startHeight)
+                theScreen.width = startWidth
+                theScreen.height = startHeight
                 # pygame.draw.rect(screen, (0, 0, 0), (0, 0, startWidth, startHeight * 0.07))
                 # enemyHealth.draw(screen)
                 # userHealth.draw(screen)
@@ -156,6 +166,8 @@ def chooseAnswer(playerGroup, enemyGroup):
                 userHealth.modify(0.02 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
                 enemyHealth.modify(0.88 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
                 drawBattle(playerGroup, enemyGroup, startWidth, startHeight)
+                theScreen.width = startWidth
+                theScreen.height = startHeight
                 # pygame.draw.rect(screen, (0, 0, 0), (0, 0, startWidth, startHeight * 0.07))
                 # enemyHealth.draw(screen)
                 # userHealth.draw(screen)
@@ -193,6 +205,10 @@ def theBattle():
     battle = True
     while battle:
         clock.tick(27)
+        userHealth.modify(0.02 * theScreen.width, 0.02 * theScreen.height, theScreen.width * 0.1,
+                          theScreen.height * 0.03)
+        enemyHealth.modify(0.88 * theScreen.width, 0.02 * theScreen.height, theScreen.width * 0.1,
+                           theScreen.height * 0.03)
         drawBattle(playerGroup, enemyGroup, width, height)
         choose = chooseCategory(playerGroup, enemyGroup)
         questionNumber = PythonPals.questions.load_question(choose)
