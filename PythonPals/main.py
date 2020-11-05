@@ -1,8 +1,8 @@
-import PythonPals.Button
-import PythonPals.questions
+import Button
+import questions
 import pygame
 import textwrap
-from PythonPals.player import Player, Coffee
+from player import Player, Coffee
 
 pygame.init()
 
@@ -25,31 +25,31 @@ screen.fill(gold)
 theScreen = Screen(screen.get_width(), screen.get_height())
 
 # all the things needed
-startButton = PythonPals.Button.button(color_light, (width * 0.25), (height * 3 / 12), (width * 0.5), (height * 2 / 10),
+startButton = Button.button(color_light, (width * 0.25), (height * 3 / 12), (width * 0.5), (height * 2 / 10),
                                        "Start")
-optionsButton = PythonPals.Button.button(color_light, (width * 0.25), (height * 6 / 12), (width * 0.5),
+optionsButton = Button.button(color_light, (width * 0.25), (height * 6 / 12), (width * 0.5),
                                          (height * 2 / 10), "Options")
-quitButton = PythonPals.Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
+quitButton = Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
                                       "Quit")
-userHealth = PythonPals.Button.healthBar(20, 20, 200, 30, 100, "left")
-enemyHealth = PythonPals.Button.healthBar(width - 20 - 200, 20, 200, 30, 100, "right")
-title = PythonPals.Button.text(gold, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
+userHealth = Button.healthBar(20, 20, 200, 30, 100, "left")
+enemyHealth = Button.healthBar(width - 20 - 200, 20, 200, 30, 100, "right")
+title = Button.text(gold, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
                                "PythonPals")
 '''
-extraButton =PythonPals.Button.button(color_light, 200, 200, 50, 50, "minus 1")
-extraButton2 =PythonPals.Button.button(color_light, 200, 300, 50, 50, "minus 5")
-extraButton3 =PythonPals.Button.button(color_light, 200, 400, 50, 50, "minus 10")
+extraButton =Button.button(color_light, 200, 200, 50, 50, "minus 1")
+extraButton2 =Button.button(color_light, 200, 300, 50, 50, "minus 5")
+extraButton3 =Button.button(color_light, 200, 400, 50, 50, "minus 10")
 '''
-cat1 = PythonPals.Button.button(fuschia, 200, 200, 30, 30, "Syntax")
-cat2 = PythonPals.Button.button(fuschia, 450, 200, 30, 30, "Vocabulary")
-cat3 = PythonPals.Button.button(fuschia, 700, 200, 30, 30, "Logic")
-cat4 = PythonPals.Button.button(fuschia, 150, 350, 30, 30, "Number Conversion")
-cat5 = PythonPals.Button.button(fuschia, 550, 350, 30, 30, "General")
+cat1 = Button.button(fuschia, 200, 200, 30, 30, "Syntax")
+cat2 = Button.button(fuschia, 450, 200, 30, 30, "Vocabulary")
+cat3 = Button.button(fuschia, 700, 200, 30, 30, "Logic")
+cat4 = Button.button(fuschia, 150, 350, 30, 30, "Number Conversion")
+cat5 = Button.button(fuschia, 550, 350, 30, 30, "General")
 
-a = PythonPals.Button.button(color_light, 200, 175, 25, 25)
-b = PythonPals.Button.button(color_light, 200, 225, 25, 25)
-c = PythonPals.Button.button(color_light, 200, 275, 25, 25)
-d = PythonPals.Button.button(color_light, 200, 325, 25, 25)
+a = Button.button(color_light, 200, 175, 25, 25)
+b = Button.button(color_light, 200, 225, 25, 25)
+c = Button.button(color_light, 200, 275, 25, 25)
+d = Button.button(color_light, 200, 325, 25, 25)
 
 
 def reDrawStartWindow(width, height):
@@ -98,8 +98,8 @@ def startscreen(width, height):
 
 
 def chooseCategory(playerGroup, enemyGroup):
-    #chooseCat = PythonPals.Button.button.text(fuschia, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5), (theScreen.height * 1 / 10), 100, "Choose a category:")
-    chooseCat = PythonPals.Button.text(fuschia, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5), (theScreen.height * 1 / 10),
+    #chooseCat = Button.button.text(fuschia, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5), (theScreen.height * 1 / 10), 100, "Choose a category:")
+    chooseCat = Button.text(fuschia, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5), (theScreen.height * 1 / 10),
                                        100, "Choose a category:")
     chooseCat.draw(screen)
     cat1.draw(screen, 50)
@@ -211,15 +211,15 @@ def theBattle():
                            theScreen.height * 0.03)
         drawBattle(playerGroup, enemyGroup, width, height)
         choose = chooseCategory(playerGroup, enemyGroup)
-        questionNumber = PythonPals.questions.load_question(choose)
-        question = PythonPals.questions.get_question(questionNumber)
+        questionNumber = questions.load_question(choose)
+        question = questions.get_question(questionNumber)
 
         drawBattle(playerGroup, enemyGroup, width, height)
-        q = PythonPals.Button.button(white, 600, 100, 50, 50, textwrap.shorten(question[0], 100))
-        A = PythonPals.Button.button(white, a.x, a.y, 50, 50, textwrap.shorten(question[1], 100))
-        B = PythonPals.Button.button(white, b.x, b.y, 50, 50, textwrap.shorten(question[2], 100))
-        C = PythonPals.Button.button(white, c.x, c.y, 50, 50, textwrap.shorten(question[3], 100))
-        D = PythonPals.Button.button(white, d.x, d.y, 50, 50, textwrap.shorten(question[4], 100))
+        q = Button.button(white, 600, 100, 50, 50, textwrap.shorten(question[0], 100))
+        A = Button.button(white, a.x, a.y, 50, 50, textwrap.shorten(question[1], 100))
+        B = Button.button(white, b.x, b.y, 50, 50, textwrap.shorten(question[2], 100))
+        C = Button.button(white, c.x, c.y, 50, 50, textwrap.shorten(question[3], 100))
+        D = Button.button(white, d.x, d.y, 50, 50, textwrap.shorten(question[4], 100))
         q.draw(screen, 30, True)
         A.draw(screen, 30)
         B.draw(screen, 30)
@@ -227,7 +227,7 @@ def theBattle():
         D.draw(screen, 30)
 
         guess = chooseAnswer(playerGroup, enemyGroup)
-        is_correct = PythonPals.questions.get_result(guess, question[5])
+        is_correct = questions.get_result(guess, question[5])
 
         if is_correct:
             enemy_health = enemy_health - 25
@@ -300,7 +300,7 @@ def theBattle():
             snake.convert()
             snake = pygame.transform.rotozoom(snake, 0, 0.7)
             screen.blit(snake, (75, 560))
-            gameOver = PythonPals.Button.text(gold, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10),
+            gameOver = Button.text(gold, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10),
                                               150,
                                               "GameOver")
             gameOver.draw(screen)
@@ -316,7 +316,7 @@ def theBattle():
             snake.convert()
             snake = pygame.transform.rotozoom(snake, 0, 0.7)
             screen.blit(snake, (75, 560))
-            winScreen = PythonPals.Button.text(gold, (width * 0.25), (height * 0 / 12), (width * 0.5),
+            winScreen = Button.text(gold, (width * 0.25), (height * 0 / 12), (width * 0.5),
                                                (height * 2 / 10), 150,
                                                "You win!")
             winScreen.draw(screen)

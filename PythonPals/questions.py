@@ -1,9 +1,9 @@
 import random
-import PythonPals.Button
+import Button
 from openpyxl import load_workbook
 
 
-wk = load_workbook(filename="PythonPals/python_questions.xlsx")
+wk = load_workbook(filename="python_questions.xlsx")
 ws = wk.active
 
 
