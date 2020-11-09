@@ -60,14 +60,17 @@ class text():
         self.width = width
         self.height = height
 
-    def draw(self, screen):
+    def draw(self, screen, center):
         #pygame.draw.rect(screen, self.color, (round(self.x), round(self.y), round(self.width), round(self.height)), 0)
 
         if self.text != '':
             font = pygame.font.SysFont('comicsans', self.textSize)
             text = font.render(self.text, True, self.color)
-            screen.blit(text, (round(self.x + (self.width / 2 - text.get_width() / 2)),
-                               round(self.y + (self.height / 2 - text.get_height() / 2))))
+            if center:
+                screen.blit(text, (round(self.x + (self.width / 2 - text.get_width() / 2)),
+                                   round(self.y + (self.height / 2 - text.get_height() / 2))))
+            else:
+                screen.blit(text, (round(self.x + self.width), round(self.y)))
 
 
 class healthBar():

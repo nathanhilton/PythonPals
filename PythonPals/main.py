@@ -5,7 +5,6 @@ import textwrap
 from player import Player, Coffee
 
 
-
 class Screen():
     def __init__(self, width, height):
         self.width = width
@@ -13,6 +12,8 @@ class Screen():
 
 screen = pygame.display.set_mode((0, 0), pygame.RESIZABLE)
 white = (255, 255, 255)
+purple = (110, 113, 198)
+indigo = (51, 57, 255)
 color_light = (170, 170, 170)
 color_dark = (100, 100, 100)
 fuschia = (255, 0, 255)
@@ -22,6 +23,8 @@ lime = (153, 255, 51)
 width = screen.get_width()
 height = screen.get_height()
 screen.fill(gold)
+
+clock = pygame.time.Clock()
 
 theScreen = Screen(screen.get_width(), screen.get_height())
 
@@ -56,7 +59,7 @@ d = Button.button(color_light, 200, 325, 25, 25)
 
 def reDrawStartWindow(width, height):
     screen.fill(gold)
-    title.draw(screen)
+    title.draw(screen, True)
     startButton.draw(screen, 60, True)
     optionsButton.draw(screen, 60, True)
     quitButton.draw(screen, 60, True)
@@ -103,7 +106,7 @@ def chooseCategory(playerGroup, enemyGroup):
     #chooseCat = Button.button.text(fuschia, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5), (theScreen.height * 1 / 10), 100, "Choose a category:")
     chooseCat = Button.text(fuschia, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5), (theScreen.height * 1 / 10),
                                        100, "Choose a category:")
-    chooseCat.draw(screen)
+    chooseCat.draw(screen, True)
     cat1.draw(screen, 50)
     cat2.draw(screen, 50)
     cat3.draw(screen, 50)
@@ -233,16 +236,16 @@ def theBattle():
         question = questions.get_question(questionNumber)
 
         drawBattle(playerGroup, enemyGroup, width, height)
-        q = Button.button(white, 600, 100, 50, 50, textwrap.shorten(question[0], 100))
-        A = Button.button(white, a.x, a.y, 50, 50, textwrap.shorten(question[1], 100))
-        B = Button.button(white, b.x, b.y, 50, 50, textwrap.shorten(question[2], 100))
-        C = Button.button(white, c.x, c.y, 50, 50, textwrap.shorten(question[3], 100))
-        D = Button.button(white, d.x, d.y, 50, 50, textwrap.shorten(question[4], 100))
-        q.draw(screen, 30, True)
-        A.draw(screen, 30)
-        B.draw(screen, 30)
-        C.draw(screen, 30)
-        D.draw(screen, 30)
+        q = Button.text(black, 600, 100, 50, 50, 40, textwrap.shorten(question[0], 100))
+        A = Button.text(black, a.x, a.y, 50, 50, 40, textwrap.shorten(question[1], 100))
+        B = Button.text(black, b.x, b.y, 50, 50, 40, textwrap.shorten(question[2], 100))
+        C = Button.text(black, c.x, c.y, 50, 50, 40, textwrap.shorten(question[3], 100))
+        D = Button.text(black, d.x, d.y, 50, 50, 40, textwrap.shorten(question[4], 100))
+        q.draw(screen, True)
+        A.draw(screen, False)
+        B.draw(screen, False)
+        C.draw(screen, False)
+        D.draw(screen, False)
 
         guess = chooseAnswer(playerGroup, enemyGroup)
         is_correct = questions.get_result(guess, question[5])
@@ -346,7 +349,7 @@ def win():
     winScreen = Button.text(gold, (width * 0.25), (height * 0 / 12), (width * 0.5),
                             (height * 2 / 10), 150,
                             "You win!")
-    winScreen.draw(screen)
+    winScreen.draw(screen, True)
     clock.tick(2)
     pygame.display.update()
     pygame.time.delay(4000)
@@ -361,7 +364,7 @@ def lose():
     gameOver = Button.text(gold, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10),
                            150,
                            "GameOver")
-    gameOver.draw(screen)
+    gameOver.draw(screen, True)
     clock.tick(2)
     pygame.display.update()
     pygame.time.delay(4000)
@@ -374,7 +377,7 @@ option = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (h
 
 def options():
     screen.fill(lime)
-    option.draw(screen)
+    option.draw(screen, True)
     back_to_main.draw(screen, 60, True)
     pygame.display.update()
     opt = True
