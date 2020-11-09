@@ -4,7 +4,6 @@ import sys
 
 
 class Player(pygame.sprite.Sprite):
-
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.images = []
@@ -22,8 +21,17 @@ class Player(pygame.sprite.Sprite):
             self.index = 0
         self.image = self.images[self.index]
 
-class Coffee(pygame.sprite.Sprite):
+    def resize(self, scale):
+            self.height = self.height * scale
+            self.width = self.width * scale
+            self.image = pygame.transform.rotozoom(self.images[self.index], 0, scale)
 
+    def changeLocation(self, x, y):
+        self.x = x
+        self.y = y
+        self.rect = pygame.Rect(x, y, self.width, self.height)
+
+class Coffee(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.images = []
@@ -41,3 +49,13 @@ class Coffee(pygame.sprite.Sprite):
         if self.index >= len(self.images):
             self.index = 0
         self.image = self.images[self.index]
+
+    def resize(self, scale):
+            self.height = self.height * scale
+            self.width = self.width * scale
+            self.image = pygame.transform.rotozoom(self.images[self.index], 0, scale)
+
+    def changeLocation(self, x, y):
+        self.x = x
+        self.y = y
+        self.rect = pygame.Rect(x, y, self.width, self.height)

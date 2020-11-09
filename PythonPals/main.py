@@ -184,7 +184,9 @@ def drawBattle(playerGroup, enemyGroup, width, height):
 
     pygame.draw.rect(screen, (0, 0, 0), (0, 0, width, height * 0.07))
     bg = pygame.image.load("jungleBackground.jpg")
+    bg = pygame.transform.rotozoom(bg, 0, theScreen.width/ 1380)
     screen.blit(bg,(0,0))
+    pygame.draw.rect(screen, (0, 0, 0), (0, 0, theScreen.width, theScreen.height * 0.07))
     playerGroup.draw(screen)
     enemyGroup.draw(screen)
     enemyHealth.draw(screen)
@@ -196,8 +198,9 @@ def drawBackground(playerGroup, enemyGroup, width, height):
     pygame.display.update()
     # screen.fill(white)
 
-    pygame.draw.rect(screen, (0, 0, 0), (0, 0, width, height * 0.07))
+    pygame.draw.rect(screen, (0, 0, 0), (0, 0, theScreen.width, theScreen.height * 0.07))
     bg = pygame.image.load("jungleBackground.jpg")
+    bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1380)
     screen.blit(bg,(0,0))
     # playerGroup.draw(screen)
     # enemyGroup.draw(screen)
