@@ -326,36 +326,42 @@ def theBattle():
             pygame.display.update()
 
         if health <= 0:
-            print("You lost!")
             battle = False
-            screen.fill((100, 100, 100))
-            snake = pygame.image.load("snake5.png")
-            snake.convert()
-            snake = pygame.transform.rotozoom(snake, 0, 0.7)
-            screen.blit(snake, (75, 560))
-            gameOver = Button.text(gold, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10),
-                                              150,
-                                              "GameOver")
-            gameOver.draw(screen)
-            clock.tick(2)
-            pygame.display.update()
-            pygame.time.delay(4000)
+            return "lose"
 
         if enemy_health <= 0:
-            print("You won!")
             battle = False
-            screen.fill((100, 100, 100))
-            snake = pygame.image.load("snake6.png")
-            snake.convert()
-            snake = pygame.transform.rotozoom(snake, 0, 0.7)
-            screen.blit(snake, (75, 560))
-            winScreen = Button.text(gold, (width * 0.25), (height * 0 / 12), (width * 0.5),
-                                               (height * 2 / 10), 150,
-                                               "You win!")
-            winScreen.draw(screen)
-            clock.tick(2)
-            pygame.display.update()
-            pygame.time.delay(4000)
+            return "win"
+
+def win():
+    print("You won!")
+    screen.fill((100, 100, 100))
+    snake = pygame.image.load("snake6.png")
+    snake.convert()
+    snake = pygame.transform.rotozoom(snake, 0, 0.7)
+    screen.blit(snake, (75, 560))
+    winScreen = Button.text(gold, (width * 0.25), (height * 0 / 12), (width * 0.5),
+                            (height * 2 / 10), 150,
+                            "You win!")
+    winScreen.draw(screen)
+    clock.tick(2)
+    pygame.display.update()
+    pygame.time.delay(4000)
+
+def lose():
+    print("You lost!")
+    screen.fill((100, 100, 100))
+    snake = pygame.image.load("snake5.png")
+    snake.convert()
+    snake = pygame.transform.rotozoom(snake, 0, 0.7)
+    screen.blit(snake, (75, 560))
+    gameOver = Button.text(gold, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10),
+                           150,
+                           "GameOver")
+    gameOver.draw(screen)
+    clock.tick(2)
+    pygame.display.update()
+    pygame.time.delay(4000)
 
 
 # enter_game = True
@@ -384,6 +390,14 @@ def main():
         #  go to start, options, or quit
         if menuOption == "start":
             result = theBattle()
+            if result == "win":
+                result2 = theBattle()
+                if result2 == "win":
+                    win()
+                else:
+                    lose()
+            else:
+                lose()
         elif menuOption == "options":
             print('this is the options')
         elif menuOption == "quit":
