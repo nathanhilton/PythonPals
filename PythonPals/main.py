@@ -4,7 +4,7 @@ import pygame
 import textwrap
 from player import Player, Coffee
 
-pygame.init()
+
 
 class Screen():
     def __init__(self, width, height):
@@ -329,7 +329,7 @@ def theBattle():
             print("You lost!")
             battle = False
             screen.fill((100, 100, 100))
-            snake = pygame.image.load("PythonPals\snake5.png")
+            snake = pygame.image.load("snake5.png")
             snake.convert()
             snake = pygame.transform.rotozoom(snake, 0, 0.7)
             screen.blit(snake, (75, 560))
@@ -345,7 +345,7 @@ def theBattle():
             print("You won!")
             battle = False
             screen.fill((100, 100, 100))
-            snake = pygame.image.load("PythonPals\snake6.png")
+            snake = pygame.image.load("snake6.png")
             snake.convert()
             snake = pygame.transform.rotozoom(snake, 0, 0.7)
             screen.blit(snake, (75, 560))
@@ -358,17 +358,37 @@ def theBattle():
             pygame.time.delay(4000)
 
 
-enter_game = True
-while enter_game:
-    # start screen
-    menuOption = startscreen(width, height)
+# enter_game = True
+# while enter_game:
+#     # start screen
+#     menuOption = startscreen(width, height)
+#
+#     #  go to start, options, or quit
+#     if menuOption == "start":
+#         result = theBattle()
+#         result = theBattle()
+#     elif menuOption == "options":
+#         print('this is the options')
+#     elif menuOption == "quit":
+#         enter_game = False
+#
+# pygame.quit()
+def main():
+    pygame.init()
 
-    #  go to start, options, or quit
-    if menuOption == "start":
-        result = theBattle()
-    elif menuOption == "options":
-        print('this is the options')
-    elif menuOption == "quit":
-        enter_game = False
+    enter_game = True
+    while enter_game:
+        # start screen
+        menuOption = startscreen(width, height)
 
-pygame.quit()
+        #  go to start, options, or quit
+        if menuOption == "start":
+            result = theBattle()
+        elif menuOption == "options":
+            print('this is the options')
+        elif menuOption == "quit":
+            enter_game = False
+    pygame.quit()
+
+if __name__ == "__main__":
+    main()
