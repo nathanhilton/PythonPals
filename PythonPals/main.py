@@ -16,8 +16,9 @@ white = (255, 255, 255)
 color_light = (170, 170, 170)
 color_dark = (100, 100, 100)
 fuschia = (255, 0, 255)
-transparent = (0, 0, 0)
+black = (0, 0, 0)
 gold = (197, 179, 88)
+lime = (153, 255, 51)
 width = screen.get_width()
 height = screen.get_height()
 screen.fill(gold)
@@ -33,8 +34,9 @@ quitButton = Button.button(color_light, (width * 0.25), (height * 9 / 12), (widt
                                       "Quit")
 userHealth = Button.healthBar(20, 20, 200, 30, 100, "left")
 enemyHealth = Button.healthBar(width - 20 - 200, 20, 200, 30, 100, "right")
-title = Button.text(gold, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
+title = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
                                "PythonPals")
+
 '''
 extraButton =Button.button(color_light, 200, 200, 50, 50, "minus 1")
 extraButton2 =Button.button(color_light, 200, 300, 50, 50, "minus 5")
@@ -185,6 +187,7 @@ def drawBattle(playerGroup, enemyGroup, width, height):
     enemyHealth.draw(screen)
     userHealth.draw(screen)
     pygame.display.update()
+
 
 def drawBackground(playerGroup, enemyGroup, width, height):
     pygame.display.update()
@@ -364,6 +367,27 @@ def lose():
     pygame.time.delay(4000)
 
 
+back_to_main = Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
+                                      "Back to Main Menu")
+option = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
+                               "Options Menu")
+
+def options():
+    screen.fill(lime)
+    option.draw(screen)
+    back_to_main.draw(screen, 60, True)
+    pygame.display.update()
+    opt = True
+    while opt:
+        for ev in pygame.event.get():
+            pos = pygame.mouse.get_pos()
+            if ev.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+            if ev.type == pygame.MOUSEBUTTONDOWN:
+                if back_to_main.isOver(pos):
+                    opt = False
+
 # enter_game = True
 # while enter_game:
 #     # start screen
@@ -399,7 +423,7 @@ def main():
             else:
                 lose()
         elif menuOption == "options":
-            print('this is the options')
+            options()
         elif menuOption == "quit":
             enter_game = False
     pygame.quit()
