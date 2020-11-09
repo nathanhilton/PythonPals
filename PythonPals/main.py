@@ -219,6 +219,10 @@ def theBattle():
 
     clock = pygame.time.Clock()
 
+    # background music
+    pygame.mixer.music.load('jazz.mp3')
+    pygame.mixer.music.play(-1)
+
     myPlayer = Player()
     playerGroup = pygame.sprite.Group(myPlayer)
     playerGroup.draw(screen)
@@ -425,7 +429,11 @@ def options():
 def main():
     pygame.init()
 
+    # test_sound = pygame.mixer.Sound("background_boss_music.wav")
+    # pygame.mixer.Sound.play(test_sound)
+
     enter_game = True
+
     while enter_game:
         # start screen
         menuOption = startscreen(width, height)
@@ -445,6 +453,7 @@ def main():
             options()
         elif menuOption == "quit":
             enter_game = False
+    # pygame.mixer.music.stop()
     pygame.quit()
 
 if __name__ == "__main__":
