@@ -35,6 +35,8 @@ optionsButton = Button.button(color_light, (width * 0.25), (height * 6 / 12), (w
                                          (height * 2 / 10), "Options")
 quitButton = Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
                                       "Quit")
+
+
 userHealth = Button.healthBar(20, 20, 200, 30, 100, "left")
 enemyHealth = Button.healthBar(width - 20 - 200, 20, 200, 30, 100, "right")
 title = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
@@ -375,12 +377,21 @@ def lose():
 
 back_to_main = Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
                                       "Back to Main Menu")
+
 option = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
-                               "Options Menu")
+                               "Option")
+
+change = Button.text(black, (width * 0.25), (height * 6 / 12), (width * 0.5), (height * 2 / 10), 150,
+                               "Change Deck")
+
+changeButton = Button.button(color_light, (width * 0.25), (height * 6 / 12), (width * 0.5), (height * 2 / 10),
+                                      "Change Deck")
 
 def options():
     screen.fill(lime)
     option.draw(screen, True)
+    changeButton.draw(screen, True)
+    change.draw(screen, True)
     back_to_main.draw(screen, 60, True)
     pygame.display.update()
     opt = True
@@ -393,6 +404,8 @@ def options():
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if back_to_main.isOver(pos):
                     opt = False
+                if changeButton.isOver(pos):
+                    questions.changeQuestionDeck("python_questions.xlsx")
 
 # enter_game = True
 # while enter_game:

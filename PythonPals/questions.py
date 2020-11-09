@@ -1,6 +1,6 @@
 import random
-import Button
-from openpyxl import load_workbook
+
+from openpyxl import load_workbook, Workbook
 
 
 wk = load_workbook(filename="python_questions.xlsx")
@@ -75,6 +75,17 @@ def get_question(value):
     the_question[5] = ws['E' + str(value)].value
 
     return the_question
+
+
+def changeQuestionDeck(filename):
+    wk = load_workbook(filename)
+    ws = wk.active
+    print("Loaded")
+
+
+
+
+
 
 
 # Press the green button in the gutter to run the script.
