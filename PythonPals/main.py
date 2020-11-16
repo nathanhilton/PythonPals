@@ -216,6 +216,11 @@ def drawBackground(playerGroup, enemyGroup, width, height):
     userHealth.draw(screen)
     pygame.display.update()
 
+# def playAnimation(groupA,groupB,numFramesA,numFramesB,screen,width,height,clock,clockSpeed):
+#     for i in range(0,numFramesA):
+#         groupA.update()
+#
+
 
 def theBattle():
     health = 100
@@ -273,14 +278,16 @@ def theBattle():
             enemyHealth.set_health(enemy_health)
             enemyHealth.draw(screen)
 
-            clock.tick(2)
-            # pygame.draw.rect(screen, white, (200, 500, 500, 500))
-            drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
-            playerGroup.update()
-            playerGroup.draw(screen)
-            enemyGroup.draw(screen)
-            pygame.display.update()
-            clock.tick(2)
+            clock.tick(4)
+
+            for i in range(0, 4):
+                drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+                playerGroup.update()
+                playerGroup.draw(screen)
+                enemyGroup.draw(screen)
+                pygame.display.update()
+                clock.tick(4)
+
             # pygame.draw.rect(screen, white, (200, 500, 500, 500))
             drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
             playerGroup.update()
@@ -336,12 +343,13 @@ def theBattle():
 
             # pygame.draw.rect(screen, white, (200, 500, 500, 500))
             drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
-            playerGroup.update()
+            for i in range(0, 4):
+                playerGroup.update()
             playerGroup.update()
             playerGroup.draw(screen)
             enemyGroup.draw(screen)
             pygame.display.update()
-            clock.tick(2)
+            clock.tick(3)
             # pygame.draw.rect(screen, white, (200, 500, 500, 500))
             drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
             playerGroup.update()

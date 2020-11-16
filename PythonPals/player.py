@@ -7,8 +7,12 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.images = []
+
         self.images.append(pygame.image.load('snake1.png'))
+        self.images.append(pygame.image.load('Snake_start.png'))
+        self.images.append(pygame.image.load('Snake_Firemid.png'))
         self.images.append(pygame.image.load('snake2.png'))
+        self.images.append(pygame.image.load('Snake fire end.png'))
         self.images.append(pygame.image.load('snake4.png'))
 
         self.index = 0
