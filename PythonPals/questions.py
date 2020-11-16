@@ -18,7 +18,7 @@ def load_question(category):
         value = random.randrange(7, 12)
     elif category == int(3):
         value = random.randrange(12, 17)
-    elif category == (4):
+    elif category == int(4):
         value = random.randrange(17, 22)
     else:
         value = random.randrange(2, 22)
