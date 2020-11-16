@@ -104,7 +104,7 @@ class healthBar():
             else:
                 pygame.draw.rect(screen, (255, 255, 0),
                                  (self.x, self.y, self.width - (self.width * ((100 - self.health) / 100)), self.height))
-            print(self.health)
+            # print(self.health)
             # font = pygame.font.SysFont('comicsans', 40)
             # text = font.render("HP:", 1, (0, 0, 0), (204,204,0))
             # text_rect = text.get_rect()

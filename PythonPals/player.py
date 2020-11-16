@@ -13,18 +13,18 @@ class Player(pygame.sprite.Sprite):
 
         self.index = 0
         self.image = self.images[self.index]
-        self.rect = pygame.Rect(200, 500, 500, 500)
+        self.rect = pygame.Rect(100, 500, 600, 600)
+
+    def resize(self, scale):
+        self.height = self.height * scale
+        self.width = self.width * scale
+        self.image = pygame.transform.rotozoom(self.images[self.index], 0, scale)
 
     def update(self):
         self.index += 1
         if self.index >= len(self.images):
             self.index = 0
         self.image = self.images[self.index]
-
-    def resize(self, scale):
-            self.height = self.height * scale
-            self.width = self.width * scale
-            self.image = pygame.transform.rotozoom(self.images[self.index], 0, scale)
 
     def changeLocation(self, x, y):
         self.x = x
@@ -42,7 +42,7 @@ class Coffee(pygame.sprite.Sprite):
 
         self.index = 0
         self.image = self.images[self.index]
-        self.rect = pygame.Rect(700, 400, 500, 500)
+        self.rect = pygame.Rect(1200, 400, 500, 500)
 
     def update(self):
         self.index += 1
@@ -51,9 +51,9 @@ class Coffee(pygame.sprite.Sprite):
         self.image = self.images[self.index]
 
     def resize(self, scale):
-            self.height = self.height * scale
-            self.width = self.width * scale
-            self.image = pygame.transform.rotozoom(self.images[self.index], 0, scale)
+        self.height = self.height * scale
+        self.width = self.width * scale
+        self.image = pygame.transform.rotozoom(self.images[self.index], 0, scale)
 
     def changeLocation(self, x, y):
         self.x = x

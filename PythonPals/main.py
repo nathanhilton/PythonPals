@@ -41,7 +41,7 @@ userHealth = Button.healthBar(20, 20, 200, 30, 100, "left")
 enemyHealth = Button.healthBar(width - 20 - 200, 20, 200, 30, 100, "right")
 title = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
                                "PythonPals")
-
+# level = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.4, theScreen.width * 0.5, theScreen.height * 0.2, "LEVEL 1")
 '''
 extraButton =Button.button(color_light, 200, 200, 50, 50, "minus 1")
 extraButton2 =Button.button(color_light, 200, 300, 50, 50, "minus 5")
@@ -92,13 +92,13 @@ def startscreen(width, height):
                 reDrawStartWindow(startWidth, startHeight)
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if startButton.isOver(pos):
-                    print("clicked start button")
+                    # print("clicked start button")
                     return "start"
                 elif optionsButton.isOver(pos):
-                    print("clicked options button")
+                    # print("clicked options button")
                     return "options"
                 elif quitButton.isOver(pos):
-                    print("clicked quit button")
+                    # print("clicked quit button")
                     return "quit"
 
         pygame.display.update()
@@ -122,31 +122,37 @@ def chooseCategory(playerGroup, enemyGroup):
                 quit()
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if cat1.isOver(pos):
+                    print(1)
                     return 1
                 elif cat2.isOver(pos):
+                    print(2)
                     return 2
                 elif cat3.isOver(pos):
+                    print(3)
                     return 3
                 elif cat4.isOver(pos):
+                    print(4)
                     return 4
                 elif cat5.isOver(pos):
+                    print(5)
                     return 5
 
             if ev.type == pygame.VIDEORESIZE:
-                print("you are in it")
+                # print("you are in it")
                 startWidth = ev.w
                 startHeight = ev.h
+                theScreen.width = startWidth
+                theScreen.height = startHeight
                 userHealth.modify(0.02 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
                 enemyHealth.modify(0.88 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
                 drawBattle(playerGroup, enemyGroup, startWidth, startHeight)
-                theScreen.width = startWidth
-                theScreen.height = startHeight
+                chooseCategory(playerGroup, enemyGroup)
                 # pygame.draw.rect(screen, (0, 0, 0), (0, 0, startWidth, startHeight * 0.07))
                 # enemyHealth.draw(screen)
                 # userHealth.draw(screen)
 
 
-def chooseAnswer(playerGroup, enemyGroup):
+def chooseAnswer(playerGroup, enemyGroup, question):
     a.draw(screen, 60)
     b.draw(screen, 60)
     c.draw(screen, 60)
@@ -167,14 +173,14 @@ def chooseAnswer(playerGroup, enemyGroup):
                 elif d.isOver(pos):
                     return 'd'
             if ev.type == pygame.VIDEORESIZE:
-                print("you are in it")
+                # print("you are in it")
                 startWidth = ev.w
                 startHeight = ev.h
+                theScreen.width = startWidth
+                theScreen.height = startHeight
                 userHealth.modify(0.02 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
                 enemyHealth.modify(0.88 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
                 drawBattle(playerGroup, enemyGroup, startWidth, startHeight)
-                theScreen.width = startWidth
-                theScreen.height = startHeight
                 # pygame.draw.rect(screen, (0, 0, 0), (0, 0, startWidth, startHeight * 0.07))
                 # enemyHealth.draw(screen)
                 # userHealth.draw(screen)
@@ -184,7 +190,7 @@ def drawBattle(playerGroup, enemyGroup, width, height):
     pygame.display.update()
     # screen.fill(white)
 
-    pygame.draw.rect(screen, (0, 0, 0), (0, 0, width, height * 0.07))
+    pygame.draw.rect(screen, (0, 0, 0), (0, 0, theScreen.width, theScreen.height * 0.1))
     bg = pygame.image.load("jungleBackground.jpg")
     bg = pygame.transform.rotozoom(bg, 0, theScreen.width/ 1380)
     screen.blit(bg,(0,0))
@@ -225,11 +231,11 @@ def theBattle():
 
     myPlayer = Player()
     playerGroup = pygame.sprite.Group(myPlayer)
-    playerGroup.draw(screen)
+    # playerGroup.draw(screen)
 
     myEnemy = Coffee()
     enemyGroup = pygame.sprite.Group(myEnemy)
-    enemyGroup.draw(screen)
+    # enemyGroup.draw(screen)
     pygame.display.update()
 
     battle = True
@@ -239,8 +245,11 @@ def theBattle():
                           theScreen.height * 0.03)
         enemyHealth.modify(0.88 * theScreen.width, 0.02 * theScreen.height, theScreen.width * 0.1,
                            theScreen.height * 0.03)
+        # enemyGroup.draw(screen)
+        # playerGroup.draw(screen)
         drawBattle(playerGroup, enemyGroup, width, height)
         choose = chooseCategory(playerGroup, enemyGroup)
+        print(choose)
         questionNumber = questions.load_question(choose)
         question = questions.get_question(questionNumber)
 
@@ -256,7 +265,7 @@ def theBattle():
         C.draw(screen, False)
         D.draw(screen, False)
 
-        guess = chooseAnswer(playerGroup, enemyGroup)
+        guess = chooseAnswer(playerGroup, enemyGroup, question)
         is_correct = questions.get_result(guess, question[5])
 
         if is_correct:
@@ -266,14 +275,14 @@ def theBattle():
 
             clock.tick(2)
             # pygame.draw.rect(screen, white, (200, 500, 500, 500))
-            drawBackground(playerGroup, enemyGroup, width, height)
+            drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
             playerGroup.update()
             playerGroup.draw(screen)
             enemyGroup.draw(screen)
             pygame.display.update()
             clock.tick(2)
             # pygame.draw.rect(screen, white, (200, 500, 500, 500))
-            drawBackground(playerGroup, enemyGroup, width, height)
+            drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
             playerGroup.update()
             playerGroup.update()
             playerGroup.draw(screen)
@@ -281,7 +290,7 @@ def theBattle():
             pygame.display.update()
 
             # pygame.draw.rect(screen, white, (700, 400, 500, 500))
-            drawBackground(playerGroup, enemyGroup, width, height)
+            drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
             enemyGroup.update()
             enemyGroup.update()
             enemyGroup.update()
@@ -290,7 +299,7 @@ def theBattle():
             pygame.display.update()
             clock.tick(3)
             # pygame.draw.rect(screen, white, (700, 400, 500, 500))
-            drawBackground(playerGroup, enemyGroup, width, height)
+            drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
             enemyGroup.update()
             enemyGroup.draw(screen)
             playerGroup.draw(screen)
@@ -304,21 +313,21 @@ def theBattle():
 
             clock.tick(3)
             # pygame.draw.rect(screen, white, (700, 400, 500, 500))
-            drawBackground(playerGroup, enemyGroup, width, height)
+            drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
             enemyGroup.update()
             enemyGroup.draw(screen)
             playerGroup.draw(screen)
             pygame.display.update()
             clock.tick(3)
             # pygame.draw.rect(screen, white, (700, 400, 500, 500))
-            drawBackground(playerGroup, enemyGroup, width, height)
+            drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
             enemyGroup.update()
             enemyGroup.draw(screen)
             playerGroup.draw(screen)
             pygame.display.update()
             clock.tick(3)
             # pygame.draw.rect(screen, white, (700, 400, 500, 500))
-            drawBackground(playerGroup, enemyGroup, width, height)
+            drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
             enemyGroup.update()
             enemyGroup.update()
             enemyGroup.draw(screen)
@@ -326,7 +335,7 @@ def theBattle():
             pygame.display.update()
 
             # pygame.draw.rect(screen, white, (200, 500, 500, 500))
-            drawBackground(playerGroup, enemyGroup, width, height)
+            drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
             playerGroup.update()
             playerGroup.update()
             playerGroup.draw(screen)
@@ -334,7 +343,7 @@ def theBattle():
             pygame.display.update()
             clock.tick(2)
             # pygame.draw.rect(screen, white, (200, 500, 500, 500))
-            drawBackground(playerGroup, enemyGroup, width, height)
+            drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
             playerGroup.update()
             playerGroup.draw(screen)
             enemyGroup.draw(screen)
@@ -411,6 +420,14 @@ def options():
                 if changeButton.isOver(pos):
                     questions.changeQuestionDeck("python_questions.xlsx")
 
+def levelChange(screen, level):
+    level = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.4, theScreen.width * 0.5,
+                        theScreen.height * 0.2, 200, "LEVEL " + str(level))
+    screen.fill(gold)
+    level.draw(screen, True)
+    pygame.display.update()
+    pygame.time.delay(2000)
+
 # enter_game = True
 # while enter_game:
 #     # start screen
@@ -433,6 +450,7 @@ def main():
     # pygame.mixer.Sound.play(test_sound)
 
     enter_game = True
+    # print("dkjsflksdkjfskjlf" + str(theScreen.height))
 
     while enter_game:
         # start screen
@@ -440,8 +458,10 @@ def main():
 
         #  go to start, options, or quit
         if menuOption == "start":
+            levelChange(screen, 1)
             result = theBattle()
             if result == "win":
+                levelChange(self, 2)
                 result2 = theBattle()
                 if result2 == "win":
                     win()

@@ -12,17 +12,18 @@ def load_question(category):
     print("1 Syntax\n2 Vocabulary\n3 Logic\n4 Number Conversion\n5 General\n")
     value = 0
 
-    if category == '1':
+    if category == int(1):
         value = random.randrange(2, 7)
-    elif category == '2':
+    elif category == int(2):
         value = random.randrange(7, 12)
-    elif category == '3':
+    elif category == int(3):
         value = random.randrange(12, 17)
-    elif category == '4':
+    elif category == (4):
         value = random.randrange(17, 22)
     else:
         value = random.randrange(2, 22)
 
+    print(value)
     return value
 
 
