@@ -410,6 +410,17 @@ changeButton = Button.button(color_light, (width * 0.25), (height * 6 / 12), (wi
 
 def options():
     screen.fill(lime)
+    back_to_main = Button.button(color_light, (theScreen.width * 0.25), (theScreen.height * 9 / 12),
+                                 (theScreen.width * 0.5), (theScreen.height * 2 / 10), "Back to Main Menu")
+
+    option = Button.text(black, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5),
+                         (theScreen.height * 2 / 10), 150, "Options")
+
+    change = Button.text(black, (theScreen.width * 0.25), (theScreen.height * 6 / 12), (theScreen.width * 0.5),
+                         (theScreen.height * 2 / 10), 150, "Change Deck")
+
+    changeButton = Button.button(color_light, (theScreen.width * 0.25), (theScreen.height * 6 / 12),
+                                 (theScreen.width * 0.5), (theScreen.height * 2 / 10), "Change Deck")
     option.draw(screen, True)
     changeButton.draw(screen, True)
     change.draw(screen, True)
@@ -469,7 +480,7 @@ def main():
             levelChange(screen, 1)
             result = theBattle()
             if result == "win":
-                levelChange(self, 2)
+                levelChange(screen, 2)
                 result2 = theBattle()
                 if result2 == "win":
                     win()
