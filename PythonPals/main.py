@@ -1,6 +1,7 @@
 import Button
 import questions
 import pygame
+import pygame.gfxdraw
 import textwrap
 from player import Player, Coffee
 
@@ -58,8 +59,36 @@ b = Button.button(color_light, 200, 225, 25, 25)
 c = Button.button(color_light, 200, 275, 25, 25)
 d = Button.button(color_light, 200, 325, 25, 25)
 
+back_to_main = Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
+                                      "Back to Main Menu")
 
-def reDrawStartWindow(width, height):
+option = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
+                               "Options")
+
+#change = Button.text(black, (width * 0.25), (height * 6 / 12), (width * 0.5), (height * 2 / 10), 150,
+                        #       "Change Deck")
+
+changeButton = Button.button(color_light, (width * 0.25), (height * 6 / 12), (width * 0.5), (height * 2 / 10),
+                                      "Change Deck")
+
+
+def resize(startWidth, startHeight):
+    startButton.modify((startWidth * 0.25), (startHeight * 3 / 12), (startWidth * 0.5),
+                       (startHeight * 2 / 10))
+    optionsButton.modify((startWidth * 0.25), (startHeight * 6 / 12), (startWidth * 0.5),
+                         (startHeight * 2 / 10))
+    quitButton.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5),
+                      (startHeight * 2 / 10))
+    title.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
+    changeButton.modify((startWidth * 0.25), (startHeight * 3 / 12), (startWidth * 0.5),
+                        (startHeight * 2 / 10))
+    back_to_main.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5),
+                        (startHeight * 2 / 10))
+    option.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
+    theScreen.width = startWidth
+    theScreen.height = startHeight
+
+def reDrawStartWindow():
     screen.fill(gold)
     title.draw(screen, True)
     startButton.draw(screen, 60, True)
@@ -68,7 +97,7 @@ def reDrawStartWindow(width, height):
 
 
 def startscreen(width, height):
-    reDrawStartWindow(width, height)
+    reDrawStartWindow()
     while True:
         # reDrawStartWindow()
         pygame.display.update()
@@ -80,16 +109,8 @@ def startscreen(width, height):
             if ev.type == pygame.VIDEORESIZE:
                 startWidth = ev.w
                 startHeight = ev.h
-                startButton.modify((startWidth * 0.25), (startHeight * 3 / 12), (startWidth * 0.5),
-                                   (startHeight * 2 / 10))
-                optionsButton.modify((startWidth * 0.25), (startHeight * 6 / 12), (startWidth * 0.5),
-                                     (startHeight * 2 / 10))
-                quitButton.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5),
-                                  (startHeight * 2 / 10))
-                title.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
-                theScreen.width = startWidth
-                theScreen.height = startHeight
-                reDrawStartWindow(startWidth, startHeight)
+                resize(startWidth, startHeight)
+                reDrawStartWindow()
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if startButton.isOver(pos):
                     # print("clicked start button")
@@ -260,10 +281,14 @@ def theBattle():
 
         drawBattle(playerGroup, enemyGroup, width, height)
         q = Button.text(black, 600, 100, 50, 50, 40, textwrap.shorten(question[0], 100))
+        pygame.gfxdraw.box(screen, pygame.Rect(0, theScreen.height * 0.1, theScreen.width, 75),
+                           (77, 153, 83, 130))
         A = Button.text(black, a.x, a.y, 50, 50, 40, textwrap.shorten(question[1], 100))
         B = Button.text(black, b.x, b.y, 50, 50, 40, textwrap.shorten(question[2], 100))
         C = Button.text(black, c.x, c.y, 50, 50, 40, textwrap.shorten(question[3], 100))
         D = Button.text(black, d.x, d.y, 50, 50, 40, textwrap.shorten(question[4], 100))
+        pygame.gfxdraw.box(screen, pygame.Rect(theScreen.width * 0.1, theScreen.height * 0.15,
+                                               600, 300), (77, 153, 83, 130))
         q.draw(screen, True)
         A.draw(screen, False)
         B.draw(screen, False)
@@ -396,23 +421,17 @@ def lose():
     pygame.time.delay(4000)
 
 
-back_to_main = Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
-                                      "Back to Main Menu")
-
-option = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
-                               "Option")
-
-change = Button.text(black, (width * 0.25), (height * 6 / 12), (width * 0.5), (height * 2 / 10), 150,
-                               "Change Deck")
-
-changeButton = Button.button(color_light, (width * 0.25), (height * 6 / 12), (width * 0.5), (height * 2 / 10),
-                                      "Change Deck")
+def reDrawOptionsWindow():
+    screen.fill(lime)
+    option.draw(screen, True)
+    changeButton.draw(screen, True)
+    back_to_main.draw(screen, 60, True)
 
 def options():
     screen.fill(lime)
     option.draw(screen, True)
-    changeButton.draw(screen, True)
-    change.draw(screen, True)
+    changeButton.draw(screen, 60, True)
+    #change.draw(screen, True)
     back_to_main.draw(screen, 60, True)
     pygame.display.update()
     opt = True
@@ -427,6 +446,11 @@ def options():
                     opt = False
                 if changeButton.isOver(pos):
                     questions.changeQuestionDeck("python_questions.xlsx")
+            if ev.type == pygame.VIDEORESIZE:
+                startWidth = ev.w
+                startHeight = ev.h
+                resize(startWidth, startHeight)
+                reDrawOptionsWindow()
 
 def levelChange(screen, level):
     level = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.4, theScreen.width * 0.5,
@@ -469,7 +493,7 @@ def main():
             levelChange(screen, 1)
             result = theBattle()
             if result == "win":
-                levelChange(self, 2)
+                levelChange(screen, 2)
                 result2 = theBattle()
                 if result2 == "win":
                     win()
