@@ -80,7 +80,7 @@ def resize(startWidth, startHeight):
     quitButton.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5),
                       (startHeight * 2 / 10))
     title.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
-    changeButton.modify((startWidth * 0.25), (startHeight * 3 / 12), (startWidth * 0.5),
+    changeButton.modify((startWidth * 0.25), (startHeight * 6 / 12), (startWidth * 0.5),
                         (startHeight * 2 / 10))
     back_to_main.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5),
                         (startHeight * 2 / 10))
@@ -424,22 +424,11 @@ def lose():
 def reDrawOptionsWindow():
     screen.fill(lime)
     option.draw(screen, True)
-    changeButton.draw(screen, True)
+    changeButton.draw(screen, 60, True)
     back_to_main.draw(screen, 60, True)
 
 def options():
     screen.fill(lime)
-    back_to_main = Button.button(color_light, (theScreen.width * 0.25), (theScreen.height * 9 / 12),
-                                 (theScreen.width * 0.5), (theScreen.height * 2 / 10), "Back to Main Menu")
-
-    option = Button.text(black, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5),
-                         (theScreen.height * 2 / 10), 150, "Options")
-
-    change = Button.text(black, (theScreen.width * 0.25), (theScreen.height * 6 / 12), (theScreen.width * 0.5),
-                         (theScreen.height * 2 / 10), 150, "Change Deck")
-
-    changeButton = Button.button(color_light, (theScreen.width * 0.25), (theScreen.height * 6 / 12),
-                                 (theScreen.width * 0.5), (theScreen.height * 2 / 10), "Change Deck")
     option.draw(screen, True)
     changeButton.draw(screen, 60, True)
     #change.draw(screen, True)
