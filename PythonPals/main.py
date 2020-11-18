@@ -48,11 +48,11 @@ extraButton =Button.button(color_light, 200, 200, 50, 50, "minus 1")
 extraButton2 =Button.button(color_light, 200, 300, 50, 50, "minus 5")
 extraButton3 =Button.button(color_light, 200, 400, 50, 50, "minus 10")
 '''
-cat1 = Button.button(fuschia, 200, 200, 30, 30, "Syntax")
-cat2 = Button.button(fuschia, 450, 200, 30, 30, "Vocabulary")
-cat3 = Button.button(fuschia, 700, 200, 30, 30, "Logic")
-cat4 = Button.button(fuschia, 150, 350, 30, 30, "Number Conversion")
-cat5 = Button.button(fuschia, 550, 350, 30, 30, "General")
+cat1 = Button.button(fuschia, 200, 200, 30, 30, " Syntax")
+cat2 = Button.button(fuschia, 450, 200, 30, 30, " Vocabulary")
+cat3 = Button.button(fuschia, 700, 200, 30, 30, " Logic")
+cat4 = Button.button(fuschia, 150, 350, 30, 30, " Number Conversion")
+cat5 = Button.button(fuschia, 550, 350, 30, 30, " General")
 
 a = Button.button(color_light, 200, 175, 25, 25)
 b = Button.button(color_light, 200, 225, 25, 25)
@@ -429,6 +429,17 @@ def reDrawOptionsWindow():
 
 def options():
     screen.fill(lime)
+    back_to_main = Button.button(color_light, (theScreen.width * 0.25), (theScreen.height * 9 / 12),
+                                 (theScreen.width * 0.5), (theScreen.height * 2 / 10), "Back to Main Menu")
+
+    option = Button.text(black, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5),
+                         (theScreen.height * 2 / 10), 150, "Options")
+
+    change = Button.text(black, (theScreen.width * 0.25), (theScreen.height * 6 / 12), (theScreen.width * 0.5),
+                         (theScreen.height * 2 / 10), 150, "Change Deck")
+
+    changeButton = Button.button(color_light, (theScreen.width * 0.25), (theScreen.height * 6 / 12),
+                                 (theScreen.width * 0.5), (theScreen.height * 2 / 10), "Change Deck")
     option.draw(screen, True)
     changeButton.draw(screen, 60, True)
     #change.draw(screen, True)
