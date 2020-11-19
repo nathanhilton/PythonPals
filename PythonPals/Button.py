@@ -26,7 +26,7 @@ class button():
         pygame.draw.rect(screen, self.color, (round(self.x), round(self.y), round(self.width), round(self.height)), 0)
 
         if self.text != '':
-            font = pygame.font.SysFont('comicsans', fontSize)
+            font = pygame.font.Font('JandaManateeSolid.ttf', fontSize)
             text = font.render(self.text, 1, (0, 0, 0))
             if center:
                 screen.blit(text, (round(self.x + (self.width / 2 - text.get_width() / 2)),
@@ -60,11 +60,11 @@ class text():
         self.width = width
         self.height = height
 
-    def draw(self, screen, center):
+    def draw(self, screen, fontSize, center):
         #pygame.draw.rect(screen, self.color, (round(self.x), round(self.y), round(self.width), round(self.height)), 0)
 
         if self.text != '':
-            font = pygame.font.SysFont('comicsans', self.textSize)
+            font = pygame.font.Font("JandaManateeSolid.ttf", fontSize)
             text = font.render(self.text, True, self.color)
             if center:
                 screen.blit(text, (round(self.x + (self.width / 2 - text.get_width() / 2)),
