@@ -424,7 +424,7 @@ def win():
     winScreen = Button.text(gold, (width * 0.25), (height * 0 / 12), (width * 0.5),
                             (height * 2 / 10), 150,
                             "You win!")
-    winScreen.draw(screen, True)
+    winScreen.draw(screen, int(theScreen.width*0.1), True)
     clock.tick(2)
     pygame.display.update()
     pygame.time.delay(4000)
@@ -439,7 +439,7 @@ def lose():
     gameOver = Button.text(gold, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10),
                            150,
                            "GameOver")
-    gameOver.draw(screen, True)
+    gameOver.draw(screen, int(theScreen.width*0.1), True)
     clock.tick(2)
     pygame.display.update()
     pygame.time.delay(4000)
