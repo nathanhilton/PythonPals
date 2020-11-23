@@ -5,7 +5,6 @@ import pygame.gfxdraw
 import textwrap
 from player import Player, Coffee
 
-
 class Screen():
     def __init__(self, width, height):
         self.width = width
@@ -29,25 +28,12 @@ clock = pygame.time.Clock()
 
 theScreen = Screen(screen.get_width(), screen.get_height())
 
-# all the things needed
-startButton = Button.button(color_light, (width * 0.25), (height * 3 / 12), (width * 0.5), (height * 2 / 10),
-                                       "Start")
-optionsButton = Button.button(color_light, (width * 0.25), (height * 6 / 12), (width * 0.5),
-                                         (height * 2 / 10), "Options")
-quitButton = Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
-                                      "Quit")
-
-
 userHealth = Button.healthBar(20, 20, 200, 30, 100, "left")
 enemyHealth = Button.healthBar(width - 20 - 200, 20, 200, 30, 100, "right")
 title = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
                                "PYTHON PALS")
-# level = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.4, theScreen.width * 0.5, theScreen.height * 0.2, "LEVEL 1")
-'''
-extraButton =Button.button(color_light, 200, 200, 50, 50, "minus 1")
-extraButton2 =Button.button(color_light, 200, 300, 50, 50, "minus 5")
-extraButton3 =Button.button(color_light, 200, 400, 50, 50, "minus 10")
-'''
+
+#(x,y,size)
 cat1 = Button.button(fuschia, 200, 200, 30, 30, " Syntax")
 cat2 = Button.button(fuschia, 450, 200, 30, 30, " Vocabulary")
 cat3 = Button.button(fuschia, 700, 200, 30, 30, " Logic")
@@ -63,29 +49,52 @@ chooseCat = Button.text(fuschia, (theScreen.width * 0.25), (theScreen.height * 0
                             (theScreen.height * 1 / 10),
                             100, "Choose a category:")
 
-back_to_main = Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
-                                      "Back to Main Menu")
-
+#start menu buttons
+startButton = Button.button(color_light, (width * 0.25), (height * 3 / 12), (width * 0.5), (height * 2 / 10),
+                                       "Start")
+optionsButton = Button.button(color_light, (width * 0.25), (height * 6 / 12), (width * 0.5),
+                                         (height * 2 / 10), "Options")
+quitButton = Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
+                                      "Quit")
+#options buttons
 option = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
                                "OPTIONS")
-
+chooseFighter = Button.button(color_light, (width * 0.25), (height * 3 / 12), (width * 0.5), (height * 2 / 10),
+                                      "Choose Your Fighter")
 changeButton = Button.button(color_light, (width * 0.25), (height * 6 / 12), (width * 0.5), (height * 2 / 10),
                                       "Change Deck")
+back_to_main = Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
+                                      "Back to Main Menu")
+#choose fighter menu buttons
+back_to_options = Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
+                                      "Back to Options Menu")
 
 
 def resize(startWidth, startHeight):
+    #start menu
+    title.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
     startButton.modify((startWidth * 0.25), (startHeight * 3 / 12), (startWidth * 0.5),
                        (startHeight * 2 / 10))
     optionsButton.modify((startWidth * 0.25), (startHeight * 6 / 12), (startWidth * 0.5),
                          (startHeight * 2 / 10))
     quitButton.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5),
                       (startHeight * 2 / 10))
-    title.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
+    #options menu
+    option.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
+    chooseFighter.modify((startWidth * 0.25), (startHeight * 3 / 12), (startWidth * 0.5),
+                        (startHeight * 2 / 10))
     changeButton.modify((startWidth * 0.25), (startHeight * 6 / 12), (startWidth * 0.5),
                         (startHeight * 2 / 10))
     back_to_main.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5),
                         (startHeight * 2 / 10))
-    option.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
+    #choose fighter menu
+    back_to_options.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5),
+                        (startHeight * 2 / 10))
+
+    #category/answer buttons
+    cat1.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5),
+                        (startHeight * 2 / 10))
+
     theScreen.width = startWidth
     theScreen.height = startHeight
 
@@ -96,7 +105,7 @@ def reDrawStartWindow():
     optionsButton.draw(screen, int(theScreen.width*0.05), True)
     quitButton.draw(screen, int(theScreen.width*0.05), True)
 
-def startscreen(width, height):
+def startscreen():
     reDrawStartWindow()
     while True:
         # reDrawStartWindow()
@@ -107,9 +116,15 @@ def startscreen(width, height):
                 pygame.quit()
                 quit()
             if ev.type == pygame.VIDEORESIZE:
-                startWidth = ev.w
-                startHeight = ev.h
-                resize(startWidth, startHeight)
+                if (ev.w != theScreen.width):
+                    theScreen.width = ev.w
+                    theScreen.height = int(theScreen.width * 900 / 1600)
+                else:
+                    theScreen.height = ev.h
+                    theScreen.width = int(theScreen.height * 1600 / 900)
+
+                pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
+                resize(theScreen.width, theScreen.height)
                 reDrawStartWindow()
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if startButton.isOver(pos):
@@ -134,6 +149,7 @@ def drawCategories():
 
 def chooseCategory(playerGroup, enemyGroup):
     drawCategories()
+    print("here")
     while True:
         for ev in pygame.event.get():
             pos = pygame.mouse.get_pos()
@@ -158,6 +174,18 @@ def chooseCategory(playerGroup, enemyGroup):
                     return 5
 
             if ev.type == pygame.VIDEORESIZE:
+                if (ev.w != theScreen.width):
+                    theScreen.width = ev.w
+                    theScreen.height = int(theScreen.width * 900 / 1600)
+                else:
+                    theScreen.height = ev.h
+                    theScreen.width = int(theScreen.height * 1600 / 900)
+
+                pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
+                resizeBattle(theScreen.width, theScreen.height)
+                drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+                drawCategories()
+                '''
                 # print("you are in it")
                 startWidth = ev.w
                 startHeight = ev.h
@@ -167,31 +195,32 @@ def chooseCategory(playerGroup, enemyGroup):
                 enemyHealth.modify(0.88 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
                 drawBattle(playerGroup, enemyGroup, startWidth, startHeight)
                 chooseCategory(playerGroup, enemyGroup)
-                #resizeBattle()
+                resizeBattle(ev.w, ev.h)
                 #drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height)
                 #chooseCategory(playerGroup, enemyGroup)
                 #drawCategories()
                 # pygame.draw.rect(screen, (0, 0, 0), (0, 0, startWidth, startHeight * 0.07))
                 # enemyHealth.draw(screen)
-                # userHealth.draw(screen)
+                # userHealth.draw(screen) '''
 
-def resizeBattle():
-    startWidth = theScreen.width
-    startHeight = theScreen.height
+def resizeBattle(startWidth, startHeight):
     userHealth.modify(0.02 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
     enemyHealth.modify(0.88 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
-    '''
-    a.modify(0.88 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
-    b.modify(0.88 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
-    c.modify(0.88 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
-    d.modify(0.88 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
-    chooseCat.modify(0.88 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
-    cat1.modify(0.88 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
-    cat2.modify(0.88 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
-    cat3.modify(0.88 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
-    cat4.modify(0.88 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
-    cat5.modify(0.88 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
-'''
+
+    a.modify(0.125 * startWidth, 0.19 * startHeight, startWidth * 0.021, startHeight * 0.021)
+    b.modify(0.125 * startWidth, 0.25 * startHeight, startWidth * 0.021, startHeight * 0.021)
+    c.modify(0.125 * startWidth, 0.305 * startHeight, startWidth * 0.021, startHeight * 0.021)
+    d.modify(0.125 * startWidth, 0.36 * startHeight, startWidth * 0.021, startHeight * 0.021)
+
+    chooseCat.modify(0.25 * startWidth, 0.001 * startHeight, startWidth * 0.5, startHeight * 0.1)
+
+    cat1.modify(0.13 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
+    cat2.modify(0.28 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
+    cat3.modify(0.44 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
+    cat4.modify(0.09 * startWidth, 0.4 * startHeight, startWidth * 0.025, startHeight * 0.025)
+    cat5.modify(0.34 * startWidth, 0.4 * startHeight, startWidth * 0.025, startHeight * 0.025)
+
+    pygame.display.update()
 
 def drawAnswers():
     a.draw(screen, int(theScreen.width * 0.02))
@@ -217,7 +246,18 @@ def chooseAnswer(playerGroup, enemyGroup, question):
                 elif d.isOver(pos):
                     return 'd'
             if ev.type == pygame.VIDEORESIZE:
-                #resizeBattle()
+                if (ev.w != theScreen.width):
+                    theScreen.width = ev.w
+                    theScreen.height = int(theScreen.width * 900 / 1600)
+                else:
+                    theScreen.height = ev.h
+                    theScreen.width = int(theScreen.height * 1600 / 900)
+
+                pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
+                resizeBattle(theScreen.width, theScreen.height)
+                drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+                drawAnswers()
+                '''
                 #drawAnswers()
                 startWidth = ev.w
                 startHeight = ev.h
@@ -228,13 +268,10 @@ def chooseAnswer(playerGroup, enemyGroup, question):
                 drawBattle(playerGroup, enemyGroup, startWidth, startHeight)
                 # pygame.draw.rect(screen, (0, 0, 0), (0, 0, startWidth, startHeight * 0.07))
                 # enemyHealth.draw(screen)
-                # userHealth.draw(screen)
+                # userHealth.draw(screen) '''
 
-
-def drawBattle(playerGroup, enemyGroup, width, height):
-    pygame.display.update()
-    # screen.fill(white)
-
+def drawBattle(playerGroup, enemyGroup, w, h):
+    screen.fill(lime)
     pygame.draw.rect(screen, (0, 0, 0), (0, 0, theScreen.width, theScreen.height * 0.1))
     bg = pygame.image.load("jungleBackground.jpg")
     bg = pygame.transform.rotozoom(bg, 0, theScreen.width/ 1380)
@@ -244,8 +281,9 @@ def drawBattle(playerGroup, enemyGroup, width, height):
     enemyGroup.draw(screen)
     enemyHealth.draw(screen)
     userHealth.draw(screen)
+    theScreen.width = w
+    theScreen.height = h
     pygame.display.update()
-
 
 def drawBackground(playerGroup, enemyGroup, width, height):
     pygame.display.update()
@@ -350,12 +388,13 @@ def animationController(playerGroup, enemyGroup, width, height, clock, animation
         pygame.display.update()
         clock.tick(2)
 
-
 def theBattle():
     health = 100
     enemy_health = 100
     userHealth.set_health(health)
     enemyHealth.set_health(enemy_health)
+
+    resizeBattle(theScreen.width, theScreen.height)
 
     clock = pygame.time.Clock()
 
@@ -381,13 +420,13 @@ def theBattle():
                            theScreen.height * 0.03)
         # enemyGroup.draw(screen)
         # playerGroup.draw(screen)
-        drawBattle(playerGroup, enemyGroup, width, height)
+        drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height)
         choose = chooseCategory(playerGroup, enemyGroup)
         print(choose)
         questionNumber = questions.load_question(choose)
         question = questions.get_question(questionNumber)
 
-        drawBattle(playerGroup, enemyGroup, width, height)
+        drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height)
         q = Button.text(black, 600, 100, 50, 50, 40, textwrap.shorten(question[0], 100))
         pygame.gfxdraw.box(screen, pygame.Rect(0, theScreen.height * 0.1, theScreen.width, 75),
                            (77, 153, 83, 130))
@@ -462,16 +501,16 @@ def lose():
     pygame.display.update()
     pygame.time.delay(4000)
 
-
 def reDrawOptionsWindow():
     screen.fill(lime)
     option.draw(screen, int(theScreen.width*0.1), True)
     changeButton.draw(screen, int(theScreen.width*0.05), True)
     back_to_main.draw(screen, int(theScreen.width*0.05), True)
+    #chooseFighter.draw(screen, int(theScreen.width*0.05), True)
+    pygame.display.update()
 
 def options():
     reDrawOptionsWindow()
-    pygame.display.update()
     opt = True
     while opt:
         for ev in pygame.event.get():
@@ -485,10 +524,43 @@ def options():
                 if changeButton.isOver(pos):
                     questions.changeQuestionDeck("python_questions.xlsx")
             if ev.type == pygame.VIDEORESIZE:
+                if (ev.w != theScreen.width):
+                    theScreen.width = ev.w
+                    theScreen.height = int(theScreen.width * 900 / 1600)
+                else:
+                    theScreen.height = ev.h
+                    theScreen.width = int(theScreen.height * 1600 / 900)
+
+                pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
+                resize(theScreen.width, theScreen.height)
+                reDrawOptionsWindow()
+
+#choose fighter functions
+'''
+def draw_choose_fighter_screen():
+    screen.fill(lime)
+    back_to_options.draw(screen, int(theScreen.width * 0.05), True)
+    pygame.display.update()
+
+def choose_your_fighter():
+    draw_choose_fighter_screen()
+    choice = True
+    while choice:
+        for ev in pygame.event.get():
+            pos = pygame.mouse.get_pos()
+            if ev.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+            if ev.type == pygame.MOUSEBUTTONDOWN:
+                if back_to_options.isOver(pos):
+                    choice = False
+
+            if ev.type == pygame.VIDEORESIZE:
                 startWidth = ev.w
                 startHeight = ev.h
                 resize(startWidth, startHeight)
                 reDrawOptionsWindow()
+'''
 
 def levelChange(screen, level):
     level = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.4, theScreen.width * 0.5,
@@ -524,7 +596,10 @@ def main():
 
     while enter_game:
         # start screen
-        menuOption = startscreen(width, height)
+        menuOption = startscreen()
+
+        print(width)
+        print(height)
 
         #  go to start, options, or quit
         if menuOption == "start":
