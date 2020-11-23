@@ -55,7 +55,7 @@ b = Button.button(color_light, 200, 225, 25, 25)
 c = Button.button(color_light, 200, 275, 25, 25)
 d = Button.button(color_light, 200, 325, 25, 25)
 
-chooseCat = Button.text(fuschia, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5),
+chooseCat = Button.text(fuschia, (theScreen.width * 0.25), (theScreen.height * 0.5 / 12), (theScreen.width * 0.5),
                             (theScreen.height * 1 / 10),
                             100, "Choose a category:")
 
@@ -207,7 +207,7 @@ def resizeBattle(startWidth, startHeight):
     c.modify(0.125 * startWidth, 0.305 * startHeight, startWidth * 0.021, startHeight * 0.021)
     d.modify(0.125 * startWidth, 0.36 * startHeight, startWidth * 0.021, startHeight * 0.021)
 
-    chooseCat.modify(0.25 * startWidth, 0.001 * startHeight, startWidth * 0.5, startHeight * 0.1)
+    chooseCat.modify(0.25 * startWidth, 1/24 * startHeight, startWidth * 0.5, startHeight * 0.1)
 
     cat1.modify(0.25 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
     cat2.modify(0.41 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
@@ -255,11 +255,11 @@ def chooseAnswer(playerGroup, enemyGroup, question):
 
 def drawBattle(playerGroup, enemyGroup, w, h):
     screen.fill(lime)
-    pygame.draw.rect(screen, (0, 0, 0), (0, 0, theScreen.width, theScreen.height * 0.1))
+    #pygame.draw.rect(screen, (0, 0, 0), (0, 0, theScreen.width, theScreen.height * 0.1))
     bg = pygame.image.load("jungleBackground.jpg")
     bg = pygame.transform.rotozoom(bg, 0, theScreen.width/ 1380)
     screen.blit(bg,(0,0))
-    pygame.draw.rect(screen, (0, 0, 0), (0, 0, theScreen.width, theScreen.height * 0.07))
+    #pygame.draw.rect(screen, (0, 0, 0), (0, 0, theScreen.width, theScreen.height * 0.07))
     playerGroup.draw(screen)
     enemyGroup.draw(screen)
     enemyHealth.draw(screen)
@@ -277,7 +277,7 @@ def drawBackground(playerGroup, enemyGroup, width, height, correctOrWrong=""):
     if correctOrWrong == "Wrong":
         display = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5, theScreen.height * 0.4, 100, "Incorrect")
 
-    pygame.draw.rect(screen, (0, 0, 0), (0, 0, theScreen.width, theScreen.height * 0.07))
+    #pygame.draw.rect(screen, (0, 0, 0), (0, 0, theScreen.width, theScreen.height * 0.07))
     bg = pygame.image.load("jungleBackground.jpg")
     bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1380)
     screen.blit(bg,(0,0))
@@ -408,7 +408,6 @@ def animationController(playerGroup, enemyGroup, width, height, clock, animation
         playerGroup.draw(screen)
         enemyGroup.draw(screen)
         pygame.display.update()
-
 
 def theBattle(level):
     health = 100
