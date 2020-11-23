@@ -11,6 +11,16 @@ class Screen():
         self.width = width
         self.height = height
 
+class damage():
+    def __init__(self, userDam, enemyDam):
+        self.userDamage = userDam
+        self.enemyDamage = enemyDam
+
+    def modify(self, newUserDam, newEnemyDam):
+        self.userDamage = newUserDam
+        self.enemyDamage = newEnemyDam
+
+
 screen = pygame.display.set_mode((0, 0), pygame.RESIZABLE)
 white = (255, 255, 255)
 purple = (110, 113, 198)
@@ -48,11 +58,11 @@ extraButton =Button.button(color_light, 200, 200, 50, 50, "minus 1")
 extraButton2 =Button.button(color_light, 200, 300, 50, 50, "minus 5")
 extraButton3 =Button.button(color_light, 200, 400, 50, 50, "minus 10")
 '''
-cat1 = Button.button(fuschia, 200, 200, 30, 30, " Syntax")
-cat2 = Button.button(fuschia, 450, 200, 30, 30, " Vocabulary")
-cat3 = Button.button(fuschia, 700, 200, 30, 30, " Logic")
-cat4 = Button.button(fuschia, 150, 350, 30, 30, " Number Conversion")
-cat5 = Button.button(fuschia, 550, 350, 30, 30, " General")
+cat1 = Button.button(fuschia, 400, 200, 30, 30, " Syntax")
+cat2 = Button.button(fuschia, 650, 200, 30, 30, " Vocabulary")
+cat3 = Button.button(fuschia, 900, 200, 30, 30, " Logic")
+cat4 = Button.button(fuschia, 450, 350, 30, 30, " Number Conversion")
+cat5 = Button.button(fuschia, 800, 350, 30, 30, " General")
 
 a = Button.button(color_light, 200, 175, 25, 25)
 b = Button.button(color_light, 200, 225, 25, 25)
@@ -72,6 +82,7 @@ option = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (h
 changeButton = Button.button(color_light, (width * 0.25), (height * 6 / 12), (width * 0.5), (height * 2 / 10),
                                       "Change Deck")
 
+damageStats = damage(50, 10)
 
 def resize(startWidth, startHeight):
     startButton.modify((startWidth * 0.25), (startHeight * 3 / 12), (startWidth * 0.5),
@@ -88,6 +99,8 @@ def resize(startWidth, startHeight):
     option.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
     theScreen.width = startWidth
     theScreen.height = startHeight
+    chooseCat.modify((theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5),
+                     (theScreen.height * 1 / 10))
 
 def reDrawStartWindow():
     screen.fill(gold)
@@ -382,7 +395,7 @@ def animationController(playerGroup, enemyGroup, width, height, clock, animation
         pygame.display.update()
 
 
-def theBattle():
+def theBattle(level):
     health = 100
     enemy_health = 100
     userHealth.set_health(health)
@@ -398,8 +411,10 @@ def theBattle():
     playerGroup = pygame.sprite.Group(myPlayer)
     # playerGroup.draw(screen)
 
-    myEnemy = Coffee()
-    # myEnemy = Ruby()
+    if level == 1:
+        myEnemy = Coffee()
+    elif level == 2:
+        myEnemy = Ruby()
     enemyGroup = pygame.sprite.Group(myEnemy)
     # enemyGroup.draw(screen)
     pygame.display.update()
@@ -439,7 +454,7 @@ def theBattle():
         is_correct = questions.get_result(guess, question[5])
 
         if is_correct:
-            enemy_health = enemy_health - 25
+            enemy_health = enemy_health - damageStats.userDamage
             enemyHealth.set_health(enemy_health)
             enemyHealth.draw(screen)
 
@@ -448,7 +463,7 @@ def theBattle():
             animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, "coffee hurt")
 
         else:
-            health = health - 10
+            health = health - damageStats.enemyDamage
             userHealth.set_health(health)
             userHealth.draw(screen)
 
@@ -563,10 +578,11 @@ def main():
         #  go to start, options, or quit
         if menuOption == "start":
             levelChange(screen, 1)
-            result = theBattle()
+            result = theBattle(1)
             if result == "win":
                 levelChange(screen, 2)
-                result2 = theBattle()
+                damageStats.modify(25,25)
+                result2 = theBattle(2)
                 if result2 == "win":
                     win()
                 else:
