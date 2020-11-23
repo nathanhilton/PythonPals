@@ -80,6 +80,7 @@ back_to_options = Button.button(color_light, (width * 0.25), (height * 9 / 12), 
                                       "Back to Options Menu")
 
 damageStats = damage(50, 10)
+ws = questions.initialize("python_questions.xlsx")
 
 def resize(startWidth, startHeight):
     #start menu
@@ -449,7 +450,7 @@ def theBattle(level):
         choose = chooseCategory(playerGroup, enemyGroup)
         print(choose)
         questionNumber = questions.load_question(choose)
-        question = questions.get_question(questionNumber)
+        question = questions.get_question(questionNumber, ws)
 
         drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height)
         q = Button.text(black, 600, 100, 50, 50, 40, textwrap.shorten(question[0], 100))
@@ -549,7 +550,7 @@ def options():
                 if back_to_main.isOver(pos):
                     opt = False
                 if changeButton.isOver(pos):
-                    questions.changeQuestionDeck("python_questions.xlsx")
+                    globals()['ws'] = questions.changeQuestionDeck("python_questions_capitals.xlsx", ws)
             if ev.type == pygame.VIDEORESIZE:
                 if (ev.w != theScreen.width):
                     theScreen.width = ev.w

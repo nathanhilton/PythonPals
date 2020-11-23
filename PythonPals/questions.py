@@ -3,8 +3,12 @@ import random
 from openpyxl import load_workbook, Workbook
 
 
-wk = load_workbook(filename="python_questions.xlsx")
-ws = wk.active
+
+def initialize(filename):
+    wk = load_workbook(filename=filename)
+
+    ws = wk.active
+    return ws
 
 
 def load_question(category):
@@ -48,7 +52,7 @@ def get_result(guess, answer):
         return False
 
 
-def get_question(value):
+def get_question(value,ws):
     # list returned has the info
     # 0 has the question
     # 1 has answer A
@@ -78,10 +82,11 @@ def get_question(value):
     return the_question
 
 
-def changeQuestionDeck(filename):
-    wk = load_workbook(filename)
+def changeQuestionDeck(filename, ws):
+    wk = load_workbook(filename=filename)
     ws = wk.active
     print("Loaded")
+    return ws
 
 
 
