@@ -18,7 +18,7 @@ class Player(pygame.sprite.Sprite):
 
         self.index = 0
         self.image = self.images[self.index]
-        self.rect = pygame.Rect(100, 500, 600, 600)
+        self.rect = pygame.Rect(250, 575, 600, 600)
 
     def resize(self, scale):
         self.height = self.height * scale
@@ -49,7 +49,41 @@ class Coffee(pygame.sprite.Sprite):
 
         self.index = 0
         self.image = self.images[self.index]
-        self.rect = pygame.Rect(1200, 400, 500, 500)
+        self.rect = pygame.Rect(1000, 450, 500, 500)
+
+    def update(self):
+        self.index += 1
+        if self.index >= len(self.images):
+            self.index = 0
+        self.image = self.images[self.index]
+
+    def resize(self, scale):
+        self.height = self.height * scale
+        self.width = self.width * scale
+        self.image = pygame.transform.rotozoom(self.images[self.index], 0, scale)
+
+    def changeLocation(self, x, y):
+        self.x = x
+        self.y = y
+        self.rect = pygame.Rect(x, y, self.width, self.height)
+
+class Ruby(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.images = []
+        self.images.append(pygame.image.load('Ruby_idle.png'))
+        self.images.append(pygame.image.load('Ruby_left.png'))
+        self.images.append(pygame.image.load('Ruby_prep.png'))
+        self.images.append(pygame.image.load('Ruby_start.png'))
+        self.images.append(pygame.image.load('Ruby_fire.png'))
+        self.images.append(pygame.image.load('Ruby_start.png'))
+        self.images.append(pygame.image.load('Ruby_prep.png'))
+        self.images.append(pygame.image.load('Ruby_left.png'))
+        self.images.append(pygame.image.load('Ruby_hurt.png'))
+
+        self.index = 0
+        self.image = self.images[self.index]
+        self.rect = pygame.Rect(800, 350, 500, 500)
 
     def update(self):
         self.index += 1
