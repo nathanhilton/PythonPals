@@ -3,7 +3,7 @@ import questions
 import pygame
 import pygame.gfxdraw
 import textwrap
-from player import Player, Coffee
+from player import Player, Coffee, Ruby
 
 
 class Screen():
@@ -248,7 +248,7 @@ def drawBattle(playerGroup, enemyGroup, width, height):
 
 
 def drawBackground(playerGroup, enemyGroup, width, height):
-    pygame.display.update()
+    # pygame.display.update()
     # screen.fill(white)
 
     pygame.draw.rect(screen, (0, 0, 0), (0, 0, theScreen.width, theScreen.height * 0.07))
@@ -259,10 +259,10 @@ def drawBackground(playerGroup, enemyGroup, width, height):
     # enemyGroup.draw(screen)
     enemyHealth.draw(screen)
     userHealth.draw(screen)
-    pygame.display.update()
+    # pygame.display.update()
 
 def animationController(playerGroup, enemyGroup, width, height, clock, animation):
-    if(animation == "attack coffee"):
+    if(animation == "snake attack"):
         for i in range(0,4):
             drawBackground(playerGroup, enemyGroup, width, height)
             playerGroup.update()
@@ -278,6 +278,7 @@ def animationController(playerGroup, enemyGroup, width, height, clock, animation
         enemyGroup.draw(screen)
         pygame.display.update()
 
+    if(animation == "coffee hurt"):
         drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
         enemyGroup.update()
         enemyGroup.update()
@@ -295,7 +296,7 @@ def animationController(playerGroup, enemyGroup, width, height, clock, animation
         playerGroup.draw(screen)
         pygame.display.update()
         
-    if(animation == "attacked by coffee"):
+    if(animation == "coffee attack"):
         drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
         enemyGroup.update()
         enemyGroup.draw(screen)
@@ -317,6 +318,7 @@ def animationController(playerGroup, enemyGroup, width, height, clock, animation
         playerGroup.draw(screen)
         pygame.display.update()
 
+    if(animation == "snake hurt"):
         drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
         for i in range(0, 4):
             playerGroup.update()
@@ -350,6 +352,35 @@ def animationController(playerGroup, enemyGroup, width, height, clock, animation
         pygame.display.update()
         clock.tick(2)
 
+    if(animation == "ruby attack"):
+        for i in range(0, 7):
+            drawBackground(playerGroup, enemyGroup, width, height)
+            enemyGroup.update()
+            playerGroup.draw(screen)
+            enemyGroup.draw(screen)
+            pygame.display.update()
+            clock.tick(5)
+        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        enemyGroup.update()
+        enemyGroup.update()
+        playerGroup.draw(screen)
+        enemyGroup.draw(screen)
+        pygame.display.update()
+    if (animation == "ruby hurt"):
+        for i in range(0, 7):
+            enemyGroup.update()
+        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        enemyGroup.update()
+        playerGroup.draw(screen)
+        enemyGroup.draw(screen)
+        pygame.display.update()
+        clock.tick(3)
+        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        enemyGroup.update()
+        playerGroup.draw(screen)
+        enemyGroup.draw(screen)
+        pygame.display.update()
+
 
 def theBattle():
     health = 100
@@ -368,6 +399,7 @@ def theBattle():
     # playerGroup.draw(screen)
 
     myEnemy = Coffee()
+    # myEnemy = Ruby()
     enemyGroup = pygame.sprite.Group(myEnemy)
     # enemyGroup.draw(screen)
     pygame.display.update()
@@ -407,12 +439,13 @@ def theBattle():
         is_correct = questions.get_result(guess, question[5])
 
         if is_correct:
-            enemy_health = enemy_health - 50
+            enemy_health = enemy_health - 25
             enemyHealth.set_health(enemy_health)
             enemyHealth.draw(screen)
 
             clock.tick(5)
-            animationController(playerGroup,enemyGroup,theScreen.width,theScreen.height, clock, "attack coffee")
+            animationController(playerGroup,enemyGroup,theScreen.width,theScreen.height, clock, "snake attack")
+            animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, "coffee hurt")
 
         else:
             health = health - 10
@@ -420,7 +453,8 @@ def theBattle():
             userHealth.draw(screen)
 
             clock.tick(3)
-            animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, "attacked by coffee")
+            animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, "coffee attack")
+            animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, "snake hurt")
             
 
         if health <= 0:
