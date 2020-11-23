@@ -261,10 +261,94 @@ def drawBackground(playerGroup, enemyGroup, width, height):
     userHealth.draw(screen)
     pygame.display.update()
 
-# def playAnimation(groupA,groupB,numFramesA,numFramesB,screen,width,height,clock,clockSpeed):
-#     for i in range(0,numFramesA):
-#         groupA.update()
-#
+def animationController(playerGroup, enemyGroup, width, height, clock, animation):
+    if(animation == "attack coffee"):
+        for i in range(0,4):
+            drawBackground(playerGroup, enemyGroup, width, height)
+            playerGroup.update()
+            playerGroup.draw(screen)
+            enemyGroup.draw(screen)
+            pygame.display.update()
+            clock.tick(5)
+        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        playerGroup.update()
+        playerGroup.update()
+        playerGroup.update()
+        playerGroup.draw(screen)
+        enemyGroup.draw(screen)
+        pygame.display.update()
+
+        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        enemyGroup.update()
+        enemyGroup.update()
+        enemyGroup.update()
+        enemyGroup.draw(screen)
+        playerGroup.draw(screen)
+        pygame.display.update()
+        clock.tick(3)
+
+        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        enemyGroup.update()
+        enemyGroup.update()
+        enemyGroup.update()
+        enemyGroup.draw(screen)
+        playerGroup.draw(screen)
+        pygame.display.update()
+        
+    if(animation == "attacked by coffee"):
+        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        enemyGroup.update()
+        enemyGroup.draw(screen)
+        playerGroup.draw(screen)
+        pygame.display.update()
+        clock.tick(3)
+        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        enemyGroup.update()
+        enemyGroup.draw(screen)
+        playerGroup.draw(screen)
+        pygame.display.update()
+        clock.tick(3)
+        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        enemyGroup.update()
+        enemyGroup.update()
+        enemyGroup.update()
+        enemyGroup.update()
+        enemyGroup.draw(screen)
+        playerGroup.draw(screen)
+        pygame.display.update()
+
+        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        for i in range(0, 4):
+            playerGroup.update()
+        playerGroup.update()
+        playerGroup.draw(screen)
+        enemyGroup.draw(screen)
+        pygame.display.update()
+        clock.tick(3)
+        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        playerGroup.update()
+        playerGroup.update()
+        playerGroup.draw(screen)
+        enemyGroup.draw(screen)
+        pygame.display.update()
+    if (animation == "coffee break"):
+        clock.tick(2)
+        for i in range (0,6):
+            playerGroup.update()
+        for i in range (0,3):
+            enemyGroup.update()
+        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        enemyGroup.update()
+        enemyGroup.draw(screen)
+        playerGroup.draw(screen)
+        pygame.display.update()
+        clock.tick(2)
+        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        enemyGroup.update()
+        enemyGroup.draw(screen)
+        playerGroup.draw(screen)
+        pygame.display.update()
+        clock.tick(2)
 
 
 def theBattle():
@@ -323,44 +407,12 @@ def theBattle():
         is_correct = questions.get_result(guess, question[5])
 
         if is_correct:
-            enemy_health = enemy_health - 25
+            enemy_health = enemy_health - 50
             enemyHealth.set_health(enemy_health)
             enemyHealth.draw(screen)
 
-            clock.tick(4)
-
-            for i in range(0, 4):
-                drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
-                playerGroup.update()
-                playerGroup.draw(screen)
-                enemyGroup.draw(screen)
-                pygame.display.update()
-                clock.tick(4)
-
-            # pygame.draw.rect(screen, white, (200, 500, 500, 500))
-            drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
-            playerGroup.update()
-            playerGroup.update()
-            playerGroup.draw(screen)
-            enemyGroup.draw(screen)
-            pygame.display.update()
-
-            # pygame.draw.rect(screen, white, (700, 400, 500, 500))
-            drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
-            enemyGroup.update()
-            enemyGroup.update()
-            enemyGroup.update()
-            enemyGroup.draw(screen)
-            playerGroup.draw(screen)
-            pygame.display.update()
-            clock.tick(3)
-            # pygame.draw.rect(screen, white, (700, 400, 500, 500))
-            drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
-            enemyGroup.update()
-            enemyGroup.draw(screen)
-            playerGroup.draw(screen)
-            pygame.display.update()
-
+            clock.tick(5)
+            animationController(playerGroup,enemyGroup,theScreen.width,theScreen.height, clock, "attack coffee")
 
         else:
             health = health - 10
@@ -368,43 +420,8 @@ def theBattle():
             userHealth.draw(screen)
 
             clock.tick(3)
-            # pygame.draw.rect(screen, white, (700, 400, 500, 500))
-            drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
-            enemyGroup.update()
-            enemyGroup.draw(screen)
-            playerGroup.draw(screen)
-            pygame.display.update()
-            clock.tick(3)
-            # pygame.draw.rect(screen, white, (700, 400, 500, 500))
-            drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
-            enemyGroup.update()
-            enemyGroup.draw(screen)
-            playerGroup.draw(screen)
-            pygame.display.update()
-            clock.tick(3)
-            # pygame.draw.rect(screen, white, (700, 400, 500, 500))
-            drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
-            enemyGroup.update()
-            enemyGroup.update()
-            enemyGroup.draw(screen)
-            playerGroup.draw(screen)
-            pygame.display.update()
-
-            # pygame.draw.rect(screen, white, (200, 500, 500, 500))
-            drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
-            for i in range(0, 4):
-                playerGroup.update()
-            playerGroup.update()
-            playerGroup.draw(screen)
-            enemyGroup.draw(screen)
-            pygame.display.update()
-            clock.tick(3)
-            # pygame.draw.rect(screen, white, (200, 500, 500, 500))
-            drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
-            playerGroup.update()
-            playerGroup.draw(screen)
-            enemyGroup.draw(screen)
-            pygame.display.update()
+            animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, "attacked by coffee")
+            
 
         if health <= 0:
             battle = False
@@ -412,6 +429,7 @@ def theBattle():
 
         if enemy_health <= 0:
             battle = False
+            animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, "coffee break")
             return "win"
 
 def win():

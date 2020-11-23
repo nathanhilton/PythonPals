@@ -14,6 +14,7 @@ class Player(pygame.sprite.Sprite):
         self.images.append(pygame.image.load('snake2.png'))
         self.images.append(pygame.image.load('Snake fire end.png'))
         self.images.append(pygame.image.load('snake4.png'))
+        self.images.append(pygame.image.load('snake6.png'))
 
         self.index = 0
         self.image = self.images[self.index]
@@ -43,6 +44,8 @@ class Coffee(pygame.sprite.Sprite):
         self.images.append(pygame.image.load('coffee2.png'))
         self.images.append(pygame.image.load('coffee3.png'))
         self.images.append(pygame.image.load('coffee4.png'))
+        self.images.append(pygame.image.load('coffee5.png'))
+        self.images.append(pygame.image.load('coffee6.png'))
 
         self.index = 0
         self.image = self.images[self.index]
