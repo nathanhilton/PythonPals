@@ -259,15 +259,21 @@ def drawBattle(playerGroup, enemyGroup, width, height):
     userHealth.draw(screen)
     pygame.display.update()
 
-
-def drawBackground(playerGroup, enemyGroup, width, height):
+#correctOrWrong is optional parameter, only use if if an animation that has has answer stuff
+def drawBackground(playerGroup, enemyGroup, width, height, correctOrWrong=""):
     # pygame.display.update()
     # screen.fill(white)
+    if correctOrWrong == "Correct":
+        display = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5, theScreen.height * 0.4, 100, "Correct")
+    if correctOrWrong == "Wrong":
+        display = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5, theScreen.height * 0.4, 100, "Incorrect")
 
     pygame.draw.rect(screen, (0, 0, 0), (0, 0, theScreen.width, theScreen.height * 0.07))
     bg = pygame.image.load("jungleBackground.jpg")
     bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1380)
     screen.blit(bg,(0,0))
+    if correctOrWrong != "":
+        display.draw(screen, 100, True)
     # playerGroup.draw(screen)
     # enemyGroup.draw(screen)
     enemyHealth.draw(screen)
@@ -277,7 +283,7 @@ def drawBackground(playerGroup, enemyGroup, width, height):
 def animationController(playerGroup, enemyGroup, width, height, clock, animation):
     if(animation == "snake attack"):
         for i in range(0,4):
-            drawBackground(playerGroup, enemyGroup, width, height)
+            drawBackground(playerGroup, enemyGroup, width, height, "Correct")
             playerGroup.update()
             playerGroup.draw(screen)
             enemyGroup.draw(screen)
@@ -285,6 +291,7 @@ def animationController(playerGroup, enemyGroup, width, height, clock, animation
             clock.tick(5)
         drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
         playerGroup.update()
+
         playerGroup.update()
         playerGroup.update()
         playerGroup.draw(screen)
@@ -310,19 +317,19 @@ def animationController(playerGroup, enemyGroup, width, height, clock, animation
         pygame.display.update()
         
     if(animation == "coffee attack"):
-        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height, "Wrong")
         enemyGroup.update()
         enemyGroup.draw(screen)
         playerGroup.draw(screen)
         pygame.display.update()
         clock.tick(3)
-        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height, "Wrong")
         enemyGroup.update()
         enemyGroup.draw(screen)
         playerGroup.draw(screen)
         pygame.display.update()
         clock.tick(3)
-        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height, "Wrong")
         enemyGroup.update()
         enemyGroup.update()
         enemyGroup.update()
@@ -539,11 +546,21 @@ def options():
                 resize(startWidth, startHeight)
                 reDrawOptionsWindow()
 
-def levelChange(screen, level):
-    level = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.4, theScreen.width * 0.5,
+def levelChange(screen, level, Enemy, enemyImg):
+    level = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.1, theScreen.width * 0.5,
                         theScreen.height * 0.2, 200, "LEVEL " + str(level))
+    enemy = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.35, theScreen.width * 0.5,
+                        theScreen.height * 0.2, 100, "Your enemy is " + Enemy)
     screen.fill(gold)
+    enemyimg = pygame.image.load(enemyImg)
+    if Enemy == "Ruby":
+        enemyimg = pygame.transform.rotozoom(enemyimg, 0, 0.68)
+    else:
+        print(enemy)
     level.draw(screen, int(theScreen.width*0.2), True)
+    enemy.draw(screen, int(theScreen.width*0.1), True)
+    screen.blit(enemyimg, (theScreen.width * 0.4, theScreen.height * 0.55))
+
     pygame.display.update()
     pygame.time.delay(2000)
 
@@ -569,18 +586,17 @@ def main():
     # pygame.mixer.Sound.play(test_sound)
 
     enter_game = True
-    # print("dkjsflksdkjfskjlf" + str(theScreen.height))
-
     while enter_game:
         # start screen
         menuOption = startscreen(width, height)
 
         #  go to start, options, or quit
         if menuOption == "start":
-            levelChange(screen, 1)
+            levelChange(screen, 1, "Java", "coffee1.png")
+            #levelChange(screen, 2, "Ruby", "Ruby_idle.png")
             result = theBattle(1)
             if result == "win":
-                levelChange(screen, 2)
+                levelChange(screen, 2, "Ruby", "Ruby_idle.png")
                 damageStats.modify(25,25)
                 result2 = theBattle(2)
                 if result2 == "win":
