@@ -19,7 +19,7 @@ class damage():
         self.userDamage = newUserDam
         self.enemyDamage = newEnemyDam
 
-
+ws = questions.initialize("python_questions.xlsx")
 screen = pygame.display.set_mode((0, 0), pygame.RESIZABLE)
 white = (255, 255, 255)
 purple = (110, 113, 198)
@@ -43,10 +43,10 @@ enemyHealth = Button.healthBar(width - 20 - 200, 20, 200, 30, 100, "right")
 title = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
                                "PYTHON PALS")
 
-cat1 = Button.button(fuschia, 400, 200, 30, 30, " Syntax")
-cat2 = Button.button(fuschia, 650, 200, 30, 30, " Vocabulary")
-cat3 = Button.button(fuschia, 900, 200, 30, 30, " Logic")
-cat4 = Button.button(fuschia, 450, 350, 30, 30, " Number Conversion")
+cat1 = Button.button(fuschia, 400, 200, 30, 30, ws['C2'].value)
+cat2 = Button.button(fuschia, 650, 200, 30, 30, ws['C7'].value)
+cat3 = Button.button(fuschia, 900, 200, 30, 30, ws['C12'].value)
+cat4 = Button.button(fuschia, 450, 350, 30, 30, ws['C17'].value)
 cat5 = Button.button(fuschia, 800, 350, 30, 30, " General")
 
 
@@ -80,7 +80,7 @@ back_to_options = Button.button(color_light, (width * 0.25), (height * 9 / 12), 
                                       "Back to Options Menu")
 
 damageStats = damage(50, 10)
-ws = questions.initialize("python_questions.xlsx")
+
 
 def resize(startWidth, startHeight):
     #start menu
