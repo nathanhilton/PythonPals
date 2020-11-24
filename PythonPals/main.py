@@ -494,7 +494,11 @@ def theBattle(level):
 
             clock.tick(5)
             animationController(playerGroup,enemyGroup,theScreen.width,theScreen.height, clock, "snake attack")
-            animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, "coffee hurt")
+            if level == 1:
+                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, "coffee hurt")
+            elif level == 2:
+                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, "ruby hurt")
+
 
         else:
             health = health - damageStats.enemyDamage
@@ -502,7 +506,10 @@ def theBattle(level):
             userHealth.draw(screen)
 
             clock.tick(3)
-            animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, "coffee attack")
+            if level == 1:
+                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, "coffee attack")
+            elif level == 2:
+                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, "ruby attack")
             animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, "snake hurt")
             
 
