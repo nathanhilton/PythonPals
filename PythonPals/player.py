@@ -100,3 +100,33 @@ class Ruby(pygame.sprite.Sprite):
         self.x = x
         self.y = y
         self.rect = pygame.Rect(x, y, self.width, self.height)
+
+class Eye(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.images = []
+        self.images.append(pygame.image.load('C1.png'))
+        self.images.append(pygame.image.load('C2.png'))
+        self.images.append(pygame.image.load('C3.png'))
+        self.images.append(pygame.image.load('C4.png'))
+
+
+        self.index = 0
+        self.image = self.images[self.index]
+        self.rect = pygame.Rect(850, 400, 500, 500)
+
+    def update(self):
+        self.index += 1
+        if self.index >= len(self.images):
+            self.index = 0
+        self.image = self.images[self.index]
+
+    def resize(self, scale):
+        self.height = self.height * scale
+        self.width = self.width * scale
+        self.image = pygame.transform.rotozoom(self.images[self.index], 0, scale)
+
+    def changeLocation(self, x, y):
+        self.x = x
+        self.y = y
+        self.rect = pygame.Rect(x, y, self.width, self.height)

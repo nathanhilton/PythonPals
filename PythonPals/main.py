@@ -3,7 +3,7 @@ import questions
 import pygame
 import pygame.gfxdraw
 import textwrap
-from player import Player, Coffee, Ruby
+from player import Player, Coffee, Ruby, Eye
 
 class Screen():
     def __init__(self, width, height):
@@ -319,7 +319,7 @@ def drawBackground(playerGroup, enemyGroup, width, height,level, correctOrWrong=
         bg = pygame.image.load("treasure.jpg")
         bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1920)
     else:
-        bg = pygame.image.load("jungleBackground.jpg")
+        bg = pygame.image.load("lava.png")
     screen.blit(bg,(0,0))
     if correctOrWrong != "":
         display.draw(screen, 100, True)
@@ -448,6 +448,34 @@ def animationController(playerGroup, enemyGroup, width, height, clock, level, an
         playerGroup.draw(screen)
         enemyGroup.draw(screen)
         pygame.display.update()
+    if (animation == "eye attack"):
+        for i in range(0, 2):
+            drawBackground(playerGroup, enemyGroup, width, height, level, "Wrong")
+            enemyGroup.update()
+            playerGroup.draw(screen)
+            enemyGroup.draw(screen)
+            pygame.display.update()
+            clock.tick(2)
+        drawBackground(playerGroup, enemyGroup, width, height, level, "Wrong")
+        enemyGroup.update()
+        enemyGroup.update()
+        playerGroup.draw(screen)
+        enemyGroup.draw(screen)
+        pygame.display.update()
+    if (animation == "eye hurt"):
+        for i in range(0, 2):
+            enemyGroup.update()
+        drawBackground(playerGroup, enemyGroup, width, height, level, "Correct")
+        enemyGroup.update()
+        playerGroup.draw(screen)
+        enemyGroup.draw(screen)
+        pygame.display.update()
+        clock.tick(3)
+        drawBackground(playerGroup, enemyGroup, width, height, level, "Correct")
+        enemyGroup.update()
+        playerGroup.draw(screen)
+        enemyGroup.draw(screen)
+        pygame.display.update()
 
 def theBattle(level):
     health = 100
@@ -471,6 +499,8 @@ def theBattle(level):
         myEnemy = Coffee()
     elif level == 2:
         myEnemy = Ruby()
+    else:
+        myEnemy = Eye()
     enemyGroup = pygame.sprite.Group(myEnemy)
     # enemyGroup.draw(screen)
     pygame.display.update()
@@ -520,7 +550,7 @@ def theBattle(level):
             if level == 1:
                 animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock,level, "coffee hurt")
             elif level == 2:
-                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock,level, "ruby hurt")
+                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock,level, "eye hurt")
 
 
         else:
@@ -533,6 +563,8 @@ def theBattle(level):
                 animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock,level, "coffee attack")
             elif level == 2:
                 animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock,level, "ruby attack")
+            else:
+                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, level, "eye attack")
             animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock,level, "snake hurt")
             
 
