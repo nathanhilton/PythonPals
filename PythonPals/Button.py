@@ -72,12 +72,12 @@ class text():
                     text = font.render(part, True, self.color)
                     screen.blit(text, (round(self.x + (self.width / 2 - text.get_width() / 2)),
                                    round(self.y + (self.height / 2 - text.get_height() / 2) + i)))
-                    i += 50
+                    i += 37
             else:
                 for part in self.text:
                     text = font.render(part, True, self.color)
                     screen.blit(text, (round(self.x + self.width), round(self.y + i)))
-                    i += 50
+                    i += 37
 
 
 class healthBar():

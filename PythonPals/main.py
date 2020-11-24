@@ -453,6 +453,7 @@ def theBattle(level):
         question = questions.get_question(questionNumber, ws)
 
         drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+
         q = Button.text(black, 600, 100, 50, 50, 40, question[0].splitlines())
         pygame.gfxdraw.box(screen, pygame.Rect(0, theScreen.height * 0.1, theScreen.width, 75),
                            (77, 153, 83, 130))
