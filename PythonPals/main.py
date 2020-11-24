@@ -286,7 +286,7 @@ def drawBattle(playerGroup, enemyGroup, w, h):
     pygame.display.update()
 
 #correctOrWrong is optional parameter, only use if if an animation that has has answer stuff
-def drawBackground(playerGroup, enemyGroup, width, height, correctOrWrong=""):
+def drawBackground(playerGroup, enemyGroup, width, height,level, correctOrWrong=""):
     # pygame.display.update()
     # screen.fill(white)
     if correctOrWrong == "Correct":
@@ -295,7 +295,12 @@ def drawBackground(playerGroup, enemyGroup, width, height, correctOrWrong=""):
         display = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5, theScreen.height * 0.4, 100, ["Incorrect"])
 
     #pygame.draw.rect(screen, (0, 0, 0), (0, 0, theScreen.width, theScreen.height * 0.07))
-    bg = pygame.image.load("jungleBackground.jpg")
+    if level == 1:
+        bg = pygame.image.load("jungleBackground.jpg")
+    elif level == 2:
+        bg = pygame.image.load("cave.jpg")
+    else:
+        bg = pygame.image.load("jungleBackground.jpg")
     bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1380)
     screen.blit(bg,(0,0))
     if correctOrWrong != "":
@@ -306,16 +311,16 @@ def drawBackground(playerGroup, enemyGroup, width, height, correctOrWrong=""):
     userHealth.draw(screen)
     # pygame.display.update()
 
-def animationController(playerGroup, enemyGroup, width, height, clock, animation):
+def animationController(playerGroup, enemyGroup, width, height, clock, level, animation):
     if(animation == "snake attack"):
         for i in range(0,4):
-            drawBackground(playerGroup, enemyGroup, width, height, "Correct")
+            drawBackground(playerGroup, enemyGroup, width, height,level, "Correct")
             playerGroup.update()
             playerGroup.draw(screen)
             enemyGroup.draw(screen)
             pygame.display.update()
             clock.tick(5)
-        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        drawBackground(playerGroup, enemyGroup, width, height,level, "Correct")
         playerGroup.update()
 
         playerGroup.update()
@@ -325,7 +330,7 @@ def animationController(playerGroup, enemyGroup, width, height, clock, animation
         pygame.display.update()
 
     if(animation == "coffee hurt"):
-        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        drawBackground(playerGroup, enemyGroup, width, height,level, "Correct")
         enemyGroup.update()
         enemyGroup.update()
         enemyGroup.update()
@@ -334,7 +339,7 @@ def animationController(playerGroup, enemyGroup, width, height, clock, animation
         pygame.display.update()
         clock.tick(3)
 
-        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        drawBackground(playerGroup, enemyGroup, width, height,level, "Correct")
         enemyGroup.update()
         enemyGroup.update()
         enemyGroup.update()
@@ -343,19 +348,19 @@ def animationController(playerGroup, enemyGroup, width, height, clock, animation
         pygame.display.update()
         
     if(animation == "coffee attack"):
-        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height, "Wrong")
+        drawBackground(playerGroup, enemyGroup, width, height,level, "Wrong")
         enemyGroup.update()
         enemyGroup.draw(screen)
         playerGroup.draw(screen)
         pygame.display.update()
         clock.tick(3)
-        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height, "Wrong")
+        drawBackground(playerGroup, enemyGroup, width, height,level, "Wrong")
         enemyGroup.update()
         enemyGroup.draw(screen)
         playerGroup.draw(screen)
         pygame.display.update()
         clock.tick(3)
-        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height, "Wrong")
+        drawBackground(playerGroup, enemyGroup, width, height,level, "Wrong")
         enemyGroup.update()
         enemyGroup.update()
         enemyGroup.update()
@@ -365,7 +370,7 @@ def animationController(playerGroup, enemyGroup, width, height, clock, animation
         pygame.display.update()
 
     if(animation == "snake hurt"):
-        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        drawBackground(playerGroup, enemyGroup, width, height,level, "Wrong")
         for i in range(0, 4):
             playerGroup.update()
         playerGroup.update()
@@ -373,7 +378,7 @@ def animationController(playerGroup, enemyGroup, width, height, clock, animation
         enemyGroup.draw(screen)
         pygame.display.update()
         clock.tick(3)
-        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        drawBackground(playerGroup, enemyGroup, width, height,level, "Wrong")
         playerGroup.update()
         playerGroup.update()
         playerGroup.draw(screen)
@@ -385,13 +390,13 @@ def animationController(playerGroup, enemyGroup, width, height, clock, animation
             playerGroup.update()
         for i in range (0,3):
             enemyGroup.update()
-        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        drawBackground(playerGroup, enemyGroup, width, height,level)
         enemyGroup.update()
         enemyGroup.draw(screen)
         playerGroup.draw(screen)
         pygame.display.update()
         clock.tick(2)
-        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        drawBackground(playerGroup, enemyGroup, width, height,level)
         enemyGroup.update()
         enemyGroup.draw(screen)
         playerGroup.draw(screen)
@@ -399,13 +404,13 @@ def animationController(playerGroup, enemyGroup, width, height, clock, animation
         clock.tick(2)
     if(animation == "ruby attack"):
         for i in range(0, 7):
-            drawBackground(playerGroup, enemyGroup, width, height)
+            drawBackground(playerGroup, enemyGroup, width, height,level, "Wrong")
             enemyGroup.update()
             playerGroup.draw(screen)
             enemyGroup.draw(screen)
             pygame.display.update()
             clock.tick(5)
-        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        drawBackground(playerGroup, enemyGroup, width, height,level, "Wrong")
         enemyGroup.update()
         enemyGroup.update()
         playerGroup.draw(screen)
@@ -414,13 +419,13 @@ def animationController(playerGroup, enemyGroup, width, height, clock, animation
     if (animation == "ruby hurt"):
         for i in range(0, 7):
             enemyGroup.update()
-        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        drawBackground(playerGroup, enemyGroup, width, height,level, "Correct")
         enemyGroup.update()
         playerGroup.draw(screen)
         enemyGroup.draw(screen)
         pygame.display.update()
         clock.tick(3)
-        drawBackground(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        drawBackground(playerGroup, enemyGroup, width, height,level, "Correct")
         enemyGroup.update()
         playerGroup.draw(screen)
         enemyGroup.draw(screen)
@@ -493,11 +498,11 @@ def theBattle(level):
             enemyHealth.draw(screen)
 
             clock.tick(5)
-            animationController(playerGroup,enemyGroup,theScreen.width,theScreen.height, clock, "snake attack")
+            animationController(playerGroup,enemyGroup,theScreen.width,theScreen.height, clock,level, "snake attack")
             if level == 1:
-                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, "coffee hurt")
+                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock,level, "coffee hurt")
             elif level == 2:
-                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, "ruby hurt")
+                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock,level, "ruby hurt")
 
 
         else:
@@ -507,10 +512,10 @@ def theBattle(level):
 
             clock.tick(3)
             if level == 1:
-                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, "coffee attack")
+                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock,level, "coffee attack")
             elif level == 2:
-                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, "ruby attack")
-            animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, "snake hurt")
+                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock,level, "ruby attack")
+            animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock,level, "snake hurt")
             
 
         if health <= 0:
@@ -520,7 +525,7 @@ def theBattle(level):
         if enemy_health <= 0:
             battle = False
             if level == 1:
-                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, "coffee break")
+                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock,level, "coffee break")
 
             return "win"
 
