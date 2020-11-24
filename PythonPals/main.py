@@ -19,6 +19,10 @@ class damage():
         self.userDamage = newUserDam
         self.enemyDamage = newEnemyDam
 
+# class level():
+#     def __init__(self, level):
+#         self.level = level
+
 
 ws = questions.initialize("python_questions.xlsx")
 screen = pygame.display.set_mode((0, 0), pygame.RESIZABLE)
@@ -176,7 +180,7 @@ def drawCategories():
     cat4.draw(screen, int(theScreen.width * 0.02))
     cat5.draw(screen, int(theScreen.width * 0.02))
 
-def chooseCategory(playerGroup, enemyGroup):
+def chooseCategory(playerGroup, enemyGroup,level):
     drawCategories()
     while True:
         for ev in pygame.event.get():
@@ -215,7 +219,7 @@ def chooseCategory(playerGroup, enemyGroup):
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resizeBattle(theScreen.width, theScreen.height)
-                drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+                drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
                 drawCategories()
 
 def resizeBattle(startWidth, startHeight):
@@ -248,7 +252,7 @@ def drawAnswers():
     c.draw(screen, int(theScreen.width * 0.02))
     d.draw(screen, int(theScreen.width * 0.02))
 
-def chooseAnswer(playerGroup, enemyGroup, question):
+def chooseAnswer(playerGroup, enemyGroup, question,level):
     drawAnswers()
     while True:
         for ev in pygame.event.get():
@@ -279,15 +283,16 @@ def chooseAnswer(playerGroup, enemyGroup, question):
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resizeBattle(theScreen.width, theScreen.height)
-                drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+                drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
                 drawAnswers()
 
-def drawBattle(playerGroup, enemyGroup, w, h):
+def drawBattle(playerGroup, enemyGroup, w, h,level):
     screen.fill(lime)
     #pygame.draw.rect(screen, (0, 0, 0), (0, 0, theScreen.width, theScreen.height * 0.1))
-    bg = pygame.image.load("jungleBackground.jpg")
-    bg = pygame.transform.rotozoom(bg, 0, theScreen.width/ 1380)
-    screen.blit(bg,(0,0))
+    # bg = pygame.image.load("jungleBackground.jpg")
+    drawBackground(playerGroup,enemyGroup,w,h,level)
+    # bg = pygame.transform.rotozoom(bg, 0, theScreen.width/ 1380)
+    # screen.blit(bg,(0,0))
     #pygame.draw.rect(screen, (0, 0, 0), (0, 0, theScreen.width, theScreen.height * 0.07))
     playerGroup.draw(screen)
     enemyGroup.draw(screen)
@@ -309,9 +314,10 @@ def drawBackground(playerGroup, enemyGroup, width, height,level, correctOrWrong=
     #pygame.draw.rect(screen, (0, 0, 0), (0, 0, theScreen.width, theScreen.height * 0.07))
     if level == 1:
         bg = pygame.image.load("jungleBackground.jpg")
+        bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1380)
     elif level == 2:
-        bg = pygame.image.load("cave.jpg")
-        bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 600)
+        bg = pygame.image.load("treasure.jpg")
+        bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1920)
     else:
         bg = pygame.image.load("jungleBackground.jpg")
     screen.blit(bg,(0,0))
@@ -478,13 +484,13 @@ def theBattle(level):
                            theScreen.height * 0.03)
         # enemyGroup.draw(screen)
         # playerGroup.draw(screen)
-        drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height)
-        choose = chooseCategory(playerGroup, enemyGroup)
+        drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
+        choose = chooseCategory(playerGroup, enemyGroup,level)
         print(choose)
         questionNumber = questions.load_question(choose)
         question = questions.get_question(questionNumber, ws)
 
-        drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height)
+        drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
 
         q = Button.text(black, 600, 100, 50, 50, 40, question[0].splitlines())
         pygame.gfxdraw.box(screen, pygame.Rect(0, theScreen.height * 0.1, theScreen.width, 75),
@@ -501,7 +507,7 @@ def theBattle(level):
         C.draw(screen, int(theScreen.width*0.015), False)
         D.draw(screen, int(theScreen.width*0.015), False)
 
-        guess = chooseAnswer(playerGroup, enemyGroup, question)
+        guess = chooseAnswer(playerGroup, enemyGroup, question,level)
         is_correct = questions.get_result(guess, question[5])
 
         if is_correct:
