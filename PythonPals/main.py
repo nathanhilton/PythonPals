@@ -519,7 +519,9 @@ def theBattle(level):
 
         if enemy_health <= 0:
             battle = False
-            animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, "coffee break")
+            if level == 1:
+                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, "coffee break")
+
             return "win"
 
 def win():
