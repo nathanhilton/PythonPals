@@ -136,12 +136,16 @@ def startscreen():
                 pygame.quit()
                 quit()
             if ev.type == pygame.VIDEORESIZE:
-                if (ev.w != theScreen.width):
-                    theScreen.width = ev.w
-                    theScreen.height = int(theScreen.width * 900 / 1600)
-                else:
-                    theScreen.height = ev.h
-                    theScreen.width = int(theScreen.height * 1600 / 900)
+                # not sure what the commented part is?
+
+                # if (ev.w != theScreen.width):
+                #     theScreen.width = ev.w
+                #     theScreen.height = int(theScreen.width * 900 / 1600)
+                # else:
+                #     theScreen.height = ev.h
+                #     theScreen.width = int(theScreen.height * 1600 / 900)
+                theScreen.width = ev.w
+                theScreen.height = ev.h
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resize(theScreen.width, theScreen.height)
@@ -198,12 +202,16 @@ def chooseCategory(playerGroup, enemyGroup):
                     return 5
 
             if ev.type == pygame.VIDEORESIZE:
-                if (ev.w != theScreen.width):
-                    theScreen.width = ev.w
-                    theScreen.height = int(theScreen.width * 900 / 1600)
-                else:
-                    theScreen.height = ev.h
-                    theScreen.width = int(theScreen.height * 1600 / 900)
+                # not sure what the commented part is?
+
+                # if (ev.w != theScreen.width):
+                #     theScreen.width = ev.w
+                #     theScreen.height = int(theScreen.width * 900 / 1600)
+                # else:
+                #     theScreen.height = ev.h
+                #     theScreen.width = int(theScreen.height * 1600 / 900)
+                theScreen.width = ev.w
+                theScreen.height = ev.h
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resizeBattle(theScreen.width, theScreen.height)
@@ -258,12 +266,16 @@ def chooseAnswer(playerGroup, enemyGroup, question):
                 elif d.isOver(pos):
                     return 'd'
             if ev.type == pygame.VIDEORESIZE:
-                if (ev.w != theScreen.width):
-                    theScreen.width = ev.w
-                    theScreen.height = int(theScreen.width * 900 / 1600)
-                else:
-                    theScreen.height = ev.h
-                    theScreen.width = int(theScreen.height * 1600 / 900)
+                # not sure what the commented part is?
+
+                # if (ev.w != theScreen.width):
+                #     theScreen.width = ev.w
+                #     theScreen.height = int(theScreen.width * 900 / 1600)
+                # else:
+                #     theScreen.height = ev.h
+                #     theScreen.width = int(theScreen.height * 1600 / 900)
+                theScreen.width = ev.w
+                theScreen.height = ev.h
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resizeBattle(theScreen.width, theScreen.height)
@@ -299,9 +311,9 @@ def drawBackground(playerGroup, enemyGroup, width, height,level, correctOrWrong=
         bg = pygame.image.load("jungleBackground.jpg")
     elif level == 2:
         bg = pygame.image.load("cave.jpg")
+        bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 600)
     else:
         bg = pygame.image.load("jungleBackground.jpg")
-    bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1380)
     screen.blit(bg,(0,0))
     if correctOrWrong != "":
         display.draw(screen, 100, True)
@@ -582,12 +594,16 @@ def options():
                 if changeButton.isOver(pos):
                     globals()['ws'] = questions.changeQuestionDeck("python_questions_capitals.xlsx", ws)
             if ev.type == pygame.VIDEORESIZE:
-                if (ev.w != theScreen.width):
-                    theScreen.width = ev.w
-                    theScreen.height = int(theScreen.width * 900 / 1600)
-                else:
-                    theScreen.height = ev.h
-                    theScreen.width = int(theScreen.height * 1600 / 900)
+                # not sure what the commented part is?
+
+                # if (ev.w != theScreen.width):
+                #     theScreen.width = ev.w
+                #     theScreen.height = int(theScreen.width * 900 / 1600)
+                # else:
+                #     theScreen.height = ev.h
+                #     theScreen.width = int(theScreen.height * 1600 / 900)
+                theScreen.width = ev.w
+                theScreen.height = ev.h
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resize(theScreen.width, theScreen.height)
