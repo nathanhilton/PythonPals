@@ -45,7 +45,7 @@ class button():
 
 
 class text():
-    def __init__(self, color, x, y, width, height, textSize, text=''):
+    def __init__(self, color, x, y, width, height, textSize, text):
         self.color = color
         self.x = x
         self.y = y
@@ -63,14 +63,21 @@ class text():
     def draw(self, screen, fontSize, center):
         #pygame.draw.rect(screen, self.color, (round(self.x), round(self.y), round(self.width), round(self.height)), 0)
 
-        if self.text != '':
+        if len(self.text) != 0:
+            size = len(self.text)
             font = pygame.font.Font("JandaManateeSolid.ttf", fontSize)
-            text = font.render(self.text, True, self.color)
+            i = 0
             if center:
-                screen.blit(text, (round(self.x + (self.width / 2 - text.get_width() / 2)),
-                                   round(self.y + (self.height / 2 - text.get_height() / 2))))
+                for part in self.text:
+                    text = font.render(part, True, self.color)
+                    screen.blit(text, (round(self.x + (self.width / 2 - text.get_width() / 2)),
+                                   round(self.y + (self.height / 2 - text.get_height() / 2) + i)))
+                    i += 50
             else:
-                screen.blit(text, (round(self.x + self.width), round(self.y)))
+                for part in self.text:
+                    text = font.render(part, True, self.color)
+                    screen.blit(text, (round(self.x + self.width), round(self.y + i)))
+                    i += 50
 
 
 class healthBar():

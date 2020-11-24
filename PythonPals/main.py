@@ -19,6 +19,7 @@ class damage():
         self.userDamage = newUserDam
         self.enemyDamage = newEnemyDam
 
+
 ws = questions.initialize("python_questions.xlsx")
 screen = pygame.display.set_mode((0, 0), pygame.RESIZABLE)
 white = (255, 255, 255)
@@ -41,7 +42,7 @@ theScreen = Screen(screen.get_width(), screen.get_height())
 userHealth = Button.healthBar(20, 20, 200, 30, 100, "left")
 enemyHealth = Button.healthBar(width - 20 - 200, 20, 200, 30, 100, "right")
 title = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
-                               "PYTHON PALS")
+                    ["PYTHON PALS"])
 
 cat1 = Button.button(fuschia, 400, 200, 30, 30, ws['C2'].value)
 cat2 = Button.button(fuschia, 650, 200, 30, 30, ws['C7'].value)
@@ -57,7 +58,7 @@ d = Button.button(color_light, 200, 325, 25, 25)
 
 chooseCat = Button.text(fuschia, (theScreen.width * 0.25), (theScreen.height * 0.5 / 12), (theScreen.width * 0.5),
                             (theScreen.height * 1 / 10),
-                            100, "Choose a category:")
+                            100, ["Choose a category:"])
 
 #start menu buttons
 startButton = Button.button(color_light, (width * 0.25), (height * 3 / 12), (width * 0.5), (height * 2 / 10),
@@ -68,7 +69,7 @@ quitButton = Button.button(color_light, (width * 0.25), (height * 9 / 12), (widt
                                       "Quit")
 #options buttons
 option = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
-                               "OPTIONS")
+                               ["OPTIONS"])
 chooseFighter = Button.button(color_light, (width * 0.25), (height * 3 / 12), (width * 0.5), (height * 2 / 10),
                                       "Choose Your Fighter")
 changeButton = Button.button(color_light, (width * 0.25), (height * 6 / 12), (width * 0.5), (height * 2 / 10),
@@ -284,9 +285,9 @@ def drawBackground(playerGroup, enemyGroup, width, height, correctOrWrong=""):
     # pygame.display.update()
     # screen.fill(white)
     if correctOrWrong == "Correct":
-        display = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5, theScreen.height * 0.4, 100, "Correct")
+        display = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5, theScreen.height * 0.4, 100, ["Correct"])
     if correctOrWrong == "Wrong":
-        display = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5, theScreen.height * 0.4, 100, "Incorrect")
+        display = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5, theScreen.height * 0.4, 100, ["Incorrect"])
 
     #pygame.draw.rect(screen, (0, 0, 0), (0, 0, theScreen.width, theScreen.height * 0.07))
     bg = pygame.image.load("jungleBackground.jpg")
@@ -462,16 +463,16 @@ def theBattle(level):
         question = questions.get_question(questionNumber, ws)
 
         drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height)
-        q = Button.text(black, 600, 100, 50, 50, 40, textwrap.shorten(question[0], 100))
+        q = Button.text(black, 600, 100, 50, 50, 40, question[0].splitlines())
         pygame.gfxdraw.box(screen, pygame.Rect(0, theScreen.height * 0.1, theScreen.width, 75),
                            (77, 153, 83, 130))
-        A = Button.text(black, a.x, a.y, 50, 50, 40, textwrap.shorten(question[1], 100))
-        B = Button.text(black, b.x, b.y, 50, 50, 40, textwrap.shorten(question[2], 100))
-        C = Button.text(black, c.x, c.y, 50, 50, 40, textwrap.shorten(question[3], 100))
-        D = Button.text(black, d.x, d.y, 50, 50, 40, textwrap.shorten(question[4], 100))
+        A = Button.text(black, a.x, a.y, 50, 50, 40, question[1].splitlines())
+        B = Button.text(black, b.x, b.y, 50, 50, 40, question[2].splitlines())
+        C = Button.text(black, c.x, c.y, 50, 50, 40, question[3].splitlines())
+        D = Button.text(black, d.x, d.y, 50, 50, 40, question[4].splitlines())
         pygame.gfxdraw.box(screen, pygame.Rect(theScreen.width * 0.1, theScreen.height * 0.15,
                                                600, 300), (77, 153, 83, 130))
-        q.draw(screen, int(theScreen.width*0.02), True)
+        q.draw(screen, int(theScreen.width*0.02), False)
         A.draw(screen, int(theScreen.width*0.015), False)
         B.draw(screen, int(theScreen.width*0.015), False)
         C.draw(screen, int(theScreen.width*0.015), False)
@@ -517,7 +518,7 @@ def win():
     screen.blit(snake, (75, 560))
     winScreen = Button.text(gold, (width * 0.25), (height * 0 / 12), (width * 0.5),
                             (height * 2 / 10), 150,
-                            "You win!")
+                            ["You win!"])
     winScreen.draw(screen, int(theScreen.width*0.1), True)
     clock.tick(2)
     pygame.display.update()
@@ -532,7 +533,7 @@ def lose():
     screen.blit(snake, (75, 560))
     gameOver = Button.text(gold, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10),
                            150,
-                           "GameOver")
+                           ["GameOver"])
     gameOver.draw(screen, int(theScreen.width*0.1), True)
     clock.tick(2)
     pygame.display.update()
@@ -601,9 +602,9 @@ def choose_your_fighter():
 
 def levelChange(screen, level, Enemy, enemyImg):
     level = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.1, theScreen.width * 0.5,
-                        theScreen.height * 0.2, 200, "LEVEL " + str(level))
+                        theScreen.height * 0.2, 200, ["LEVEL " + str(level)])
     enemy = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.35, theScreen.width * 0.5,
-                        theScreen.height * 0.2, 100, "Your enemy is " + Enemy)
+                        theScreen.height * 0.2, 100, ["Your enemy is " + Enemy])
     screen.fill(gold)
     enemyimg = pygame.image.load(enemyImg)
     if Enemy == "Ruby":
@@ -635,6 +636,7 @@ def levelChange(screen, level, Enemy, enemyImg):
 def main():
     pygame.init()
 
+    pygame.display.set_caption("Python Pals")
     # test_sound = pygame.mixer.Sound("background_boss_music.wav")
     # pygame.mixer.Sound.play(test_sound)
 
