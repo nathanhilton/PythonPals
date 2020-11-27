@@ -306,11 +306,6 @@ def drawBattle(playerGroup, enemyGroup, w, h,level):
 def drawBackground(playerGroup, enemyGroup, width, height,level, correctOrWrong=""):
     # pygame.display.update()
     # screen.fill(white)
-    if correctOrWrong == "Correct":
-        display = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5, theScreen.height * 0.4, 100, ["Correct"])
-    if correctOrWrong == "Wrong":
-        display = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5, theScreen.height * 0.4, 100, ["Incorrect"])
-
     #pygame.draw.rect(screen, (0, 0, 0), (0, 0, theScreen.width, theScreen.height * 0.07))
     if level == 1:
         bg = pygame.image.load("jungleBackground.jpg")
@@ -320,8 +315,17 @@ def drawBackground(playerGroup, enemyGroup, width, height,level, correctOrWrong=
         bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1920)
     else:
         bg = pygame.image.load("lava.png")
+        bg = pygame.transform.rotozoom(bg, 0, theScreen.height / 727)
     screen.blit(bg,(0,0))
     if correctOrWrong != "":
+        if correctOrWrong == "Correct":
+            display = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5,
+                                  theScreen.height * 0.4, 100, ["Correct"])
+            pygame.draw.rect(screen, (0,255,0), (theScreen.width * 0.35, theScreen.height * 0.3, theScreen.width * 0.3, theScreen.height * 0.2))
+        if correctOrWrong == "Wrong":
+            display = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5,
+                                  theScreen.height * 0.4, 100, ["Incorrect"])
+            pygame.draw.rect(screen, (255, 0, 0), (theScreen.width * 0.35, theScreen.height * 0.3, theScreen.width * 0.3, theScreen.height * 0.2))
         display.draw(screen, 100, True)
     # playerGroup.draw(screen)
     # enemyGroup.draw(screen)
@@ -683,11 +687,15 @@ def levelChange(screen, level, Enemy, enemyImg):
     enemyimg = pygame.image.load(enemyImg)
     if Enemy == "Ruby":
         enemyimg = pygame.transform.rotozoom(enemyimg, 0, 0.68)
-    else:
-        print(enemy)
+    elif Enemy == "Eye":
+        enemyimg = pygame.transform.rotozoom(enemyimg, 0, 0.85)
+
     level.draw(screen, int(theScreen.width*0.2), True)
     enemy.draw(screen, int(theScreen.width*0.1), True)
-    screen.blit(enemyimg, (theScreen.width * 0.4, theScreen.height * 0.55))
+    if Enemy != "Eye":
+        screen.blit(enemyimg, (theScreen.width * 0.4, theScreen.height * 0.55))
+    else:
+        screen.blit(enemyimg, (theScreen.width * 0.35, theScreen.height * 0.55))
 
     pygame.display.update()
     pygame.time.delay(2000)
@@ -725,14 +733,19 @@ def main():
         #  go to start, options, or quit
         if menuOption == "start":
             levelChange(screen, 1, "Java", "coffee1.png")
-            #levelChange(screen, 2, "Ruby", "Ruby_idle.png")
             result = theBattle(1)
             if result == "win":
                 levelChange(screen, 2, "Ruby", "Ruby_idle.png")
                 damageStats.modify(25,25)
                 result2 = theBattle(2)
                 if result2 == "win":
-                    win()
+                    levelChange(screen, 3, "Eye", "C1.png")
+                    damageStats.modify(17,25)
+                    result3 = theBattle(3)
+                    if result3 == "win":
+                        win()
+                    else:
+                        lose()
                 else:
                     lose()
             else:
