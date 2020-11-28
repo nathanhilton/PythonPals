@@ -28,6 +28,7 @@ ws = questions.initialize("python_questions.xlsx")
 screen = pygame.display.set_mode((0, 0), pygame.RESIZABLE)
 white = (255, 255, 255)
 purple = (110, 113, 198)
+blue = (64, 127, 194)
 indigo = (51, 57, 255)
 color_light = (170, 170, 170)
 color_dark = (100, 100, 100)
@@ -98,7 +99,9 @@ changePython = Button.button(color_light, (width * 0.25), (height * 6 / 14), (wi
 changeHistory = Button.button(color_light, (width * 0.25), (height * 9 / 14), (width * 0.5), (height * 2 / 14),
                                       "Use History Deck")
 
-
+#options -> change sound settings
+sound_header = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
+                               ["SOUND SETTINGS"])
 
 damageStats = damage(50, 10)
 
@@ -126,11 +129,14 @@ def resize(startWidth, startHeight):
     #options -> submenus
     back_to_options.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
 
-    #options -> change question deck menu
+    #options -> choose question deck menu
     q_deck_header.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
     changeCapitals.modify((startWidth * 0.25), (startHeight * 3 / 14), (startWidth * 0.5), (startHeight * 2 / 14))
     changePython.modify((startWidth * 0.25), (startHeight * 5.5 / 14), (startWidth * 0.5), (startHeight * 2 / 14))
     changeHistory.modify((startWidth * 0.25), (startHeight * 8 / 14), (startWidth * 0.5), (startHeight * 2 / 14))
+
+    #options -> change sound settings menu
+    sound_header.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
 
     #category/answer buttons
     cat1.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5),
@@ -639,11 +645,8 @@ def lose():
     pygame.time.delay(4000)
 
 def reDrawOptionsWindow():
-    screen.fill(lime)
+    screen.fill(purple)
     optionsHeader.draw(screen, int(theScreen.width*0.1), True)
-    #changeCapitals.draw(screen, int(theScreen.width*0.05), True)
-    #changePython.draw(screen, int(theScreen.width*0.05), True)
-    #changeHistory.draw(screen, int(theScreen.width*0.05), True)
     choose_q_deck.draw(screen, int(theScreen.width*0.05), True)
     change_sound_settings.draw(screen, int(theScreen.width*0.05), True)
     back_to_main.draw(screen, int(theScreen.width*0.05), True)
@@ -661,12 +664,12 @@ def options():
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if back_to_main.isOver(pos):
                     opt = False
-                if changeCapitals.isOver(pos):
-                    globals()['ws'] = questions.changeQuestionDeck("python_questions_capitals.xlsx", ws)
+                if choose_q_deck.isOver(pos):
+                    q_deck_menu()
                     opt = False
                     break
-                if changePython.isOver(pos):
-                    globals()['ws'] = questions.changeQuestionDeck("python_questions.xlsx", ws)
+                if change_sound_settings.isOver(pos):
+                    sound_settings_menu()
                     opt = False
                     break
                 if changeHistory.isOver(pos):
@@ -674,14 +677,6 @@ def options():
                     opt = False
                     break
             if ev.type == pygame.VIDEORESIZE:
-                # not sure what the commented part is?
-
-                # if (ev.w != theScreen.width):
-                #     theScreen.width = ev.w
-                #     theScreen.height = int(theScreen.width * 900 / 1600)
-                # else:
-                #     theScreen.height = ev.h
-                #     theScreen.width = int(theScreen.height * 1600 / 900)
                 theScreen.width = ev.w
                 theScreen.height = ev.h
 
@@ -691,7 +686,7 @@ def options():
 
 #options -> choose question deck
 def redraw_q_deck_window():
-    screen.fill(lime)
+    screen.fill(blue)
     q_deck_header.draw(screen, int(theScreen.width*0.1), True)
     changeCapitals.draw(screen, int(theScreen.width*0.05), True)
     changePython.draw(screen, int(theScreen.width*0.05), True)
@@ -738,6 +733,34 @@ def q_deck_menu():
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resize(theScreen.width, theScreen.height)
                 redraw_q_deck_window()
+
+#options -> change sound settings
+def redraw_sound_window():
+    screen.fill(blue)
+    sound_header.draw(screen, int(theScreen.width*0.1), True)
+    back_to_options.draw(screen, int(theScreen.width*0.05), True)
+    pygame.display.update()
+
+def sound_settings_menu():
+    redraw_sound_window()
+    opt = True
+    while opt:
+        for ev in pygame.event.get():
+            pos = pygame.mouse.get_pos()
+            if ev.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+            if ev.type == pygame.MOUSEBUTTONDOWN:
+                if back_to_options.isOver(pos):
+                    opt = False
+            if ev.type == pygame.VIDEORESIZE:
+                theScreen.width = ev.w
+                theScreen.height = ev.h
+
+                pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
+                resize(theScreen.width, theScreen.height)
+                redraw_q_deck_window()
+
 
 def levelChange(screen, level, Enemy, enemyImg):
     level = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.1, theScreen.width * 0.5,
