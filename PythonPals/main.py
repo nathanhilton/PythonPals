@@ -554,7 +554,7 @@ def theBattle(level):
 
         drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
 
-        q = Button.text(black, 600, 100, 50, 50, 40, question[0].splitlines())
+        q = Button.text(black, 400, 100, 50, 50, 40, question[0].splitlines())
         pygame.gfxdraw.box(screen, pygame.Rect(0, theScreen.height * 0.1, theScreen.width, 75),
                            (77, 153, 83, 130))
         A = Button.text(black, a.x, a.y, 50, 50, 40, question[1].splitlines())
