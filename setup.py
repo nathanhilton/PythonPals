@@ -15,6 +15,12 @@ setup(
                                 "PythonPals/coffee3.png", "PythonPals/coffee4.png", "PythonPals/coffee5.png",
                                 "PythonPals/coffee6.png", "PythonPals/snake1.png", "PythonPals/snake2.png",
                                 "PythonPals/snake4.png", "PythonPals/snake5.png", "PythonPals/snake6.png",
+                                "PythonPals/C1.png", "PythonPals/C2.png", "PythonPals/C3.png", "PythonPals/C4.png",
+                                "PythonPals/cave.jpg", "PythonPals/jazz.mp3", "PythonPals/lava.png",
+                                "PythonPals/Ruby_fire.png", "PythonPals/Ruby_hurt.png", "PythonPals/Ruby_Idle.png"
+                                , "PythonPals/Ruby_left.png", "PythonPals/Ruby_prep.png", "PythonPals/Ruby_start.png",
+                                "PythonPals/treasure.png", "PythonPals/Snake_Firemid.png", "PythonPals/Snake_start.png",
+                                "PythonPals/python_questions_capitals.xlsx", "PythonPals/jungleBackground.png",
                                 "PythonPals/requirements.txt"])],
     url='https://github.com/nathanhilton/PythonPals/tree/development',
     author='Sheamus Cooper',

@@ -46,7 +46,7 @@ theScreen = Screen(screen.get_width(), screen.get_height())
 
 userHealth = Button.healthBar(20, 20, 200, 30, 100, "left")
 enemyHealth = Button.healthBar(width - 20 - 200, 20, 200, 30, 100, "right")
-title = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
+title = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 3/ 10), 150,
                     ["PYTHON PALS"])
 
 cat1 = Button.button(fuschia, 400, 200, 30, 30, " " +ws['C2'].value)
