@@ -144,6 +144,7 @@ def resize(startWidth, startHeight):
 
 
 def reDrawStartWindow():
+
     screen.fill(gold)
     title.draw(screen, int(theScreen.width*0.1), True)
     startButton.draw(screen, int(theScreen.width*0.05), True)
@@ -254,10 +255,10 @@ def resizeBattle(startWidth, startHeight):
     d.modify(0.125 * startWidth, 0.36 * startHeight, startWidth * 0.021, startHeight * 0.021)
 
     chooseCat.modify(0.25 * startWidth, 1/24 * startHeight, startWidth * 0.5, startHeight * 0.1)
-    cat1 = Button.button(fuschia, 400, 200, 30, 30," " + ws['C2'].value)
-    cat2 = Button.button(fuschia, 650, 200, 30, 30, " " +ws['C7'].value)
-    cat3 = Button.button(fuschia, 900, 200, 30, 30, " " +ws['C12'].value)
-    cat4 = Button.button(fuschia, 450, 350, 30, 30, " " +ws['C17'].value)
+    cat1 = Button.button(fuschia, 400, 200, 30, 30, " " + ws['C2'].value)
+    cat2 = Button.button(fuschia, 650, 200, 30, 30, " " + ws['C7'].value)
+    cat3 = Button.button(fuschia, 900, 200, 30, 30, " " + ws['C12'].value)
+    cat4 = Button.button(fuschia, 450, 350, 30, 30, " " + ws['C17'].value)
     cat5 = Button.button(fuschia, 800, 350, 30, 30, " General")
 
     cat1.modify(0.25 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
@@ -520,8 +521,8 @@ def theBattle(level):
     clock = pygame.time.Clock()
 
     # background music
-    pygame.mixer.music.load('jazz.mp3')
-    pygame.mixer.music.play(-1)
+    #pygame.mixer.music.load('funke.mp3')
+    #pygame.mixer.music.play(-1)
 
     myPlayer = Player()
     playerGroup = pygame.sprite.Group(myPlayer)
@@ -529,10 +530,16 @@ def theBattle(level):
 
     if level == 1:
         myEnemy = Coffee()
+        pygame.mixer.music.load('jazz.mp3')
+        pygame.mixer.music.play(-1)
     elif level == 2:
         myEnemy = Ruby()
+        pygame.mixer.music.load('funke.mp3')
+        pygame.mixer.music.play(-1)
     else:
         myEnemy = Eye()
+        pygame.mixer.music.load('bluth.wav')
+        pygame.mixer.music.play(-1)
     enemyGroup = pygame.sprite.Group(myEnemy)
     # enemyGroup.draw(screen)
     pygame.display.update()
@@ -614,6 +621,9 @@ def theBattle(level):
             return "win"
 
 def win():
+    pygame.mixer.music.load('victoire.wav')
+    pygame.mixer.music.play(-1)
+
     print("You won!")
     screen.fill((100, 100, 100))
     snake = pygame.image.load("snake6.png")
@@ -629,6 +639,9 @@ def win():
     pygame.time.delay(4000)
 
 def lose():
+    pygame.mixer.music.load('defaite.ogg')
+    pygame.mixer.music.play(-1)
+
     print("You lost!")
     screen.fill((100, 100, 100))
     snake = pygame.image.load("snake5.png")
@@ -669,10 +682,6 @@ def options():
                     break
                 if change_sound_settings.isOver(pos):
                     sound_settings_menu()
-                    opt = False
-                    break
-                if changeHistory.isOver(pos):
-                    globals()['ws'] = questions.changeQuestionDeck("python_questions_timeline.xlsx", ws)
                     opt = False
                     break
             if ev.type == pygame.VIDEORESIZE:
@@ -781,11 +790,12 @@ def main():
     pygame.init()
 
     pygame.display.set_caption("Python Pals")
-    # test_sound = pygame.mixer.Sound("background_boss_music.wav")
-    # pygame.mixer.Sound.play(test_sound)
 
     enter_game = True
     while enter_game:
+        pygame.mixer.music.load('idle.wav')
+        pygame.mixer.music.play(-1)
+
         # start screen
         menuOption = startscreen()
 
