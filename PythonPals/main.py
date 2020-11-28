@@ -76,9 +76,13 @@ option = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (h
                                ["OPTIONS"])
 chooseFighter = Button.button(color_light, (width * 0.25), (height * 3 / 12), (width * 0.5), (height * 2 / 10),
                                       "Choose Your Fighter")
-changeButton = Button.button(color_light, (width * 0.25), (height * 6 / 12), (width * 0.5), (height * 2 / 10),
+changeCapitals = Button.button(color_light, (width * 0.25), (height * 3 / 14), (width * 0.5), (height * 2 / 14),
                                       "Use Capitals Deck")
-back_to_main = Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
+changePython = Button.button(color_light, (width * 0.25), (height * 6 / 14), (width * 0.5), (height * 2 / 14),
+                                      "Use Python Deck")
+changeHistory = Button.button(color_light, (width * 0.25), (height * 9 / 14), (width * 0.5), (height * 2 / 14),
+                                      "Use History Deck")
+back_to_main = Button.button(color_light, (width * 0.25), (height * 11 / 14), (width * 0.5), (height * 2 / 14),
                                       "Back to Main Menu")
 #choose fighter menu buttons
 back_to_options = Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
@@ -105,10 +109,10 @@ def resize(startWidth, startHeight):
     option.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
     chooseFighter.modify((startWidth * 0.25), (startHeight * 3 / 12), (startWidth * 0.5),
                         (startHeight * 2 / 10))
-    changeButton.modify((startWidth * 0.25), (startHeight * 6 / 12), (startWidth * 0.5),
-                        (startHeight * 2 / 10))
-    back_to_main.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5),
-                        (startHeight * 2 / 10))
+    changeCapitals.modify((startWidth * 0.25), (startHeight * 3 / 14), (startWidth * 0.5), (startHeight * 2 / 14))
+    changePython.modify((startWidth * 0.25), (startHeight * 5.5 / 14), (startWidth * 0.5), (startHeight * 2 / 14))
+    changeHistory.modify((startWidth * 0.25), (startHeight * 8 / 14), (startWidth * 0.5), (startHeight * 2 / 14))
+    back_to_main.modify((startWidth * 0.25), (startHeight * 10.5 / 14), (startWidth * 0.5), (startHeight * 2 / 14))
     #choose fighter menu
     back_to_options.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5),
                         (startHeight * 2 / 10))
@@ -252,7 +256,7 @@ def drawAnswers():
     c.draw(screen, int(theScreen.width * 0.02))
     d.draw(screen, int(theScreen.width * 0.02))
 
-def chooseAnswer(playerGroup, enemyGroup, question,level):
+def chooseAnswer(playerGroup, enemyGroup, question,level,q,A,B,C,D):
     drawAnswers()
     while True:
         for ev in pygame.event.get():
@@ -284,6 +288,12 @@ def chooseAnswer(playerGroup, enemyGroup, question,level):
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resizeBattle(theScreen.width, theScreen.height)
                 drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
+                q.draw(screen, int(theScreen.width * 0.02), False)
+                q.draw(screen, int(theScreen.width * 0.02), False)
+                A.draw(screen, int(theScreen.width * 0.015), False)
+                B.draw(screen, int(theScreen.width * 0.015), False)
+                C.draw(screen, int(theScreen.width * 0.015), False)
+                D.draw(screen, int(theScreen.width * 0.015), False)
                 drawAnswers()
 
 def drawBattle(playerGroup, enemyGroup, w, h,level):
@@ -541,7 +551,7 @@ def theBattle(level):
         C.draw(screen, int(theScreen.width*0.015), False)
         D.draw(screen, int(theScreen.width*0.015), False)
 
-        guess = chooseAnswer(playerGroup, enemyGroup, question,level)
+        guess = chooseAnswer(playerGroup, enemyGroup, question,level,q,A,B,C,D)
         is_correct = questions.get_result(guess, question[5])
 
         if is_correct:
@@ -588,10 +598,10 @@ def win():
     screen.fill((100, 100, 100))
     snake = pygame.image.load("snake6.png")
     snake.convert()
-    snake = pygame.transform.rotozoom(snake, 0, 0.7)
-    screen.blit(snake, (75, 560))
-    winScreen = Button.text(gold, (width * 0.25), (height * 0 / 12), (width * 0.5),
-                            (height * 2 / 10), 150,
+    # snake = pygame.transform.rotozoom(snake, 0, 0.7)
+    screen.blit(snake, (theScreen.width * 0.43, theScreen.height * 0.6))
+    winScreen = Button.text(gold, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5),
+                            (theScreen.height * 2 / 10), 150,
                             ["You win!"])
     winScreen.draw(screen, int(theScreen.width*0.1), True)
     clock.tick(2)
@@ -603,9 +613,9 @@ def lose():
     screen.fill((100, 100, 100))
     snake = pygame.image.load("snake5.png")
     snake.convert()
-    snake = pygame.transform.rotozoom(snake, 0, 0.7)
-    screen.blit(snake, (75, 560))
-    gameOver = Button.text(gold, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10),
+    #snake = pygame.transform.rotozoom(snake, 0, 0.7)
+    screen.blit(snake, (theScreen.width * 0.4, theScreen.height * 0.6))
+    gameOver = Button.text(gold, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5), (theScreen.height * 2 / 10),
                            150,
                            ["GameOver"])
     gameOver.draw(screen, int(theScreen.width*0.1), True)
@@ -616,7 +626,9 @@ def lose():
 def reDrawOptionsWindow():
     screen.fill(lime)
     option.draw(screen, int(theScreen.width*0.1), True)
-    changeButton.draw(screen, int(theScreen.width*0.05), True)
+    changeCapitals.draw(screen, int(theScreen.width*0.05), True)
+    changePython.draw(screen, int(theScreen.width*0.05), True)
+    changeHistory.draw(screen, int(theScreen.width*0.05), True)
     back_to_main.draw(screen, int(theScreen.width*0.05), True)
     #chooseFighter.draw(screen, int(theScreen.width*0.05), True)
     pygame.display.update()
@@ -633,8 +645,18 @@ def options():
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if back_to_main.isOver(pos):
                     opt = False
-                if changeButton.isOver(pos):
+                if changeCapitals.isOver(pos):
                     globals()['ws'] = questions.changeQuestionDeck("python_questions_capitals.xlsx", ws)
+                    opt = False
+                    break
+                if changePython.isOver(pos):
+                    globals()['ws'] = questions.changeQuestionDeck("python_questions.xlsx", ws)
+                    opt = False
+                    break
+                if changeHistory.isOver(pos):
+                    globals()['ws'] = questions.changeQuestionDeck("python_questions_timeline.xlsx", ws)
+                    opt = False
+                    break
             if ev.type == pygame.VIDEORESIZE:
                 # not sure what the commented part is?
 
@@ -732,6 +754,7 @@ def main():
 
         #  go to start, options, or quit
         if menuOption == "start":
+            damageStats.modify(50,10)
             levelChange(screen, 1, "Java", "coffee1.png")
             result = theBattle(1)
             if result == "win":
