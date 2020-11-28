@@ -621,7 +621,7 @@ def theBattle(level):
             return "win"
 
 def win():
-    pygame.mixer.music.load('victoire.wav')
+    pygame.mixer.music.load('victoire.mp3')
     pygame.mixer.music.play(-1)
 
     print("You won!")
@@ -639,7 +639,7 @@ def win():
     pygame.time.delay(4000)
 
 def lose():
-    pygame.mixer.music.load('defaite.ogg')
+    pygame.mixer.music.load('defaite.mp3')
     pygame.mixer.music.play(-1)
 
     print("You lost!")
