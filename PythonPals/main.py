@@ -149,7 +149,7 @@ def resize(startWidth, startHeight):
                      (theScreen.height * 1 / 10))
 
 def reDrawStartWindow():
-    screen.fill(lime)
+    screen.fill(gold)
     title.draw(screen, int(theScreen.width*0.1), True)
     startButton.draw(screen, int(theScreen.width*0.05), True)
     optionsButton.draw(screen, int(theScreen.width*0.05), True)
