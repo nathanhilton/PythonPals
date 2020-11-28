@@ -38,8 +38,7 @@ gold = (197, 179, 88)
 lime = (153, 255, 51)
 width = screen.get_width()
 height = screen.get_height()
-screen.fill(lime)
-
+#screen.fill(lime)
 
 clock = pygame.time.Clock()
 
@@ -47,15 +46,13 @@ theScreen = Screen(screen.get_width(), screen.get_height())
 
 userHealth = Button.healthBar(20, 20, 200, 30, 100, "left")
 enemyHealth = Button.healthBar(width - 20 - 200, 20, 200, 30, 100, "right")
-title = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
-                    ["PYTHON PALS"])
+damageStats = damage(50, 10)
 
-cat1 = Button.button(fuschia, 400, 200, 30, 30, " " +ws['C2'].value)
+cat1 = Button.button(fuschia, 400, 200, 30, 30, " " + ws['C2'].value)
 cat2 = Button.button(fuschia, 650, 200, 30, 30, " " + ws['C7'].value)
 cat3 = Button.button(fuschia, 900, 200, 30, 30, " " + ws['C12'].value)
 cat4 = Button.button(fuschia, 450, 350, 30, 30, " " + ws['C17'].value)
 cat5 = Button.button(fuschia, 800, 350, 30, 30, "General")
-
 
 a = Button.button(color_light, 200, 175, 25, 25)
 b = Button.button(color_light, 200, 225, 25, 25)
@@ -67,6 +64,8 @@ chooseCat = Button.text(fuschia, (theScreen.width * 0.25), (theScreen.height * 0
                             100, ["Choose a category:"])
 
 #start menu buttons
+title = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
+                    ["PYTHON PALS"])
 startButton = Button.button(color_light, (width * 0.25), (height * 3 / 12), (width * 0.5), (height * 2 / 10),
                                        "Start")
 optionsButton = Button.button(color_light, (width * 0.25), (height * 6 / 12), (width * 0.5), (height * 2 / 10),
@@ -76,13 +75,10 @@ quitButton = Button.button(color_light, (width * 0.25), (height * 9 / 12), (widt
 #options menu buttons
 optionsHeader = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
                                ["OPTIONS"])
-
 choose_q_deck = Button.button(color_light, (width * 0.25), (height * 3 / 12), (width * 0.5), (height * 2 / 10),
                                       "Choose Question Deck")
-
 change_sound_settings = Button.button(color_light, (width * 0.25), (height * 6 / 12), (width * 0.5), (height * 2 / 10),
                                       "Change Sound Settings")
-
 back_to_main = Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
                                       "Back to Main Menu")
 
@@ -104,8 +100,6 @@ changeHistory = Button.button(color_light, (width * 0.25), (height * 9 / 14), (w
 sound_header = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
                                ["SOUND SETTINGS"])
 
-damageStats = damage(50, 10)
-
 
 def resize(startWidth, startHeight):
     # battle scene
@@ -114,6 +108,10 @@ def resize(startWidth, startHeight):
     cat3 = Button.button(fuschia, 900, 200, 30, 30, " " + ws['C12'].value)
     cat4 = Button.button(fuschia, 450, 350, 30, 30, " " + ws['C17'].value)
     cat5 = Button.button(fuschia, 800, 350, 30, 30, " General")
+
+    # category/answer buttons
+    cat1.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5),
+                (startHeight * 2 / 10))
 
     #start menu
     title.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
@@ -139,14 +137,11 @@ def resize(startWidth, startHeight):
     #options -> change sound settings menu
     sound_header.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
 
-    #category/answer buttons
-    cat1.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5),
-                        (startHeight * 2 / 10))
-
     theScreen.width = startWidth
     theScreen.height = startHeight
     chooseCat.modify((theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5),
                      (theScreen.height * 1 / 10))
+
 
 def reDrawStartWindow():
     screen.fill(gold)
@@ -707,6 +702,7 @@ def q_deck_menu():
                 quit()
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if back_to_options.isOver(pos):
+                    options()
                     opt = False
                 if changeCapitals.isOver(pos):
                     globals()['ws'] = questions.changeQuestionDeck("python_questions_capitals.xlsx", ws)
@@ -721,14 +717,6 @@ def q_deck_menu():
                     opt = False
                     break
             if ev.type == pygame.VIDEORESIZE:
-                # not sure what the commented part is?
-
-                # if (ev.w != theScreen.width):
-                #     theScreen.width = ev.w
-                #     theScreen.height = int(theScreen.width * 900 / 1600)
-                # else:
-                #     theScreen.height = ev.h
-                #     theScreen.width = int(theScreen.height * 1600 / 900)
                 theScreen.width = ev.w
                 theScreen.height = ev.h
 
@@ -754,6 +742,7 @@ def sound_settings_menu():
                 quit()
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if back_to_options.isOver(pos):
+                    options()
                     opt = False
             if ev.type == pygame.VIDEORESIZE:
                 theScreen.width = ev.w
