@@ -315,7 +315,7 @@ def chooseAnswer(playerGroup, enemyGroup, question,level,q,A,B,C,D):
                 drawAnswers()
 
 def drawBattle(playerGroup, enemyGroup, w, h,level):
-    screen.fill(lime)
+    screen.fill((0,0,0))
     #pygame.draw.rect(screen, (0, 0, 0), (0, 0, theScreen.width, theScreen.height * 0.1))
     # bg = pygame.image.load("jungleBackground.jpg")
     drawBackground(playerGroup,enemyGroup,w,h,level)
@@ -582,7 +582,9 @@ def theBattle(level):
             if level == 1:
                 animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock,level, "coffee hurt")
             elif level == 2:
-                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock,level, "eye hurt")
+                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock,level, "ruby hurt")
+            else:
+                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, level, "eye hurt")
 
 
         else:
