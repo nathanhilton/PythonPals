@@ -52,7 +52,7 @@ cat1 = Button.button(fuschia, 400, 200, 30, 30, ws['C2'].value)
 cat2 = Button.button(fuschia, 650, 200, 30, 30, ws['C7'].value)
 cat3 = Button.button(fuschia, 900, 200, 30, 30, ws['C12'].value)
 cat4 = Button.button(fuschia, 450, 350, 30, 30, ws['C17'].value)
-cat5 = Button.button(fuschia, 800, 350, 30, 30, " General")
+cat5 = Button.button(fuschia, 800, 350, 30, 30, "General")
 
 
 a = Button.button(color_light, 200, 175, 25, 25)
@@ -67,55 +67,70 @@ chooseCat = Button.text(fuschia, (theScreen.width * 0.25), (theScreen.height * 0
 #start menu buttons
 startButton = Button.button(color_light, (width * 0.25), (height * 3 / 12), (width * 0.5), (height * 2 / 10),
                                        "Start")
-optionsButton = Button.button(color_light, (width * 0.25), (height * 6 / 12), (width * 0.5),
-                                         (height * 2 / 10), "Options")
+optionsButton = Button.button(color_light, (width * 0.25), (height * 6 / 12), (width * 0.5), (height * 2 / 10),
+                              "Options")
 quitButton = Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
                                       "Quit")
-#options buttons
-option = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
+#options menu buttons
+optionsHeader = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
                                ["OPTIONS"])
-chooseFighter = Button.button(color_light, (width * 0.25), (height * 3 / 12), (width * 0.5), (height * 2 / 10),
-                                      "Choose Your Fighter")
+
+choose_q_deck = Button.button(color_light, (width * 0.25), (height * 3 / 12), (width * 0.5), (height * 2 / 10),
+                                      "Choose Question Deck")
+
+change_sound_settings = Button.button(color_light, (width * 0.25), (height * 6 / 12), (width * 0.5), (height * 2 / 10),
+                                      "Change Sound Settings")
+
+back_to_main = Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
+                                      "Back to Main Menu")
+
+#options -> return to options
+back_to_options = Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
+                                      "Back to Options Menu")
+
+#options -> choose question deck
+q_deck_header = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
+                               ["QUESTION DECKS"])
 changeCapitals = Button.button(color_light, (width * 0.25), (height * 3 / 14), (width * 0.5), (height * 2 / 14),
                                       "Use Capitals Deck")
 changePython = Button.button(color_light, (width * 0.25), (height * 6 / 14), (width * 0.5), (height * 2 / 14),
                                       "Use Python Deck")
 changeHistory = Button.button(color_light, (width * 0.25), (height * 9 / 14), (width * 0.5), (height * 2 / 14),
                                       "Use History Deck")
-back_to_main = Button.button(color_light, (width * 0.25), (height * 11 / 14), (width * 0.5), (height * 2 / 14),
-                                      "Back to Main Menu")
-#choose fighter menu buttons
-back_to_options = Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
-                                      "Back to Options Menu")
+
+
 
 damageStats = damage(50, 10)
 
 
 def resize(startWidth, startHeight):
+    # battle scene
     cat1 = Button.button(fuschia, 400, 200, 30, 30, ws['C2'].value)
     cat2 = Button.button(fuschia, 650, 200, 30, 30, ws['C7'].value)
     cat3 = Button.button(fuschia, 900, 200, 30, 30, ws['C12'].value)
     cat4 = Button.button(fuschia, 450, 350, 30, 30, ws['C17'].value)
     cat5 = Button.button(fuschia, 800, 350, 30, 30, " General")
+
     #start menu
     title.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
-    startButton.modify((startWidth * 0.25), (startHeight * 3 / 12), (startWidth * 0.5),
-                       (startHeight * 2 / 10))
-    optionsButton.modify((startWidth * 0.25), (startHeight * 6 / 12), (startWidth * 0.5),
-                         (startHeight * 2 / 10))
-    quitButton.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5),
-                      (startHeight * 2 / 10))
+    startButton.modify((startWidth * 0.25), (startHeight * 3 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
+    optionsButton.modify((startWidth * 0.25), (startHeight * 6 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
+    quitButton.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
+
     #options menu
-    option.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
-    chooseFighter.modify((startWidth * 0.25), (startHeight * 3 / 12), (startWidth * 0.5),
-                        (startHeight * 2 / 10))
+    optionsHeader.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
+    choose_q_deck.modify((startWidth * 0.25), (startHeight * 3 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
+    change_sound_settings.modify((startWidth * 0.25), (startHeight * 6 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
+    back_to_main.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
+
+    #options -> submenus
+    back_to_options.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
+
+    #options -> change question deck menu
+    q_deck_header.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
     changeCapitals.modify((startWidth * 0.25), (startHeight * 3 / 14), (startWidth * 0.5), (startHeight * 2 / 14))
     changePython.modify((startWidth * 0.25), (startHeight * 5.5 / 14), (startWidth * 0.5), (startHeight * 2 / 14))
     changeHistory.modify((startWidth * 0.25), (startHeight * 8 / 14), (startWidth * 0.5), (startHeight * 2 / 14))
-    back_to_main.modify((startWidth * 0.25), (startHeight * 10.5 / 14), (startWidth * 0.5), (startHeight * 2 / 14))
-    #choose fighter menu
-    back_to_options.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5),
-                        (startHeight * 2 / 10))
 
     #category/answer buttons
     cat1.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5),
@@ -625,12 +640,13 @@ def lose():
 
 def reDrawOptionsWindow():
     screen.fill(lime)
-    option.draw(screen, int(theScreen.width*0.1), True)
-    changeCapitals.draw(screen, int(theScreen.width*0.05), True)
-    changePython.draw(screen, int(theScreen.width*0.05), True)
-    changeHistory.draw(screen, int(theScreen.width*0.05), True)
+    optionsHeader.draw(screen, int(theScreen.width*0.1), True)
+    #changeCapitals.draw(screen, int(theScreen.width*0.05), True)
+    #changePython.draw(screen, int(theScreen.width*0.05), True)
+    #changeHistory.draw(screen, int(theScreen.width*0.05), True)
+    choose_q_deck.draw(screen, int(theScreen.width*0.05), True)
+    change_sound_settings.draw(screen, int(theScreen.width*0.05), True)
     back_to_main.draw(screen, int(theScreen.width*0.05), True)
-    #chooseFighter.draw(screen, int(theScreen.width*0.05), True)
     pygame.display.update()
 
 def options():
@@ -673,17 +689,20 @@ def options():
                 resize(theScreen.width, theScreen.height)
                 reDrawOptionsWindow()
 
-#choose fighter functions
-'''
-def draw_choose_fighter_screen():
+#options -> choose question deck
+def redraw_q_deck_window():
     screen.fill(lime)
-    back_to_options.draw(screen, int(theScreen.width * 0.05), True)
+    q_deck_header.draw(screen, int(theScreen.width*0.1), True)
+    changeCapitals.draw(screen, int(theScreen.width*0.05), True)
+    changePython.draw(screen, int(theScreen.width*0.05), True)
+    changeHistory.draw(screen, int(theScreen.width*0.05), True)
+    back_to_options.draw(screen, int(theScreen.width*0.05), True)
     pygame.display.update()
 
-def choose_your_fighter():
-    draw_choose_fighter_screen()
-    choice = True
-    while choice:
+def q_deck_menu():
+    redraw_q_deck_window()
+    opt = True
+    while opt:
         for ev in pygame.event.get():
             pos = pygame.mouse.get_pos()
             if ev.type == pygame.QUIT:
@@ -691,14 +710,34 @@ def choose_your_fighter():
                 quit()
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if back_to_options.isOver(pos):
-                    choice = False
-
+                    opt = False
+                if changeCapitals.isOver(pos):
+                    globals()['ws'] = questions.changeQuestionDeck("python_questions_capitals.xlsx", ws)
+                    opt = False
+                    break
+                if changePython.isOver(pos):
+                    globals()['ws'] = questions.changeQuestionDeck("python_questions.xlsx", ws)
+                    opt = False
+                    break
+                if changeHistory.isOver(pos):
+                    globals()['ws'] = questions.changeQuestionDeck("python_questions_timeline.xlsx", ws)
+                    opt = False
+                    break
             if ev.type == pygame.VIDEORESIZE:
-                startWidth = ev.w
-                startHeight = ev.h
-                resize(startWidth, startHeight)
-                reDrawOptionsWindow()
-'''
+                # not sure what the commented part is?
+
+                # if (ev.w != theScreen.width):
+                #     theScreen.width = ev.w
+                #     theScreen.height = int(theScreen.width * 900 / 1600)
+                # else:
+                #     theScreen.height = ev.h
+                #     theScreen.width = int(theScreen.height * 1600 / 900)
+                theScreen.width = ev.w
+                theScreen.height = ev.h
+
+                pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
+                resize(theScreen.width, theScreen.height)
+                redraw_q_deck_window()
 
 def levelChange(screen, level, Enemy, enemyImg):
     level = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.1, theScreen.width * 0.5,
@@ -722,21 +761,6 @@ def levelChange(screen, level, Enemy, enemyImg):
     pygame.display.update()
     pygame.time.delay(2000)
 
-# enter_game = True
-# while enter_game:
-#     # start screen
-#     menuOption = startscreen(width, height)
-#
-#     #  go to start, options, or quit
-#     if menuOption == "start":
-#         result = theBattle()
-#         result = theBattle()
-#     elif menuOption == "options":
-#         print('this is the options')
-#     elif menuOption == "quit":
-#         enter_game = False
-#
-# pygame.quit()
 def main():
     pygame.init()
 
