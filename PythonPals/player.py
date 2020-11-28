@@ -12,7 +12,7 @@ class Player(pygame.sprite.Sprite):
         self.images.append(pygame.image.load('Snake_start.png'))
         self.images.append(pygame.image.load('Snake_Firemid.png'))
         self.images.append(pygame.image.load('snake2.png'))
-        self.images.append(pygame.image.load('Snake fire end.png'))
+        self.images.append(pygame.image.load('Snake_fire_end.png'))
         self.images.append(pygame.image.load('snake4.png'))
         self.images.append(pygame.image.load('snake6.png'))
 

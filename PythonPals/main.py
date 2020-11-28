@@ -1,4 +1,4 @@
-import Button
+from Button import button
 import questions
 import pygame
 import pygame.gfxdraw
@@ -787,6 +787,7 @@ def levelChange(screen, level, Enemy, enemyImg):
     pygame.time.delay(2000)
 
 def main():
+
     pygame.init()
 
     pygame.display.set_caption("Python Pals")
