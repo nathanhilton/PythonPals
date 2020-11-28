@@ -39,6 +39,7 @@ width = screen.get_width()
 height = screen.get_height()
 screen.fill(gold)
 
+
 clock = pygame.time.Clock()
 
 theScreen = Screen(screen.get_width(), screen.get_height())
@@ -48,10 +49,10 @@ enemyHealth = Button.healthBar(width - 20 - 200, 20, 200, 30, 100, "right")
 title = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
                     ["PYTHON PALS"])
 
-cat1 = Button.button(fuschia, 400, 200, 30, 30, ws['C2'].value)
-cat2 = Button.button(fuschia, 650, 200, 30, 30, ws['C7'].value)
-cat3 = Button.button(fuschia, 900, 200, 30, 30, ws['C12'].value)
-cat4 = Button.button(fuschia, 450, 350, 30, 30, ws['C17'].value)
+cat1 = Button.button(fuschia, 400, 200, 30, 30, " " +ws['C2'].value)
+cat2 = Button.button(fuschia, 650, 200, 30, 30, " " + ws['C7'].value)
+cat3 = Button.button(fuschia, 900, 200, 30, 30, " " + ws['C12'].value)
+cat4 = Button.button(fuschia, 450, 350, 30, 30, " " + ws['C17'].value)
 cat5 = Button.button(fuschia, 800, 350, 30, 30, "General")
 
 
@@ -105,10 +106,10 @@ damageStats = damage(50, 10)
 
 def resize(startWidth, startHeight):
     # battle scene
-    cat1 = Button.button(fuschia, 400, 200, 30, 30, ws['C2'].value)
-    cat2 = Button.button(fuschia, 650, 200, 30, 30, ws['C7'].value)
-    cat3 = Button.button(fuschia, 900, 200, 30, 30, ws['C12'].value)
-    cat4 = Button.button(fuschia, 450, 350, 30, 30, ws['C17'].value)
+    cat1 = Button.button(fuschia, 400, 200, 30, 30, " " + ws['C2'].value)
+    cat2 = Button.button(fuschia, 650, 200, 30, 30, " " + ws['C7'].value)
+    cat3 = Button.button(fuschia, 900, 200, 30, 30, " " + ws['C12'].value)
+    cat4 = Button.button(fuschia, 450, 350, 30, 30, " " + ws['C17'].value)
     cat5 = Button.button(fuschia, 800, 350, 30, 30, " General")
 
     #start menu
@@ -187,11 +188,12 @@ def startscreen():
         pygame.display.update()
 
 def drawCategories():
-    cat1 = Button.button(fuschia, 400, 200, 30, 30, ws['C2'].value)
-    cat2 = Button.button(fuschia, 650, 200, 30, 30, ws['C7'].value)
-    cat3 = Button.button(fuschia, 900, 200, 30, 30, ws['C12'].value)
-    cat4 = Button.button(fuschia, 450, 350, 30, 30, ws['C17'].value)
+    cat1 = Button.button(fuschia, 400, 200, 30, 30, " " + ws['C2'].value)
+    cat2 = Button.button(fuschia, 650, 200, 30, 30, " " + ws['C7'].value)
+    cat3 = Button.button(fuschia, 900, 200, 30, 30, " " + ws['C12'].value)
+    cat4 = Button.button(fuschia, 450, 350, 30, 30, " " + ws['C17'].value)
     cat5 = Button.button(fuschia, 800, 350, 30, 30, " General")
+
     chooseCat.draw(screen, int(theScreen.width * 0.07), True)
     cat1.draw(screen, int(theScreen.width * 0.02))
     cat2.draw(screen, int(theScreen.width * 0.02))
@@ -251,10 +253,10 @@ def resizeBattle(startWidth, startHeight):
     d.modify(0.125 * startWidth, 0.36 * startHeight, startWidth * 0.021, startHeight * 0.021)
 
     chooseCat.modify(0.25 * startWidth, 1/24 * startHeight, startWidth * 0.5, startHeight * 0.1)
-    cat1 = Button.button(fuschia, 400, 200, 30, 30, ws['C2'].value)
-    cat2 = Button.button(fuschia, 650, 200, 30, 30, ws['C7'].value)
-    cat3 = Button.button(fuschia, 900, 200, 30, 30, ws['C12'].value)
-    cat4 = Button.button(fuschia, 450, 350, 30, 30, ws['C17'].value)
+    cat1 = Button.button(fuschia, 400, 200, 30, 30," " + ws['C2'].value)
+    cat2 = Button.button(fuschia, 650, 200, 30, 30, " " +ws['C7'].value)
+    cat3 = Button.button(fuschia, 900, 200, 30, 30, " " +ws['C12'].value)
+    cat4 = Button.button(fuschia, 450, 350, 30, 30, " " +ws['C17'].value)
     cat5 = Button.button(fuschia, 800, 350, 30, 30, " General")
 
     cat1.modify(0.25 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
