@@ -37,7 +37,7 @@ gold = (197, 179, 88)
 lime = (153, 255, 51)
 width = screen.get_width()
 height = screen.get_height()
-screen.fill(gold)
+screen.fill(lime)
 
 
 clock = pygame.time.Clock()
@@ -143,7 +143,7 @@ def resize(startWidth, startHeight):
                      (theScreen.height * 1 / 10))
 
 def reDrawStartWindow():
-    screen.fill(gold)
+    screen.fill(lime)
     title.draw(screen, int(theScreen.width*0.1), True)
     startButton.draw(screen, int(theScreen.width*0.05), True)
     optionsButton.draw(screen, int(theScreen.width*0.05), True)
