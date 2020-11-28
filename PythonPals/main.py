@@ -582,7 +582,9 @@ def theBattle(level):
             if level == 1:
                 animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock,level, "coffee hurt")
             elif level == 2:
-                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock,level, "eye hurt")
+                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock,level, "ruby hurt")
+            else:
+                animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock, level, "eye hurt")
 
 
         else:
