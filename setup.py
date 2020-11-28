@@ -20,12 +20,14 @@ setup(
                                 "PythonPals/Ruby_fire.png", "PythonPals/Ruby_hurt.png", "PythonPals/Ruby_Idle.png"
                                 , "PythonPals/Ruby_left.png", "PythonPals/Ruby_prep.png", "PythonPals/Ruby_start.png",
                                 "PythonPals/treasure.png", "PythonPals/Snake_Firemid.png", "PythonPals/Snake_start.png",
-                                "PythonPals/python_questions_capitals.xlsx", "PythonPals/jungleBackground.png",
+                                "PythonPals/python_questions_capitals.xlsx", "PythonPals/python_questions_timeline.xlsx"
+                                , "PythonPals/JandaManateeSolid.ttf", "PythonPals/background_boss_music.wav",
+                                "PythonPals/background_laundr.wav", "PythonPals/jungleBackground.png",
                                 "PythonPals/requirements.txt"])],
     url='https://github.com/nathanhilton/PythonPals/tree/development',
     author='Sheamus Cooper',
     author_email='sheamus.cooper@ufl.edu',
-    description='Prototype Submission',
+    description='Production Release',
     long_description=readme(),
     long_description_content_type="text/markdown",
     classifiers=["Programming Language :: Python :: 3"],
