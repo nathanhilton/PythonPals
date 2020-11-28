@@ -717,16 +717,16 @@ def q_deck_menu():
                     opt = False
                 if changeCapitals.isOver(pos):
                     globals()['ws'] = questions.changeQuestionDeck("python_questions_capitals.xlsx", ws)
+                    options()
                     opt = False
-                    break
                 if changePython.isOver(pos):
                     globals()['ws'] = questions.changeQuestionDeck("python_questions.xlsx", ws)
+                    options()
                     opt = False
-                    break
                 if changeHistory.isOver(pos):
                     globals()['ws'] = questions.changeQuestionDeck("python_questions_timeline.xlsx", ws)
+                    options()
                     opt = False
-                    break
             if ev.type == pygame.VIDEORESIZE:
                 theScreen.width = ev.w
                 theScreen.height = ev.h
@@ -761,7 +761,7 @@ def sound_settings_menu():
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resize(theScreen.width, theScreen.height)
-                redraw_q_deck_window()
+                redraw_sound_window()
 
 
 def levelChange(screen, level, Enemy, enemyImg):
