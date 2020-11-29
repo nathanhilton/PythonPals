@@ -724,12 +724,14 @@ def animationController(playerGroup, enemyGroup, width, height, clock, level, an
         playerGroup.draw(screen)
         pygame.display.update()
         clock.tick(3)
+
         drawBackground(playerGroup, enemyGroup, width, height,level, "Wrong")
         enemyGroup.update()
         enemyGroup.draw(screen)
         playerGroup.draw(screen)
         pygame.display.update()
         clock.tick(3)
+
         drawBackground(playerGroup, enemyGroup, width, height,level, "Wrong")
         enemyGroup.update()
         enemyGroup.update()
@@ -754,6 +756,7 @@ def animationController(playerGroup, enemyGroup, width, height, clock, level, an
         playerGroup.draw(screen)
         enemyGroup.draw(screen)
         pygame.display.update()
+
     if (animation == "coffee break"):
         clock.tick(2)
         for i in range (0,6):
@@ -780,26 +783,31 @@ def animationController(playerGroup, enemyGroup, width, height, clock, level, an
             enemyGroup.draw(screen)
             pygame.display.update()
             clock.tick(5)
+
         drawBackground(playerGroup, enemyGroup, width, height,level, "Wrong")
         enemyGroup.update()
         enemyGroup.update()
         playerGroup.draw(screen)
         enemyGroup.draw(screen)
         pygame.display.update()
+
     if (animation == "ruby hurt"):
         for i in range(0, 7):
             enemyGroup.update()
+
         drawBackground(playerGroup, enemyGroup, width, height,level, "Correct")
         enemyGroup.update()
         playerGroup.draw(screen)
         enemyGroup.draw(screen)
         pygame.display.update()
         clock.tick(3)
+
         drawBackground(playerGroup, enemyGroup, width, height,level, "Correct")
         enemyGroup.update()
         playerGroup.draw(screen)
         enemyGroup.draw(screen)
         pygame.display.update()
+
     if (animation == "eye attack"):
         for i in range(0, 2):
             drawBackground(playerGroup, enemyGroup, width, height, level, "Wrong")
@@ -808,21 +816,25 @@ def animationController(playerGroup, enemyGroup, width, height, clock, level, an
             enemyGroup.draw(screen)
             pygame.display.update()
             clock.tick(2)
+
         drawBackground(playerGroup, enemyGroup, width, height, level, "Wrong")
         enemyGroup.update()
         enemyGroup.update()
         playerGroup.draw(screen)
         enemyGroup.draw(screen)
         pygame.display.update()
+
     if (animation == "eye hurt"):
         for i in range(0, 2):
             enemyGroup.update()
+
         drawBackground(playerGroup, enemyGroup, width, height, level, "Correct")
         enemyGroup.update()
         playerGroup.draw(screen)
         enemyGroup.draw(screen)
         pygame.display.update()
         clock.tick(3)
+
         drawBackground(playerGroup, enemyGroup, width, height, level, "Correct")
         enemyGroup.update()
         playerGroup.draw(screen)
@@ -1122,7 +1134,6 @@ def sound_settings_menu():
                 redraw_sound_window()
 
 def levelChange(screen, level, Enemy, enemyImg, sound):
-
     lev = text(black, theScreen.width * 0.25, theScreen.height * 0.1, theScreen.width * 0.5,
                         theScreen.height * 0.2, 200, ["LEVEL " + str(level)])
     if level == 1:
@@ -1195,11 +1206,8 @@ def main():
             sound_str = options()
             if sound_str == "muted":
                 sound = False
-                #redraw_sound_window()
             if sound_str == "unmuted":
                 sound = True
-                #pygame.mixer.music.unpause()
-                #redraw_sound_window()
         elif menuOption == "quit":
             enter_game = False
             #restart_music = False
