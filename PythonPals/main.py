@@ -1198,7 +1198,7 @@ def main():
                 #redraw_sound_window()
             if sound_str == "unmuted":
                 sound = True
-                pygame.mixer.music.unpause()
+                #pygame.mixer.music.unpause()
                 #redraw_sound_window()
         elif menuOption == "quit":
             enter_game = False
