@@ -147,9 +147,9 @@ def reDrawStartWindow():
 
     screen.fill(gold)
     title.draw(screen, int(theScreen.width*0.1), True)
-    startButton.draw(screen, int(theScreen.width*0.05), True)
-    optionsButton.draw(screen, int(theScreen.width*0.05), True)
-    quitButton.draw(screen, int(theScreen.width*0.05), True)
+    startButton.draw(screen, int(theScreen.width*0.05), black, True)
+    optionsButton.draw(screen, int(theScreen.width*0.05), black, True)
+    quitButton.draw(screen, int(theScreen.width*0.05), black, True)
 
 def startscreen():
     reDrawStartWindow()
@@ -189,22 +189,25 @@ def startscreen():
 
         pygame.display.update()
 
-def drawCategories():
-    cat1 = Button.button(fuschia, 400, 200, 30, 30, " " + ws['C2'].value)
-    cat2 = Button.button(fuschia, 650, 200, 30, 30, " " + ws['C7'].value)
-    cat3 = Button.button(fuschia, 900, 200, 30, 30, " " + ws['C12'].value)
-    cat4 = Button.button(fuschia, 450, 350, 30, 30, " " + ws['C17'].value)
-    cat5 = Button.button(fuschia, 800, 350, 30, 30, " General")
+def drawCategories(color, text_color):
+    chooseCat = Button.text(color, (theScreen.width * 0.25), (theScreen.height * 0.5 / 12), (theScreen.width * 0.5),
+                            (theScreen.height * 1 / 10),
+                            100, ["Choose a category:"])
+    cat1 = Button.button(color, 400, 200, 30, 30, " " + ws['C2'].value)
+    cat2 = Button.button(color, 650, 200, 30, 30, " " + ws['C7'].value)
+    cat3 = Button.button(color, 900, 200, 30, 30, " " + ws['C12'].value)
+    cat4 = Button.button(color, 450, 350, 30, 30, " " + ws['C17'].value)
+    cat5 = Button.button(color, 800, 350, 30, 30, " General")
 
     chooseCat.draw(screen, int(theScreen.width * 0.07), True)
-    cat1.draw(screen, int(theScreen.width * 0.02))
-    cat2.draw(screen, int(theScreen.width * 0.02))
-    cat3.draw(screen, int(theScreen.width * 0.02))
-    cat4.draw(screen, int(theScreen.width * 0.02))
-    cat5.draw(screen, int(theScreen.width * 0.02))
+    cat1.draw(screen, int(theScreen.width * 0.02), text_color, False)
+    cat2.draw(screen, int(theScreen.width * 0.02), text_color, False)
+    cat3.draw(screen, int(theScreen.width * 0.02), text_color, False)
+    cat4.draw(screen, int(theScreen.width * 0.02), text_color, False)
+    cat5.draw(screen, int(theScreen.width * 0.02), text_color, False)
 
-def chooseCategory(playerGroup, enemyGroup,level):
-    drawCategories()
+def chooseCategory(playerGroup, enemyGroup,level,color,text_color):
+    drawCategories(color, text_color)
     while True:
         for ev in pygame.event.get():
             pos = pygame.mouse.get_pos()
@@ -243,7 +246,7 @@ def chooseCategory(playerGroup, enemyGroup,level):
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resizeBattle(theScreen.width, theScreen.height)
                 drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
-                drawCategories()
+                drawCategories(color, text_color)
 
 def resizeBattle(startWidth, startHeight):
     userHealth.modify(0.02 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
@@ -269,14 +272,14 @@ def resizeBattle(startWidth, startHeight):
 
     pygame.display.update()
 
-def drawAnswers():
-    a.draw(screen, int(theScreen.width * 0.02))
-    b.draw(screen, int(theScreen.width * 0.02))
-    c.draw(screen, int(theScreen.width * 0.02))
-    d.draw(screen, int(theScreen.width * 0.02))
+def drawAnswers(text_color):
+    a.draw(screen, int(theScreen.width * 0.02), text_color, False)
+    b.draw(screen, int(theScreen.width * 0.02), text_color, False)
+    c.draw(screen, int(theScreen.width * 0.02), text_color, False)
+    d.draw(screen, int(theScreen.width * 0.02), text_color, False)
 
-def chooseAnswer(playerGroup, enemyGroup, question,level,q,A,B,C,D):
-    drawAnswers()
+def chooseAnswer(playerGroup, enemyGroup, question ,level,q,A,B,C,D, text_color):
+    drawAnswers(text_color)
     while True:
         for ev in pygame.event.get():
             pos = pygame.mouse.get_pos()
@@ -308,12 +311,11 @@ def chooseAnswer(playerGroup, enemyGroup, question,level,q,A,B,C,D):
                 resizeBattle(theScreen.width, theScreen.height)
                 drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
                 q.draw(screen, int(theScreen.width * 0.02), False)
-                q.draw(screen, int(theScreen.width * 0.02), False)
                 A.draw(screen, int(theScreen.width * 0.015), False)
                 B.draw(screen, int(theScreen.width * 0.015), False)
                 C.draw(screen, int(theScreen.width * 0.015), False)
                 D.draw(screen, int(theScreen.width * 0.015), False)
-                drawAnswers()
+                drawAnswers(text_color)
 
 def drawBattle(playerGroup, enemyGroup, w, h,level):
     screen.fill((0,0,0))
@@ -340,8 +342,8 @@ def drawBackground(playerGroup, enemyGroup, width, height,level, correctOrWrong=
         bg = pygame.image.load("jungleBackground.jpg")
         bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1380)
     elif level == 2:
-        bg = pygame.image.load("treasure.jpg")
-        bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1920)
+        bg = pygame.image.load("goldmine.jpg")
+        bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1400)
     else:
         bg = pygame.image.load("lava.png")
         bg = pygame.transform.rotozoom(bg, 0, theScreen.height / 727)
@@ -528,15 +530,30 @@ def theBattle(level):
     playerGroup = pygame.sprite.Group(myPlayer)
     # playerGroup.draw(screen)
 
+    cat_button_color = white
+    ans_button_color = white
+    text_color = white
     if level == 1:
+        text_color = black
+        cat_button_color = fuschia
+        ans_button_color = color_light
+
         myEnemy = Coffee()
         pygame.mixer.music.load('jazz.mp3')
         pygame.mixer.music.play(-1)
     elif level == 2:
+        cat_button_color = (240,208,79)
+        text_color = color_light
+        ans_button_color = color_dark
+
         myEnemy = Ruby()
         pygame.mixer.music.load('funke.mp3')
         pygame.mixer.music.play(-1)
     else:
+        cat_button_color = color_dark
+        text_color = color_light
+        ans_button_color = color_dark
+
         myEnemy = Eye()
         pygame.mixer.music.load('bluth.wav')
         pygame.mixer.music.play(-1)
@@ -554,20 +571,20 @@ def theBattle(level):
         # enemyGroup.draw(screen)
         # playerGroup.draw(screen)
         drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
-        choose = chooseCategory(playerGroup, enemyGroup,level)
+        choose = chooseCategory(playerGroup, enemyGroup, level, cat_button_color, text_color)
         print(choose)
         questionNumber = questions.load_question(choose)
         question = questions.get_question(questionNumber, ws)
 
         drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
 
-        q = Button.text(black, 400, 100, 50, 50, 40, question[0].splitlines())
+        q = Button.text(text_color, 400, 100, 50, 50, 40, question[0].splitlines())
         pygame.gfxdraw.box(screen, pygame.Rect(0, theScreen.height * 0.1, theScreen.width, 75),
                            (77, 153, 83, 130))
-        A = Button.text(black, a.x, a.y, 50, 50, 40, question[1].splitlines())
-        B = Button.text(black, b.x, b.y, 50, 50, 40, question[2].splitlines())
-        C = Button.text(black, c.x, c.y, 50, 50, 40, question[3].splitlines())
-        D = Button.text(black, d.x, d.y, 50, 50, 40, question[4].splitlines())
+        A = Button.text(text_color, a.x, a.y, 50, 50, 40, question[1].splitlines())
+        B = Button.text(text_color, b.x, b.y, 50, 50, 40, question[2].splitlines())
+        C = Button.text(text_color, c.x, c.y, 50, 50, 40, question[3].splitlines())
+        D = Button.text(text_color, d.x, d.y, 50, 50, 40, question[4].splitlines())
         pygame.gfxdraw.box(screen, pygame.Rect(theScreen.width * 0.1, theScreen.height * 0.15,
                                                600, 300), (77, 153, 83, 130))
         q.draw(screen, int(theScreen.width*0.02), False)
@@ -576,7 +593,7 @@ def theBattle(level):
         C.draw(screen, int(theScreen.width*0.015), False)
         D.draw(screen, int(theScreen.width*0.015), False)
 
-        guess = chooseAnswer(playerGroup, enemyGroup, question,level,q,A,B,C,D)
+        guess = chooseAnswer(playerGroup, enemyGroup, question,level,q,A,B,C,D, text_color)
         is_correct = questions.get_result(guess, question[5])
 
         if is_correct:
@@ -659,9 +676,9 @@ def lose():
 def reDrawOptionsWindow():
     screen.fill(purple)
     optionsHeader.draw(screen, int(theScreen.width*0.1), True)
-    choose_q_deck.draw(screen, int(theScreen.width*0.05), True)
-    change_sound_settings.draw(screen, int(theScreen.width*0.05), True)
-    back_to_main.draw(screen, int(theScreen.width*0.05), True)
+    choose_q_deck.draw(screen, int(theScreen.width*0.05), black, True)
+    change_sound_settings.draw(screen, int(theScreen.width*0.05), black, True)
+    back_to_main.draw(screen, int(theScreen.width*0.05), black, True)
     pygame.display.update()
 
 def options():
@@ -696,10 +713,10 @@ def options():
 def redraw_q_deck_window():
     screen.fill(blue)
     q_deck_header.draw(screen, int(theScreen.width*0.1), True)
-    changeCapitals.draw(screen, int(theScreen.width*0.05), True)
-    changePython.draw(screen, int(theScreen.width*0.05), True)
-    changeHistory.draw(screen, int(theScreen.width*0.05), True)
-    back_to_options.draw(screen, int(theScreen.width*0.05), True)
+    changeCapitals.draw(screen, int(theScreen.width*0.05), black, True)
+    changePython.draw(screen, int(theScreen.width*0.05), black, True)
+    changeHistory.draw(screen, int(theScreen.width*0.05), black, True)
+    back_to_options.draw(screen, int(theScreen.width*0.05), black, True)
     pygame.display.update()
 
 def q_deck_menu():
@@ -739,7 +756,7 @@ def q_deck_menu():
 def redraw_sound_window():
     screen.fill(blue)
     sound_header.draw(screen, int(theScreen.width*0.1), True)
-    back_to_options.draw(screen, int(theScreen.width*0.05), True)
+    back_to_options.draw(screen, int(theScreen.width*0.05), black, True)
     pygame.display.update()
 
 def sound_settings_menu():
@@ -762,7 +779,6 @@ def sound_settings_menu():
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resize(theScreen.width, theScreen.height)
                 redraw_q_deck_window()
-
 
 def levelChange(screen, level, Enemy, enemyImg):
     level = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.1, theScreen.width * 0.5,
