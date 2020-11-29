@@ -341,7 +341,7 @@ class healthBar():
 
 #-----initialize objects etc-----#
 ws = initialize("python_questions.xlsx")
-screen = pygame.display.set_mode((0, 0), pygame.RESIZABLE)
+screen = pygame.display.set_mode((0,0), pygame.RESIZABLE)
 white = (255, 255, 255)
 purple = (110, 113, 198)
 blue = (64, 127, 194)
@@ -668,12 +668,12 @@ def drawBackground(playerGroup, enemyGroup, width, height, level, correctOrWrong
             #pygame.mixer.Sound("correct.wav").play(0)
             display = text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5,
                                   theScreen.height * 0.4, int(theScreen.width * 0.02), ["Correct"])
-            pygame.draw.rect(screen, (0,255,0), (theScreen.width * 0.35, theScreen.height * 0.3, theScreen.width * 0.3, theScreen.height * 0.2))
+            pygame.draw.ellipse(screen, (0, 200, 0), (theScreen.width * 0.35, theScreen.height * 0.3, theScreen.width * 0.3, theScreen.height * 0.2))
         if correctOrWrong == "Wrong":
             #pygame.mixer.Sound("incorrect.wav").play(0)
             display = text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5,
                                   theScreen.height * 0.4, int(theScreen.width * 0.02), ["Incorrect"])
-            pygame.draw.rect(screen, (255, 0, 0), (theScreen.width * 0.35, theScreen.height * 0.3, theScreen.width * 0.3, theScreen.height * 0.2))
+            pygame.draw.ellipse(screen, (255, 0, 0), (theScreen.width * 0.35, theScreen.height * 0.3, theScreen.width * 0.3, theScreen.height * 0.2))
         display.draw(screen, int(theScreen.width * 1/16), True)
     # playerGroup.draw(screen)
     # enemyGroup.draw(screen)
@@ -893,14 +893,11 @@ def theBattle(level, sound):
         drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
 
         q = text(text_color, theScreen.width * 0.25, theScreen.height * 1/9, 50, 50, 40, question[0].splitlines())
-        pygame.gfxdraw.box(screen, pygame.Rect(0, theScreen.height * 0.1, theScreen.width, 75),
-                           (77, 153, 83, 130))
         A = text(text_color, a.x, a.y, 50, 50, 40, question[1].splitlines())
         B = text(text_color, b.x, b.y, 50, 50, 40, question[2].splitlines())
         C = text(text_color, c.x, c.y, 50, 50, 40, question[3].splitlines())
         D = text(text_color, d.x, d.y, 50, 50, 40, question[4].splitlines())
-        pygame.gfxdraw.box(screen, pygame.Rect(theScreen.width * 0.1, theScreen.height * 0.15,
-                                               600, 300), (77, 153, 83, 130))
+
         q.draw(screen, int(theScreen.width*0.02), False)
         A.draw(screen, int(theScreen.width*0.015), False)
         B.draw(screen, int(theScreen.width*0.015), False)
@@ -952,13 +949,20 @@ def win(sound):
         pygame.mixer.music.load('victoire.mp3')
         pygame.mixer.music.play(-1)
 
+<<<<<<< HEAD
     print("Victory!")
     screen.fill((100, 100, 100))
+=======
+    screen.fill(gold)
+    fw = pygame.image.load("fireworks.png")
+    fw = pygame.transform.rotozoom(fw, 0, theScreen.width / 820)
+    screen.blit(fw, (theScreen.width * 0.2, theScreen.height * 0.25))
+>>>>>>> 476cbcfa7cf696ddb908809add60befd75b6004c
     snake = pygame.image.load("snake6.png")
     snake.convert()
-    # snake = pygame.transform.rotozoom(snake, 0, 0.7)
-    screen.blit(snake, (theScreen.width * 0.43, theScreen.height * 0.6))
-    winScreen = text(gold, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5),
+    snake = pygame.transform.rotozoom(snake, 0, theScreen.height / 600)
+    screen.blit(snake, (theScreen.width * 0.4, theScreen.height * 0.6))
+    winScreen = text(black, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5),
                             (theScreen.height * 2 / 10), 150,
                             ["You win!"])
     winScreen.draw(screen, int(theScreen.width*0.1), True)
@@ -971,13 +975,20 @@ def lose(sound):
         pygame.mixer.music.load('defaite.mp3')
         pygame.mixer.music.play(-1)
 
+<<<<<<< HEAD
     print("Defeat")
     screen.fill((100, 100, 100))
+=======
+    screen.fill(color_light)
+    rain = pygame.image.load("rain.png")
+    rain = pygame.transform.rotozoom(rain, 0, theScreen.width / 2000)
+    screen.blit(rain, (theScreen.width * 0.4, theScreen.height * 0.25))
+>>>>>>> 476cbcfa7cf696ddb908809add60befd75b6004c
     snake = pygame.image.load("snake5.png")
     snake.convert()
-    #snake = pygame.transform.rotozoom(snake, 0, 0.7)
-    screen.blit(snake, (theScreen.width * 0.4, theScreen.height * 0.6))
-    gameOver = text(gold, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5), (theScreen.height * 2 / 10),
+    snake = pygame.transform.rotozoom(snake, 0, theScreen.height / 600)
+    screen.blit(snake, (theScreen.width * 0.34, theScreen.height * 0.6))
+    gameOver = text(indigo, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5), (theScreen.height * 2 / 10),
                            150,
                            ["You lose!"])
     gameOver.draw(screen, int(theScreen.width*0.1), True)
@@ -1118,10 +1129,17 @@ def sound_settings_menu():
 
 def levelChange(screen, level, Enemy, enemyImg, sound):
 
-    level = text(black, theScreen.width * 0.25, theScreen.height * 0.1, theScreen.width * 0.5,
+    lev = text(black, theScreen.width * 0.25, theScreen.height * 0.1, theScreen.width * 0.5,
                         theScreen.height * 0.2, 200, ["LEVEL " + str(level)])
-    enemy = text(black, theScreen.width * 0.25, theScreen.height * 0.35, theScreen.width * 0.5,
-                        theScreen.height * 0.2, 100, ["Your enemy is " + Enemy])
+    if level == 1:
+        enemy = text(black, theScreen.width * 0.25, theScreen.height * 0.35, theScreen.width * 0.5,
+                     theScreen.height * 0.2, theScreen.width * 1/16, ["Warmup: Beat Java"])
+    elif level == 2:
+        enemy = text(black, theScreen.width * 0.25, theScreen.height * 0.35, theScreen.width * 0.5,
+                     theScreen.height * 0.2, theScreen.width * 1 / 16, ["Your enemy is Ruby"])
+    else:
+        enemy = text(black, theScreen.width * 0.25, theScreen.height * 0.35, theScreen.width * 0.5,
+                        theScreen.height * 0.2, theScreen.width * 0.01, ["Let's C if you can beat Eye"])
     screen.fill(gold)
 
     if sound:
@@ -1129,13 +1147,10 @@ def levelChange(screen, level, Enemy, enemyImg, sound):
         pygame.mixer.music.play(0)
 
     enemyimg = pygame.image.load(enemyImg)
-    if Enemy == "Ruby":
-        enemyimg = pygame.transform.rotozoom(enemyimg, 0, 0.68)
-    elif Enemy == "Eye":
-        enemyimg = pygame.transform.rotozoom(enemyimg, 0, 0.85)
+    enemyimg = pygame.transform.rotozoom(enemyimg, 0, theScreen.width / 2000)
 
-    level.draw(screen, int(theScreen.width*0.2), True)
-    enemy.draw(screen, int(theScreen.width*0.1), True)
+    lev.draw(screen, int(theScreen.width*0.2), True)
+    enemy.draw(screen, int(theScreen.width*0.07), True)
     if Enemy != "Eye":
         screen.blit(enemyimg, (theScreen.width * 0.4, theScreen.height * 0.55))
     else:
