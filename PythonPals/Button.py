@@ -17,7 +17,7 @@ class button():
         self.width = width
         self.height = height
 
-    def draw(self, screen, fontSize, center=False, outline=None):
+    def draw(self, screen, fontSize, text_color, center=False, outline=None):
         # Call this method to draw the button on the screen
         if outline:
             pygame.draw.rect(screen, outline, (round(self.x - 2, self.y - 2), round(self.width + 4, self.height + 4)),
@@ -27,7 +27,7 @@ class button():
 
         if self.text != '':
             font = pygame.font.Font('JandaManateeSolid.ttf', fontSize)
-            text = font.render(self.text, 1, (0, 0, 0))
+            text = font.render(self.text, 1, text_color)
             if center:
                 screen.blit(text, (round(self.x + (self.width / 2 - text.get_width() / 2)),
                                    round(self.y + (self.height / 2 - text.get_height() / 2))))
