@@ -830,7 +830,7 @@ def animationController(playerGroup, enemyGroup, width, height, clock, level, an
         enemyGroup.draw(screen)
         pygame.display.update()
 
-def theBattle(level, sounds=True):
+def theBattle(level, sound):
     health = 100
     enemy_health = 100
     userHealth.set_health(health)
@@ -849,7 +849,7 @@ def theBattle(level, sounds=True):
 
     if level == 1:
         myEnemy = Coffee()
-        if sounds:
+        if sound:
             pygame.mixer.music.load('jazz.mp3')
             pygame.mixer.music.play(-1)
         text_color = (108, 16, 40)
@@ -857,7 +857,7 @@ def theBattle(level, sounds=True):
         ans_button_color = color_light
     elif level == 2:
         myEnemy = Ruby()
-        if sounds:
+        if sound:
             pygame.mixer.music.load('funke.mp3')
             pygame.mixer.music.play(-1)
         cat_button_color = (240,208,79)
@@ -865,7 +865,7 @@ def theBattle(level, sounds=True):
         ans_button_color = color_dark
     else:
         myEnemy = Eye()
-        if sounds:
+        if sound:
             pygame.mixer.music.load('bluth.wav')
             pygame.mixer.music.play(-1)
         cat_button_color = color_dark
@@ -948,8 +948,8 @@ def theBattle(level, sounds=True):
                 animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock,level, "coffee break")
             return "win"
 
-def win(sounds=True):
-    if sounds:
+def win(sound):
+    if sound:
         pygame.mixer.music.load('victoire.mp3')
         pygame.mixer.music.play(-1)
 
@@ -969,8 +969,8 @@ def win(sounds=True):
     pygame.display.update()
     pygame.time.delay(4000)
 
-def lose(sounds=True):
-    if sounds:
+def lose(sound):
+    if sound:
         pygame.mixer.music.load('defaite.mp3')
         pygame.mixer.music.play(-1)
 
@@ -1004,7 +1004,6 @@ def options():
     while opt:
         for ev in pygame.event.get():
             pos = pygame.mouse.get_pos()
-
             if ev.type == pygame.QUIT:
                 pygame.quit()
                 quit()
@@ -1018,7 +1017,6 @@ def options():
                 if change_sound_settings.isOver(pos):
                     #sound_settings_menu()
                     return sound_settings_menu()
-                    opt = False
 
             if ev.type == pygame.VIDEORESIZE:
                 if (ev.w != theScreen.width):
@@ -1082,13 +1080,13 @@ def q_deck_menu():
                 redraw_q_deck_window()
 
 #options -> change sound settings
-def redraw_sound_window(sounds=True):
+def redraw_sound_window(sound_str=""):
     screen.fill(blue)
     sound_header.draw(screen, int(theScreen.width*0.1), True)
-    if sounds:
-        mute_button.draw(screen, int(theScreen.width*0.06), black, True)
-    else:
+    if sound_str == "muted":
         unmute_button.draw(screen, int(theScreen.width*0.06), black, True)
+    else:
+        mute_button.draw(screen, int(theScreen.width*0.06), black, True)
     volume_label.draw(screen, int(theScreen.width*0.06), True)
     back_to_options.draw(screen, int(theScreen.width*0.04), black, True)
     pygame.display.update()
@@ -1108,12 +1106,12 @@ def sound_settings_menu():
                     opt = False
                 if mute_button.isOver(pos):
                     pygame.mixer.music.pause()
-                    redraw_sound_window(False)
-                    return False
+                    redraw_sound_window("muted")
+                    return "muted"
                 if unmute_button.isOver(pos):
-                    pygame.mixer.music.pause()
-                    redraw_sound_window(True)
-                    return True
+                    pygame.mixer.music.unpause()
+                    redraw_sound_window("unmuted")
+                    return "unmuted"
             if ev.type == pygame.VIDEORESIZE:
                 if (ev.w != theScreen.width):
                     theScreen.width = ev.w
@@ -1126,12 +1124,25 @@ def sound_settings_menu():
                 resize(theScreen.width, theScreen.height)
                 redraw_sound_window()
 
-def levelChange(screen, level, Enemy, enemyImg):
+def levelChange(screen, level, Enemy, enemyImg, sound):
+
     level = text(black, theScreen.width * 0.25, theScreen.height * 0.1, theScreen.width * 0.5,
                         theScreen.height * 0.2, 200, ["LEVEL " + str(level)])
     enemy = text(black, theScreen.width * 0.25, theScreen.height * 0.35, theScreen.width * 0.5,
                         theScreen.height * 0.2, 100, ["Your enemy is " + Enemy])
     screen.fill(gold)
+
+    if sound:
+        if level == 1:
+            pygame.mixer.music.load('jazz.mp3')
+            pygame.mixer.music.play(-1)
+        if level == 2:
+            pygame.mixer.music.load('funke.mp3')
+            pygame.mixer.music.play(-1)
+        if level == 3:
+            pygame.mixer.music.load('bluth.wav')
+            pygame.mixer.music.play(-1)
+
     enemyimg = pygame.image.load(enemyImg)
     if Enemy == "Ruby":
         enemyimg = pygame.transform.rotozoom(enemyimg, 0, 0.68)
@@ -1167,15 +1178,15 @@ def main():
         if menuOption == "start":
             lose(sound)
             damageStats.modify(50,10)
-            levelChange(screen, 1, "Java", "coffee1.png")
+            levelChange(screen, 1, "Java", "coffee1.png", sound)
             result = theBattle(1, sound)
             restart_music = True
             if result == "win":
-                levelChange(screen, 2, "Ruby", "Ruby_idle.png")
+                levelChange(screen, 2, "Ruby", "Ruby_idle.png", sound)
                 damageStats.modify(25,25)
                 result2 = theBattle(2, sound)
                 if result2 == "win":
-                    levelChange(screen, 3, "Eye", "C1.png")
+                    levelChange(screen, 3, "Eye", "C1.png", sound)
                     damageStats.modify(17,25)
                     result3 = theBattle(3, sound)
                     if result3 == "win":
@@ -1188,8 +1199,12 @@ def main():
                 lose(sound)
         elif menuOption == "options":
             restart_music = False
-            if not options():
+            sound_str = options()
+            if sound_str == "muted":
                 sound = False
+            if sound_str == "unmuted":
+                sound = True
+                restart_music = True
                 #pygame.mixer.music.pause()
         elif menuOption == "quit":
             enter_game = False
