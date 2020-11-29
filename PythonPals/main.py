@@ -414,10 +414,24 @@ changeHistory = button(color_light, (width * 0.25), (height * 8 / 14), (width * 
 #options -> change sound settings
 sound_header = text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
                                ["SOUND SETTINGS"])
+mute_button = button(color_light, (width * 0.25), (height * 3 / 12), (width * 0.5), (height * 2 / 10),
+                                      "Mute")
+unmute_button = button(color_light, (width * 0.25), (height * 3 / 12), (width * 0.5), (height * 2 / 10),
+                                      "Unmute")
+volume_label = text(black,(width * 0.25), (height * 6 / 12), (width * 0.5), (height * 2 / 10), 100,
+                               ["Volume"])
+#volume_minus
+#volume_plus
 
 
 def resize(startWidth, startHeight):
-    # category/answer buttons
+    #screen
+    theScreen.width = startWidth
+    theScreen.height = startHeight
+    chooseCat.modify((theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5),
+                     (theScreen.height * 1 / 10))
+
+    #battle category/answer buttons
     cat1.modify(0.25 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
     cat2.modify(0.41 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
     cat3.modify(0.56 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
@@ -447,11 +461,9 @@ def resize(startWidth, startHeight):
 
     #options -> change sound settings menu
     sound_header.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
-
-    theScreen.width = startWidth
-    theScreen.height = startHeight
-    chooseCat.modify((theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5),
-                     (theScreen.height * 1 / 10))
+    mute_button.modify((startWidth * 0.25), (startHeight * 3 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
+    unmute_button.modify((startWidth * 0.25), (startHeight * 3 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
+    volume_label.modify((startWidth * 0.25), (startHeight * 6 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
 
 def reDrawStartWindow():
     screen.fill(gold)
@@ -653,12 +665,12 @@ def drawBackground(playerGroup, enemyGroup, width, height, level, correctOrWrong
     screen.blit(bg,(0,0))
     if correctOrWrong != "":
         if correctOrWrong == "Correct":
-            pygame.mixer.Sound("correct.wav").play()
+            #pygame.mixer.Sound("correct.wav").play(0)
             display = text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5,
                                   theScreen.height * 0.4, int(theScreen.width * 0.02), ["Correct"])
             pygame.draw.rect(screen, (0,255,0), (theScreen.width * 0.35, theScreen.height * 0.3, theScreen.width * 0.3, theScreen.height * 0.2))
         if correctOrWrong == "Wrong":
-            pygame.mixer.Sound("incorrect.wav").play()
+            #pygame.mixer.Sound("incorrect.wav").play(0)
             display = text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5,
                                   theScreen.height * 0.4, int(theScreen.width * 0.02), ["Incorrect"])
             pygame.draw.rect(screen, (255, 0, 0), (theScreen.width * 0.35, theScreen.height * 0.3, theScreen.width * 0.3, theScreen.height * 0.2))
@@ -817,7 +829,7 @@ def animationController(playerGroup, enemyGroup, width, height, clock, level, an
         enemyGroup.draw(screen)
         pygame.display.update()
 
-def theBattle(level):
+def theBattle(level, sounds=True):
     health = 100
     enemy_health = 100
     userHealth.set_health(health)
@@ -835,29 +847,29 @@ def theBattle(level):
     text_color = white
 
     if level == 1:
+        myEnemy = Coffee()
+        if sounds:
+            pygame.mixer.music.load('jazz.mp3')
+            pygame.mixer.music.play(-1)
         text_color = black
         cat_button_color = fuschia
         ans_button_color = color_light
-
-        myEnemy = Coffee()
-        pygame.mixer.music.load('jazz.mp3')
-        pygame.mixer.music.play(-1)
     elif level == 2:
+        myEnemy = Ruby()
+        if sounds:
+            pygame.mixer.music.load('funke.mp3')
+            pygame.mixer.music.play(-1)
         cat_button_color = (240,208,79)
         text_color = color_light
         ans_button_color = color_dark
-
-        myEnemy = Ruby()
-        pygame.mixer.music.load('funke.mp3')
-        pygame.mixer.music.play(-1)
     else:
+        myEnemy = Eye()
+        if sounds:
+            pygame.mixer.music.load('bluth.wav')
+            pygame.mixer.music.play(-1)
         cat_button_color = color_dark
         text_color = color_light
         ans_button_color = color_dark
-
-        myEnemy = Eye()
-        pygame.mixer.music.load('bluth.wav')
-        pygame.mixer.music.play(-1)
 
     enemyGroup = pygame.sprite.Group(myEnemy)
     # enemyGroup.draw(screen)
@@ -935,9 +947,10 @@ def theBattle(level):
                 animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock,level, "coffee break")
             return "win"
 
-def win():
-    pygame.mixer.music.load('victoire.mp3')
-    pygame.mixer.music.play(-1)
+def win(sounds=True):
+    if sounds:
+        pygame.mixer.music.load('victoire.mp3')
+        pygame.mixer.music.play(-1)
 
     print("You won!")
     screen.fill((100, 100, 100))
@@ -953,9 +966,10 @@ def win():
     pygame.display.update()
     pygame.time.delay(4000)
 
-def lose():
-    pygame.mixer.music.load('defaite.mp3')
-    pygame.mixer.music.play(-1)
+def lose(sounds=True):
+    if sounds:
+        pygame.mixer.music.load('defaite.mp3')
+        pygame.mixer.music.play(-1)
 
     print("You lost!")
     screen.fill((100, 100, 100))
@@ -996,11 +1010,10 @@ def options():
                 if choose_q_deck.isOver(pos):
                     q_deck_menu()
                     opt = False
-                    break
                 if change_sound_settings.isOver(pos):
-                    sound_settings_menu()
+                    #sound_settings_menu()
+                    return sound_settings_menu()
                     opt = False
-                    break
 
             if ev.type == pygame.VIDEORESIZE:
                 if (ev.w != theScreen.width):
@@ -1064,9 +1077,14 @@ def q_deck_menu():
                 redraw_q_deck_window()
 
 #options -> change sound settings
-def redraw_sound_window():
+def redraw_sound_window(sounds=True):
     screen.fill(blue)
     sound_header.draw(screen, int(theScreen.width*0.1), True)
+    if sounds:
+        mute_button.draw(screen, int(theScreen.width*0.06), black, True)
+    else:
+        unmute_button.draw(screen, int(theScreen.width*0.06), black, True)
+    volume_label.draw(screen, int(theScreen.width*0.06), True)
     back_to_options.draw(screen, int(theScreen.width*0.04), black, True)
     pygame.display.update()
 
@@ -1083,6 +1101,14 @@ def sound_settings_menu():
                 if back_to_options.isOver(pos):
                     options()
                     opt = False
+                if mute_button.isOver(pos):
+                    pygame.mixer.music.pause()
+                    redraw_sound_window(False)
+                    return False
+                if unmute_button.isOver(pos):
+                    pygame.mixer.music.pause()
+                    redraw_sound_window(True)
+                    return True
             if ev.type == pygame.VIDEORESIZE:
                 if (ev.w != theScreen.width):
                     theScreen.width = ev.w
@@ -1123,8 +1149,9 @@ def main():
 
     enter_game = True
     restart_music = True
+    sound = True
     while enter_game:
-        if(restart_music == True):
+        if(sound and restart_music):
             pygame.mixer.music.load('idle.wav')
             pygame.mixer.music.play(-1)
 
@@ -1135,27 +1162,29 @@ def main():
         if menuOption == "start":
             damageStats.modify(50,10)
             levelChange(screen, 1, "Java", "coffee1.png")
-            result = theBattle(1)
+            result = theBattle(1, sound)
             restart_music = True
             if result == "win":
                 levelChange(screen, 2, "Ruby", "Ruby_idle.png")
                 damageStats.modify(25,25)
-                result2 = theBattle(2)
+                result2 = theBattle(2, sound)
                 if result2 == "win":
                     levelChange(screen, 3, "Eye", "C1.png")
                     damageStats.modify(17,25)
-                    result3 = theBattle(3)
+                    result3 = theBattle(3, sound)
                     if result3 == "win":
-                        win()
+                        win(sound)
                     else:
-                        lose()
+                        lose(sound)
                 else:
-                    lose()
+                    lose(sound)
             else:
-                lose()
+                lose(sound)
         elif menuOption == "options":
-            options()
             restart_music = False
+            if not options():
+                sound = False
+                #pygame.mixer.music.pause()
         elif menuOption == "quit":
             enter_game = False
             #restart_music = False
