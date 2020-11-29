@@ -48,11 +48,12 @@ userHealth = Button.healthBar(20, 20, 200, 30, 100, "left")
 enemyHealth = Button.healthBar(width - 20 - 200, 20, 200, 30, 100, "right")
 damageStats = damage(50, 10)
 
+
 cat1 = Button.button(fuschia, 400, 200, 30, 30, " " + ws['C2'].value)
 cat2 = Button.button(fuschia, 650, 200, 30, 30, " " + ws['C7'].value)
 cat3 = Button.button(fuschia, 900, 200, 30, 30, " " + ws['C12'].value)
 cat4 = Button.button(fuschia, 450, 350, 30, 30, " " + ws['C17'].value)
-cat5 = Button.button(fuschia, 800, 350, 30, 30, "General")
+cat5 = Button.button(fuschia, 800, 350, 30, 30, " General")
 
 a = Button.button(color_light, 200, 175, 25, 25)
 b = Button.button(color_light, 200, 225, 25, 25)
@@ -102,16 +103,12 @@ sound_header = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.
 
 
 def resize(startWidth, startHeight):
-    # battle scene
-    cat1 = Button.button(fuschia, 400, 200, 30, 30, " " + ws['C2'].value)
-    cat2 = Button.button(fuschia, 650, 200, 30, 30, " " + ws['C7'].value)
-    cat3 = Button.button(fuschia, 900, 200, 30, 30, " " + ws['C12'].value)
-    cat4 = Button.button(fuschia, 450, 350, 30, 30, " " + ws['C17'].value)
-    cat5 = Button.button(fuschia, 800, 350, 30, 30, " General")
-
     # category/answer buttons
-    cat1.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5),
-                (startHeight * 2 / 10))
+    cat1.modify(0.25 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
+    cat2.modify(0.41 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
+    cat3.modify(0.56 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
+    cat4.modify(0.25 * startWidth, 0.4 * startHeight, startWidth * 0.025, startHeight * 0.025)
+    cat5.modify(0.5 * startWidth, 0.4 * startHeight, startWidth * 0.025, startHeight * 0.025)
 
     #start menu
     title.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
@@ -141,7 +138,6 @@ def resize(startWidth, startHeight):
     theScreen.height = startHeight
     chooseCat.modify((theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5),
                      (theScreen.height * 1 / 10))
-
 
 def reDrawStartWindow():
 
@@ -189,11 +185,11 @@ def drawCategories(color, text_color):
     chooseCat = Button.text(color, (theScreen.width * 0.25), (theScreen.height * 0.5 / 12), (theScreen.width * 0.5),
                             (theScreen.height * 1 / 10),
                             100, ["Choose a category:"])
-    cat1 = Button.button(color, 400, 200, 30, 30, " " + ws['C2'].value)
-    cat2 = Button.button(color, 650, 200, 30, 30, " " + ws['C7'].value)
-    cat3 = Button.button(color, 900, 200, 30, 30, " " + ws['C12'].value)
-    cat4 = Button.button(color, 450, 350, 30, 30, " " + ws['C17'].value)
-    cat5 = Button.button(color, 800, 350, 30, 30, " General")
+    cat1 = Button.button(color, theScreen.width * 0.25, theScreen.height * 0.22, theScreen.width * 0.025, theScreen.height * 0.025, " " + ws['C2'].value)
+    cat2 = Button.button(color, theScreen.width * 0.41, theScreen.height * 0.22, theScreen.width * 0.025, theScreen.height * 0.025, " " + ws['C7'].value)
+    cat3 = Button.button(color, theScreen.width * 0.56, theScreen.height * 0.22, theScreen.width * 0.025, theScreen.height * 0.025, " " + ws['C12'].value)
+    cat4 = Button.button(color, theScreen.width * 0.25, theScreen.height * 0.4, theScreen.width * 0.025, theScreen.height * 0.025, " " + ws['C17'].value)
+    cat5 = Button.button(color, theScreen.width * 0.5, theScreen.height * 0.4, theScreen.width * 0.025, theScreen.height * 0.025, " General")
 
     chooseCat.draw(screen, int(theScreen.width * 0.07), True)
     cat1.draw(screen, int(theScreen.width * 0.02), text_color, False)
@@ -250,11 +246,6 @@ def resizeBattle(startWidth, startHeight):
     d.modify(0.125 * startWidth, 0.36 * startHeight, startWidth * 0.021, startHeight * 0.021)
 
     chooseCat.modify(0.25 * startWidth, 1/24 * startHeight, startWidth * 0.5, startHeight * 0.1)
-    cat1 = Button.button(fuschia, 400, 200, 30, 30, " " + ws['C2'].value)
-    cat2 = Button.button(fuschia, 650, 200, 30, 30, " " + ws['C7'].value)
-    cat3 = Button.button(fuschia, 900, 200, 30, 30, " " + ws['C12'].value)
-    cat4 = Button.button(fuschia, 450, 350, 30, 30, " " + ws['C17'].value)
-    cat5 = Button.button(fuschia, 800, 350, 30, 30, " General")
 
     cat1.modify(0.25 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
     cat2.modify(0.41 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
@@ -298,6 +289,11 @@ def chooseAnswer(playerGroup, enemyGroup, question ,level,q,A,B,C,D, text_color)
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resizeBattle(theScreen.width, theScreen.height)
                 drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
+                q.modify(theScreen.width * 0.25, theScreen.height * 1/9, 50, 50)
+                A.modify(a.x, a.y, 50, 50)
+                B.modify(b.x, b.y, 50, 50)
+                C.modify(c.x, c.y, 50, 50)
+                D.modify(d.x, d.y, 50, 50)
                 q.draw(screen, int(theScreen.width * 0.02), False)
                 A.draw(screen, int(theScreen.width * 0.015), False)
                 B.draw(screen, int(theScreen.width * 0.015), False)
@@ -339,13 +335,13 @@ def drawBackground(playerGroup, enemyGroup, width, height,level, correctOrWrong=
     if correctOrWrong != "":
         if correctOrWrong == "Correct":
             display = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5,
-                                  theScreen.height * 0.4, 100, ["Correct"])
+                                  theScreen.height * 0.4, int(theScreen.width * 0.02), ["Correct"])
             pygame.draw.rect(screen, (0,255,0), (theScreen.width * 0.35, theScreen.height * 0.3, theScreen.width * 0.3, theScreen.height * 0.2))
         if correctOrWrong == "Wrong":
             display = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5,
-                                  theScreen.height * 0.4, 100, ["Incorrect"])
+                                  theScreen.height * 0.4, int(theScreen.width * 0.02), ["Incorrect"])
             pygame.draw.rect(screen, (255, 0, 0), (theScreen.width * 0.35, theScreen.height * 0.3, theScreen.width * 0.3, theScreen.height * 0.2))
-        display.draw(screen, 100, True)
+        display.draw(screen, int(theScreen.width * 1/16), True)
     # playerGroup.draw(screen)
     # enemyGroup.draw(screen)
     enemyHealth.draw(screen)
@@ -566,7 +562,7 @@ def theBattle(level):
 
         drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
 
-        q = Button.text(text_color, 400, 100, 50, 50, 40, question[0].splitlines())
+        q = Button.text(text_color, theScreen.width * 0.25, theScreen.height * 1/9, 50, 50, 40, question[0].splitlines())
         pygame.gfxdraw.box(screen, pygame.Rect(0, theScreen.height * 0.1, theScreen.width, 75),
                            (77, 153, 83, 130))
         A = Button.text(text_color, a.x, a.y, 50, 50, 40, question[1].splitlines())
@@ -581,7 +577,7 @@ def theBattle(level):
         C.draw(screen, int(theScreen.width*0.015), False)
         D.draw(screen, int(theScreen.width*0.015), False)
 
-        guess = chooseAnswer(playerGroup, enemyGroup, question,level,q,A,B,C,D, text_color)
+        guess = chooseAnswer(playerGroup, enemyGroup, question,level,q,A,B,C,D, ans_button_color)
         is_correct = questions.get_result(guess, question[5])
 
         if is_correct:
