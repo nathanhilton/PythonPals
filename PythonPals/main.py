@@ -953,13 +953,15 @@ def win(sounds=True):
         pygame.mixer.music.load('victoire.mp3')
         pygame.mixer.music.play(-1)
 
-    print("You won!")
-    screen.fill((100, 100, 100))
+    screen.fill(gold)
+    fw = pygame.image.load("fireworks.png")
+    fw = pygame.transform.rotozoom(fw, 0, theScreen.width / 820)
+    screen.blit(fw, (theScreen.width * 0.25, theScreen.height * 0.25))
     snake = pygame.image.load("snake6.png")
     snake.convert()
-    # snake = pygame.transform.rotozoom(snake, 0, 0.7)
+    snake = pygame.transform.rotozoom(snake, 0, theScreen.height / 600)
     screen.blit(snake, (theScreen.width * 0.43, theScreen.height * 0.6))
-    winScreen = text(gold, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5),
+    winScreen = text(black, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5),
                             (theScreen.height * 2 / 10), 150,
                             ["You win!"])
     winScreen.draw(screen, int(theScreen.width*0.1), True)
@@ -972,13 +974,15 @@ def lose(sounds=True):
         pygame.mixer.music.load('defaite.mp3')
         pygame.mixer.music.play(-1)
 
-    print("You lost!")
-    screen.fill((100, 100, 100))
+    screen.fill(color_light)
+    rain = pygame.image.load("rain.png")
+    rain = pygame.transform.rotozoom(rain, 0, theScreen.width / 2000)
+    screen.blit(rain, (theScreen.width * 0.4, theScreen.height * 0.25))
     snake = pygame.image.load("snake5.png")
     snake.convert()
-    #snake = pygame.transform.rotozoom(snake, 0, 0.7)
+    snake = pygame.transform.rotozoom(snake, 0, theScreen.height / 600)
     screen.blit(snake, (theScreen.width * 0.4, theScreen.height * 0.6))
-    gameOver = text(gold, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5), (theScreen.height * 2 / 10),
+    gameOver = text(indigo, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5), (theScreen.height * 2 / 10),
                            150,
                            ["GameOver"])
     gameOver.draw(screen, int(theScreen.width*0.1), True)
@@ -1161,6 +1165,7 @@ def main():
 
         #  go to start, options, or quit
         if menuOption == "start":
+            lose(sound)
             damageStats.modify(50,10)
             levelChange(screen, 1, "Java", "coffee1.png")
             result = theBattle(1, sound)
