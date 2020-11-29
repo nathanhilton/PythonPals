@@ -1176,8 +1176,6 @@ def main():
 
         #  go to start, options, or quit
         if menuOption == "start":
-            win(sound)
-            lose(sound)
             damageStats.modify(50,10)
             levelChange(screen, 1, "Java", "coffee1.png", sound)
             result = theBattle(1, sound)
