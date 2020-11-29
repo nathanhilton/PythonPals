@@ -414,15 +414,14 @@ changeHistory = button(color_light, (width * 0.25), (height * 8 / 14), (width * 
 #options -> change sound settings
 sound_header = text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
                                ["SOUND SETTINGS"])
-mute_button = button(color_light, (width * 0.25), (height * 3 / 12), (width * 0.5), (height * 2 / 10),
+mute_button = button(color_light, (width * 0.24), (height * 3 / 12), (width * 0.25), (height * 2 / 10),
                                       "Mute")
-unmute_button = button(color_light, (width * 0.25), (height * 3 / 12), (width * 0.5), (height * 2 / 10),
+unmute_button = button(color_light, (width * 0.51), (height * 3 / 12), (width * 0.25), (height * 2 / 10),
                                       "Unmute")
 volume_label = text(black,(width * 0.25), (height * 6 / 12), (width * 0.5), (height * 2 / 10), 100,
                                ["Volume"])
 #volume_minus
 #volume_plus
-
 
 def resize(startWidth, startHeight):
     #screen
@@ -461,8 +460,8 @@ def resize(startWidth, startHeight):
 
     #options -> change sound settings menu
     sound_header.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
-    mute_button.modify((startWidth * 0.25), (startHeight * 3 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
-    unmute_button.modify((startWidth * 0.25), (startHeight * 3 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
+    mute_button.modify((startWidth * 0.24), (startHeight * 3 / 12), (startWidth * 0.25), (startHeight * 2 / 10))
+    unmute_button.modify((startWidth * 0.51), (startHeight * 3 / 12), (startWidth * 0.25), (startHeight * 2 / 10))
     volume_label.modify((startWidth * 0.25), (startHeight * 6 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
 
 def reDrawStartWindow():
@@ -953,7 +952,7 @@ def win(sound):
         pygame.mixer.music.load('victoire.mp3')
         pygame.mixer.music.play(-1)
 
-    print("You won!")
+    print("Victory!")
     screen.fill((100, 100, 100))
     snake = pygame.image.load("snake6.png")
     snake.convert()
@@ -972,7 +971,7 @@ def lose(sound):
         pygame.mixer.music.load('defaite.mp3')
         pygame.mixer.music.play(-1)
 
-    print("You lost!")
+    print("Defeat")
     screen.fill((100, 100, 100))
     snake = pygame.image.load("snake5.png")
     snake.convert()
@@ -980,7 +979,7 @@ def lose(sound):
     screen.blit(snake, (theScreen.width * 0.4, theScreen.height * 0.6))
     gameOver = text(gold, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5), (theScreen.height * 2 / 10),
                            150,
-                           ["GameOver"])
+                           ["You lose!"])
     gameOver.draw(screen, int(theScreen.width*0.1), True)
     clock.tick(2)
     pygame.display.update()
@@ -1041,7 +1040,6 @@ def q_deck_menu():
     while opt:
         for ev in pygame.event.get():
             pos = pygame.mouse.get_pos()
-
             if ev.type == pygame.QUIT:
                 pygame.quit()
                 quit()
@@ -1076,13 +1074,11 @@ def q_deck_menu():
                 redraw_q_deck_window()
 
 #options -> change sound settings
-def redraw_sound_window(sound_str=""):
+def redraw_sound_window():
     screen.fill(blue)
     sound_header.draw(screen, int(theScreen.width*0.1), True)
-    if sound_str == "muted":
-        unmute_button.draw(screen, int(theScreen.width*0.06), black, True)
-    else:
-        mute_button.draw(screen, int(theScreen.width*0.06), black, True)
+    unmute_button.draw(screen, int(theScreen.width*0.06), black, True)
+    mute_button.draw(screen, int(theScreen.width*0.06), black, True)
     volume_label.draw(screen, int(theScreen.width*0.06), True)
     back_to_options.draw(screen, int(theScreen.width*0.04), black, True)
     pygame.display.update()
@@ -1102,11 +1098,11 @@ def sound_settings_menu():
                     opt = False
                 if mute_button.isOver(pos):
                     pygame.mixer.music.pause()
-                    redraw_sound_window("muted")
+                    sound_settings_menu()
                     return "muted"
                 if unmute_button.isOver(pos):
                     pygame.mixer.music.unpause()
-                    redraw_sound_window("unmuted")
+                    sound_settings_menu()
                     return "unmuted"
             if ev.type == pygame.VIDEORESIZE:
                 if (ev.w != theScreen.width):
@@ -1129,15 +1125,8 @@ def levelChange(screen, level, Enemy, enemyImg, sound):
     screen.fill(gold)
 
     if sound:
-        if level == 1:
-            pygame.mixer.music.load('jazz.mp3')
-            pygame.mixer.music.play(-1)
-        if level == 2:
-            pygame.mixer.music.load('funke.mp3')
-            pygame.mixer.music.play(-1)
-        if level == 3:
-            pygame.mixer.music.load('bluth.wav')
-            pygame.mixer.music.play(-1)
+        pygame.mixer.music.load("elevator_music_16bit.wav")
+        pygame.mixer.music.play(0)
 
     enemyimg = pygame.image.load(enemyImg)
     if Enemy == "Ruby":
@@ -1167,10 +1156,10 @@ def main():
             pygame.mixer.music.load('idle.wav')
             pygame.mixer.music.play(-1)
 
-        # start screen
+        #start screen
         menuOption = startscreen()
 
-        #  go to start, options, or quit
+        #go to start, options, or quit
         if menuOption == "start":
             damageStats.modify(50,10)
             levelChange(screen, 1, "Java", "coffee1.png", sound)
@@ -1197,10 +1186,11 @@ def main():
             sound_str = options()
             if sound_str == "muted":
                 sound = False
+                #redraw_sound_window()
             if sound_str == "unmuted":
                 sound = True
-                restart_music = True
-                #pygame.mixer.music.pause()
+                pygame.mixer.music.unpause()
+                #redraw_sound_window()
         elif menuOption == "quit":
             enter_game = False
             #restart_music = False
