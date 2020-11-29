@@ -461,6 +461,7 @@ def reDrawStartWindow():
     quitButton.draw(screen, int(theScreen.width*0.05), black, True)
 
 def startscreen():
+    resize(theScreen.width, theScreen.height)
     reDrawStartWindow()
     while True:
         # reDrawStartWindow()
@@ -835,8 +836,8 @@ def theBattle(level):
     text_color = white
 
     if level == 1:
-        text_color = black
-        cat_button_color = fuschia
+        text_color = (108,16,40)
+        cat_button_color = (171,92,187)
         ans_button_color = color_light
 
         myEnemy = Coffee()
