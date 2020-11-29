@@ -7,9 +7,10 @@ number conversion) and then enter a battle scene where they will be asked multip
 be expected to provide the correct answer. A correct answer deals damage to the opponent while an
 incorrect answer reduces the player's own HP. The player wins when their opponent's HP reaches zero and
 the player loses if their own HP reaches zero. The production release now also includes the option to change the 
-questions to History and Geography categories as well as multiple levels.
+questions to History and Geography categories as well as multiple levels and sound effects for feedback.
 
-`**Note about bugs: `
+`**Note about bugs: Possible issue with pip installation in which relative file paths are not recognized. To run from 
+the .tgz file, cd into PythonPals-VersionNumber, then Python Pals and then run python main.py`
 
 ## Package name for PIP installation
 May need to run as administrator on Windows from PythonPals-//VersionNumber

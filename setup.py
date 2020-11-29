@@ -9,7 +9,7 @@ def readme():
 
 setup(
     name='PythonPals',
-    version='2.0.35',
+    version='2.0.54',
     packages=setuptools.find_packages(),
     include_package_data=True,
     data_files=[('PythonPals', ["PythonPals/python_questions.xlsx", "PythonPals/coffee1.png", "PythonPals/coffee2.png",
@@ -35,7 +35,7 @@ setup(
     classifiers=["Programming Language :: Python :: 3"],
     entry_points={
         "console_scripts": [
-            "python-pals=PythonPals.main:init",
+            "python-pals=PythonPals.main:main",
         ]
     },
 )

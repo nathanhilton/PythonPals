@@ -473,6 +473,7 @@ def reDrawStartWindow():
     quitButton.draw(screen, int(theScreen.width*0.05), black, True)
 
 def startscreen():
+    resize(theScreen.width, theScreen.height)
     reDrawStartWindow()
     while True:
         # reDrawStartWindow()
@@ -577,7 +578,7 @@ def resizeBattle(startWidth, startHeight):
     cat1.modify(0.25 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
     cat2.modify(0.41 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
     cat3.modify(0.56 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
-    cat4.modify(0.28 * startWidth, 0.4 * startHeight, startWidth * 0.025, startHeight * 0.025)
+    cat4.modify(0.25 * startWidth, 0.4 * startHeight, startWidth * 0.025, startHeight * 0.025)
     cat5.modify(0.5 * startWidth, 0.4 * startHeight, startWidth * 0.025, startHeight * 0.025)
 
     pygame.display.update()
@@ -661,7 +662,7 @@ def drawBackground(playerGroup, enemyGroup, width, height, level, correctOrWrong
         bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1400)
     else:
         bg = pygame.image.load("ocean.jpg")
-        bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1900)
+        bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1850)
     screen.blit(bg,(0,0))
     if correctOrWrong != "":
         if correctOrWrong == "Correct":
@@ -851,8 +852,8 @@ def theBattle(level, sound):
         if sound:
             pygame.mixer.music.load('jazz.mp3')
             pygame.mixer.music.play(-1)
-        text_color = black
-        cat_button_color = fuschia
+        text_color = (108, 16, 40)
+        cat_button_color = (171, 92, 187)
         ans_button_color = color_light
     elif level == 2:
         myEnemy = Ruby()
