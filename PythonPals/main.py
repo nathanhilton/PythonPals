@@ -1,4 +1,4 @@
-from Button import button
+import Button
 import questions
 import pygame
 import pygame.gfxdraw
@@ -91,9 +91,9 @@ q_deck_header = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0
                                ["QUESTION DECKS"])
 changeCapitals = Button.button(color_light, (width * 0.25), (height * 3 / 14), (width * 0.5), (height * 2 / 14),
                                       "Use Capitals Deck")
-changePython = Button.button(color_light, (width * 0.25), (height * 6 / 14), (width * 0.5), (height * 2 / 14),
+changePython = Button.button(color_light, (width * 0.25), (height * 5.5 / 14), (width * 0.5), (height * 2 / 14),
                                       "Use Python Deck")
-changeHistory = Button.button(color_light, (width * 0.25), (height * 9 / 14), (width * 0.5), (height * 2 / 14),
+changeHistory = Button.button(color_light, (width * 0.25), (height * 8 / 14), (width * 0.5), (height * 2 / 14),
                                       "Use History Deck")
 
 #options -> change sound settings
@@ -162,16 +162,12 @@ def startscreen():
                 pygame.quit()
                 quit()
             if ev.type == pygame.VIDEORESIZE:
-                # not sure what the commented part is?
-
-                # if (ev.w != theScreen.width):
-                #     theScreen.width = ev.w
-                #     theScreen.height = int(theScreen.width * 900 / 1600)
-                # else:
-                #     theScreen.height = ev.h
-                #     theScreen.width = int(theScreen.height * 1600 / 900)
-                theScreen.width = ev.w
-                theScreen.height = ev.h
+                if (ev.w != theScreen.width):
+                    theScreen.width = ev.w
+                    theScreen.height = int(theScreen.width * 900 / 1600)
+                else:
+                    theScreen.height = ev.h
+                    theScreen.width = int(theScreen.height * 1600 / 900)
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resize(theScreen.width, theScreen.height)
@@ -232,16 +228,12 @@ def chooseCategory(playerGroup, enemyGroup,level,color,text_color):
                     return 5
 
             if ev.type == pygame.VIDEORESIZE:
-                # not sure what the commented part is?
-
-                # if (ev.w != theScreen.width):
-                #     theScreen.width = ev.w
-                #     theScreen.height = int(theScreen.width * 900 / 1600)
-                # else:
-                #     theScreen.height = ev.h
-                #     theScreen.width = int(theScreen.height * 1600 / 900)
-                theScreen.width = ev.w
-                theScreen.height = ev.h
+                if (ev.w != theScreen.width):
+                    theScreen.width = ev.w
+                    theScreen.height = int(theScreen.width * 900 / 1600)
+                else:
+                    theScreen.height = ev.h
+                    theScreen.width = int(theScreen.height * 1600 / 900)
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resizeBattle(theScreen.width, theScreen.height)
@@ -296,16 +288,12 @@ def chooseAnswer(playerGroup, enemyGroup, question ,level,q,A,B,C,D, text_color)
                 elif d.isOver(pos):
                     return 'd'
             if ev.type == pygame.VIDEORESIZE:
-                # not sure what the commented part is?
-
-                # if (ev.w != theScreen.width):
-                #     theScreen.width = ev.w
-                #     theScreen.height = int(theScreen.width * 900 / 1600)
-                # else:
-                #     theScreen.height = ev.h
-                #     theScreen.width = int(theScreen.height * 1600 / 900)
-                theScreen.width = ev.w
-                theScreen.height = ev.h
+                if (ev.w != theScreen.width):
+                    theScreen.width = ev.w
+                    theScreen.height = int(theScreen.width * 900 / 1600)
+                else:
+                    theScreen.height = ev.h
+                    theScreen.width = int(theScreen.height * 1600 / 900)
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resizeBattle(theScreen.width, theScreen.height)
@@ -676,9 +664,9 @@ def lose():
 def reDrawOptionsWindow():
     screen.fill(purple)
     optionsHeader.draw(screen, int(theScreen.width*0.1), True)
-    choose_q_deck.draw(screen, int(theScreen.width*0.05), black, True)
-    change_sound_settings.draw(screen, int(theScreen.width*0.05), black, True)
-    back_to_main.draw(screen, int(theScreen.width*0.05), black, True)
+    choose_q_deck.draw(screen, int(theScreen.width*0.04), black, True)
+    change_sound_settings.draw(screen, int(theScreen.width*0.04), black, True)
+    back_to_main.draw(screen, int(theScreen.width*0.04), black, True)
     pygame.display.update()
 
 def options():
@@ -702,8 +690,12 @@ def options():
                     opt = False
                     break
             if ev.type == pygame.VIDEORESIZE:
-                theScreen.width = ev.w
-                theScreen.height = ev.h
+                if (ev.w != theScreen.width):
+                    theScreen.width = ev.w
+                    theScreen.height = int(theScreen.width * 900 / 1600)
+                else:
+                    theScreen.height = ev.h
+                    theScreen.width = int(theScreen.height * 1600 / 900)
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resize(theScreen.width, theScreen.height)
@@ -713,10 +705,10 @@ def options():
 def redraw_q_deck_window():
     screen.fill(blue)
     q_deck_header.draw(screen, int(theScreen.width*0.1), True)
-    changeCapitals.draw(screen, int(theScreen.width*0.05), black, True)
-    changePython.draw(screen, int(theScreen.width*0.05), black, True)
-    changeHistory.draw(screen, int(theScreen.width*0.05), black, True)
-    back_to_options.draw(screen, int(theScreen.width*0.05), black, True)
+    changeCapitals.draw(screen, int(theScreen.width*0.04), black, True)
+    changePython.draw(screen, int(theScreen.width*0.04), black, True)
+    changeHistory.draw(screen, int(theScreen.width*0.04), black, True)
+    back_to_options.draw(screen, int(theScreen.width*0.04), black, True)
     pygame.display.update()
 
 def q_deck_menu():
@@ -745,8 +737,12 @@ def q_deck_menu():
                     options()
                     opt = False
             if ev.type == pygame.VIDEORESIZE:
-                theScreen.width = ev.w
-                theScreen.height = ev.h
+                if (ev.w != theScreen.width):
+                    theScreen.width = ev.w
+                    theScreen.height = int(theScreen.width * 900 / 1600)
+                else:
+                    theScreen.height = ev.h
+                    theScreen.width = int(theScreen.height * 1600 / 900)
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resize(theScreen.width, theScreen.height)
@@ -756,7 +752,7 @@ def q_deck_menu():
 def redraw_sound_window():
     screen.fill(blue)
     sound_header.draw(screen, int(theScreen.width*0.1), True)
-    back_to_options.draw(screen, int(theScreen.width*0.05), black, True)
+    back_to_options.draw(screen, int(theScreen.width*0.04), black, True)
     pygame.display.update()
 
 def sound_settings_menu():
@@ -773,8 +769,12 @@ def sound_settings_menu():
                     options()
                     opt = False
             if ev.type == pygame.VIDEORESIZE:
-                theScreen.width = ev.w
-                theScreen.height = ev.h
+                if (ev.w != theScreen.width):
+                    theScreen.width = ev.w
+                    theScreen.height = int(theScreen.width * 900 / 1600)
+                else:
+                    theScreen.height = ev.h
+                    theScreen.width = int(theScreen.height * 1600 / 900)
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resize(theScreen.width, theScreen.height)
@@ -809,21 +809,21 @@ def main():
     pygame.display.set_caption("Python Pals")
 
     enter_game = True
+    restart_music = True
     while enter_game:
-        pygame.mixer.music.load('idle.wav')
-        pygame.mixer.music.play(-1)
+        if(restart_music == True):
+            pygame.mixer.music.load('idle.wav')
+            pygame.mixer.music.play(-1)
 
         # start screen
         menuOption = startscreen()
-
-        print(width)
-        print(height)
 
         #  go to start, options, or quit
         if menuOption == "start":
             damageStats.modify(50,10)
             levelChange(screen, 1, "Java", "coffee1.png")
             result = theBattle(1)
+            restart_music = True
             if result == "win":
                 levelChange(screen, 2, "Ruby", "Ruby_idle.png")
                 damageStats.modify(25,25)
@@ -842,8 +842,10 @@ def main():
                 lose()
         elif menuOption == "options":
             options()
+            restart_music = False
         elif menuOption == "quit":
             enter_game = False
+            restart_music = False
     # pygame.mixer.music.stop()
     pygame.quit()
 
