@@ -48,6 +48,8 @@ userHealth = Button.healthBar(20, 20, 200, 30, 100, "left")
 enemyHealth = Button.healthBar(width - 20 - 200, 20, 200, 30, 100, "right")
 damageStats = damage(50, 10)
 
+
+
 cat1 = Button.button(fuschia, 400, 200, 30, 30, " " + ws['C2'].value)
 cat2 = Button.button(fuschia, 650, 200, 30, 30, " " + ws['C7'].value)
 cat3 = Button.button(fuschia, 900, 200, 30, 30, " " + ws['C12'].value)
@@ -144,7 +146,6 @@ def resize(startWidth, startHeight):
 
 
 def reDrawStartWindow():
-
     screen.fill(gold)
     title.draw(screen, int(theScreen.width*0.1), True)
     startButton.draw(screen, int(theScreen.width*0.05), True)
@@ -162,14 +163,6 @@ def startscreen():
                 pygame.quit()
                 quit()
             if ev.type == pygame.VIDEORESIZE:
-                # not sure what the commented part is?
-
-                # if (ev.w != theScreen.width):
-                #     theScreen.width = ev.w
-                #     theScreen.height = int(theScreen.width * 900 / 1600)
-                # else:
-                #     theScreen.height = ev.h
-                #     theScreen.width = int(theScreen.height * 1600 / 900)
                 theScreen.width = ev.w
                 theScreen.height = ev.h
 
@@ -229,14 +222,6 @@ def chooseCategory(playerGroup, enemyGroup,level):
                     return 5
 
             if ev.type == pygame.VIDEORESIZE:
-                # not sure what the commented part is?
-
-                # if (ev.w != theScreen.width):
-                #     theScreen.width = ev.w
-                #     theScreen.height = int(theScreen.width * 900 / 1600)
-                # else:
-                #     theScreen.height = ev.h
-                #     theScreen.width = int(theScreen.height * 1600 / 900)
                 theScreen.width = ev.w
                 theScreen.height = ev.h
 
@@ -293,14 +278,6 @@ def chooseAnswer(playerGroup, enemyGroup, question,level,q,A,B,C,D):
                 elif d.isOver(pos):
                     return 'd'
             if ev.type == pygame.VIDEORESIZE:
-                # not sure what the commented part is?
-
-                # if (ev.w != theScreen.width):
-                #     theScreen.width = ev.w
-                #     theScreen.height = int(theScreen.width * 900 / 1600)
-                # else:
-                #     theScreen.height = ev.h
-                #     theScreen.width = int(theScreen.height * 1600 / 900)
                 theScreen.width = ev.w
                 theScreen.height = ev.h
 
@@ -332,7 +309,7 @@ def drawBattle(playerGroup, enemyGroup, w, h,level):
     pygame.display.update()
 
 #correctOrWrong is optional parameter, only use if if an animation that has has answer stuff
-def drawBackground(playerGroup, enemyGroup, width, height,level, correctOrWrong=""):
+def drawBackground(playerGroup, enemyGroup, width, height, level, correctOrWrong=""):
     # pygame.display.update()
     # screen.fill(white)
     #pygame.draw.rect(screen, (0, 0, 0), (0, 0, theScreen.width, theScreen.height * 0.07))
@@ -348,10 +325,12 @@ def drawBackground(playerGroup, enemyGroup, width, height,level, correctOrWrong=
     screen.blit(bg,(0,0))
     if correctOrWrong != "":
         if correctOrWrong == "Correct":
+            pygame.mixer.Sound("correct.wav").play()
             display = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5,
                                   theScreen.height * 0.4, 100, ["Correct"])
             pygame.draw.rect(screen, (0,255,0), (theScreen.width * 0.35, theScreen.height * 0.3, theScreen.width * 0.3, theScreen.height * 0.2))
         if correctOrWrong == "Wrong":
+            pygame.mixer.Sound("incorrect.wav").play()
             display = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5,
                                   theScreen.height * 0.4, 100, ["Incorrect"])
             pygame.draw.rect(screen, (255, 0, 0), (theScreen.width * 0.35, theScreen.height * 0.3, theScreen.width * 0.3, theScreen.height * 0.2))
@@ -520,10 +499,6 @@ def theBattle(level):
 
     clock = pygame.time.Clock()
 
-    # background music
-    #pygame.mixer.music.load('funke.mp3')
-    #pygame.mixer.music.play(-1)
-
     myPlayer = Player()
     playerGroup = pygame.sprite.Group(myPlayer)
     # playerGroup.draw(screen)
@@ -540,6 +515,7 @@ def theBattle(level):
         myEnemy = Eye()
         pygame.mixer.music.load('bluth.wav')
         pygame.mixer.music.play(-1)
+
     enemyGroup = pygame.sprite.Group(myEnemy)
     # enemyGroup.draw(screen)
     pygame.display.update()
