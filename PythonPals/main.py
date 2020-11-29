@@ -565,7 +565,7 @@ def resizeBattle(startWidth, startHeight):
     cat1.modify(0.25 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
     cat2.modify(0.41 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
     cat3.modify(0.56 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
-    cat4.modify(0.28 * startWidth, 0.4 * startHeight, startWidth * 0.025, startHeight * 0.025)
+    cat4.modify(0.25 * startWidth, 0.4 * startHeight, startWidth * 0.025, startHeight * 0.025)
     cat5.modify(0.5 * startWidth, 0.4 * startHeight, startWidth * 0.025, startHeight * 0.025)
 
     pygame.display.update()
