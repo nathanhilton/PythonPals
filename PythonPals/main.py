@@ -49,6 +49,10 @@ enemyHealth = Button.healthBar(width - 20 - 200, 20, 200, 30, 100, "right")
 damageStats = damage(50, 10)
 
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9f7e6a16039f4dd2ab63acddb37f02c668db4b5f
 cat1 = Button.button(fuschia, 400, 200, 30, 30, " " + ws['C2'].value)
 cat2 = Button.button(fuschia, 650, 200, 30, 30, " " + ws['C7'].value)
 cat3 = Button.button(fuschia, 900, 200, 30, 30, " " + ws['C12'].value)
@@ -140,7 +144,6 @@ def resize(startWidth, startHeight):
                      (theScreen.height * 1 / 10))
 
 def reDrawStartWindow():
-
     screen.fill(gold)
     title.draw(screen, int(theScreen.width*0.1), True)
     startButton.draw(screen, int(theScreen.width*0.05), black, True)
@@ -158,12 +161,17 @@ def startscreen():
                 pygame.quit()
                 quit()
             if ev.type == pygame.VIDEORESIZE:
+<<<<<<< HEAD
+                theScreen.width = ev.w
+                theScreen.height = ev.h
+=======
                 if (ev.w != theScreen.width):
                     theScreen.width = ev.w
                     theScreen.height = int(theScreen.width * 900 / 1600)
                 else:
                     theScreen.height = ev.h
                     theScreen.width = int(theScreen.height * 1600 / 900)
+>>>>>>> 9f7e6a16039f4dd2ab63acddb37f02c668db4b5f
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resize(theScreen.width, theScreen.height)
@@ -224,12 +232,17 @@ def chooseCategory(playerGroup, enemyGroup,level,color,text_color):
                     return 5
 
             if ev.type == pygame.VIDEORESIZE:
+<<<<<<< HEAD
+                theScreen.width = ev.w
+                theScreen.height = ev.h
+=======
                 if (ev.w != theScreen.width):
                     theScreen.width = ev.w
                     theScreen.height = int(theScreen.width * 900 / 1600)
                 else:
                     theScreen.height = ev.h
                     theScreen.width = int(theScreen.height * 1600 / 900)
+>>>>>>> 9f7e6a16039f4dd2ab63acddb37f02c668db4b5f
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resizeBattle(theScreen.width, theScreen.height)
@@ -279,12 +292,17 @@ def chooseAnswer(playerGroup, enemyGroup, question ,level,q,A,B,C,D, text_color)
                 elif d.isOver(pos):
                     return 'd'
             if ev.type == pygame.VIDEORESIZE:
+<<<<<<< HEAD
+                theScreen.width = ev.w
+                theScreen.height = ev.h
+=======
                 if (ev.w != theScreen.width):
                     theScreen.width = ev.w
                     theScreen.height = int(theScreen.width * 900 / 1600)
                 else:
                     theScreen.height = ev.h
                     theScreen.width = int(theScreen.height * 1600 / 900)
+>>>>>>> 9f7e6a16039f4dd2ab63acddb37f02c668db4b5f
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resizeBattle(theScreen.width, theScreen.height)
@@ -318,7 +336,7 @@ def drawBattle(playerGroup, enemyGroup, w, h,level):
     pygame.display.update()
 
 #correctOrWrong is optional parameter, only use if if an animation that has has answer stuff
-def drawBackground(playerGroup, enemyGroup, width, height,level, correctOrWrong=""):
+def drawBackground(playerGroup, enemyGroup, width, height, level, correctOrWrong=""):
     # pygame.display.update()
     # screen.fill(white)
     #pygame.draw.rect(screen, (0, 0, 0), (0, 0, theScreen.width, theScreen.height * 0.07))
@@ -329,15 +347,17 @@ def drawBackground(playerGroup, enemyGroup, width, height,level, correctOrWrong=
         bg = pygame.image.load("goldmine.jpg")
         bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1400)
     else:
-        bg = pygame.image.load("lava.png")
-        bg = pygame.transform.rotozoom(bg, 0, theScreen.height / 727)
+        bg = pygame.image.load("ocean.jpg")
+        bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1900)
     screen.blit(bg,(0,0))
     if correctOrWrong != "":
         if correctOrWrong == "Correct":
+            pygame.mixer.Sound("correct.wav").play()
             display = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5,
                                   theScreen.height * 0.4, int(theScreen.width * 0.02), ["Correct"])
             pygame.draw.rect(screen, (0,255,0), (theScreen.width * 0.35, theScreen.height * 0.3, theScreen.width * 0.3, theScreen.height * 0.2))
         if correctOrWrong == "Wrong":
+            pygame.mixer.Sound("incorrect.wav").play()
             display = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5,
                                   theScreen.height * 0.4, int(theScreen.width * 0.02), ["Incorrect"])
             pygame.draw.rect(screen, (255, 0, 0), (theScreen.width * 0.35, theScreen.height * 0.3, theScreen.width * 0.3, theScreen.height * 0.2))
@@ -506,10 +526,6 @@ def theBattle(level):
 
     clock = pygame.time.Clock()
 
-    # background music
-    #pygame.mixer.music.load('funke.mp3')
-    #pygame.mixer.music.play(-1)
-
     myPlayer = Player()
     playerGroup = pygame.sprite.Group(myPlayer)
     # playerGroup.draw(screen)
@@ -541,6 +557,7 @@ def theBattle(level):
         myEnemy = Eye()
         pygame.mixer.music.load('bluth.wav')
         pygame.mixer.music.play(-1)
+
     enemyGroup = pygame.sprite.Group(myEnemy)
     # enemyGroup.draw(screen)
     pygame.display.update()
