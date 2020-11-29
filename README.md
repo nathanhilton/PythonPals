@@ -9,7 +9,8 @@ incorrect answer reduces the player's own HP. The player wins when their opponen
 the player loses if their own HP reaches zero. The production release now also includes the option to change the 
 questions to History and Geography categories as well as multiple levels and sound effects for feedback.
 
-`**Note about bugs: Possible issue with pip installation in which relative file paths are not recognized.`
+`**Note about bugs: Possible issue with pip installation in which relative file paths are not recognized. To run from 
+the .tgz file, cd into PythonPals-VersionNumber, then Python Pals and then run python main.py`
 
 ## Package name for PIP installation
 May need to run as administrator on Windows from PythonPals-//VersionNumber
