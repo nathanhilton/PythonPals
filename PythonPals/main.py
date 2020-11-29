@@ -1,4 +1,4 @@
-import Button
+from Button import button
 import questions
 import pygame
 import pygame.gfxdraw
@@ -638,7 +638,7 @@ def theBattle(level):
             return "win"
 
 def win():
-    pygame.mixer.music.load('victoire.wav')
+    pygame.mixer.music.load('victoire.mp3')
     pygame.mixer.music.play(-1)
 
     print("You won!")
@@ -656,7 +656,7 @@ def win():
     pygame.time.delay(4000)
 
 def lose():
-    pygame.mixer.music.load('defaite.ogg')
+    pygame.mixer.music.load('defaite.mp3')
     pygame.mixer.music.play(-1)
 
     print("You lost!")
@@ -734,16 +734,16 @@ def q_deck_menu():
                     opt = False
                 if changeCapitals.isOver(pos):
                     globals()['ws'] = questions.changeQuestionDeck("python_questions_capitals.xlsx", ws)
+                    options()
                     opt = False
-                    break
                 if changePython.isOver(pos):
                     globals()['ws'] = questions.changeQuestionDeck("python_questions.xlsx", ws)
+                    options()
                     opt = False
-                    break
                 if changeHistory.isOver(pos):
                     globals()['ws'] = questions.changeQuestionDeck("python_questions_timeline.xlsx", ws)
+                    options()
                     opt = False
-                    break
             if ev.type == pygame.VIDEORESIZE:
                 theScreen.width = ev.w
                 theScreen.height = ev.h
@@ -778,7 +778,7 @@ def sound_settings_menu():
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resize(theScreen.width, theScreen.height)
-                redraw_q_deck_window()
+                redraw_sound_window()
 
 def levelChange(screen, level, Enemy, enemyImg):
     level = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.1, theScreen.width * 0.5,
@@ -803,6 +803,7 @@ def levelChange(screen, level, Enemy, enemyImg):
     pygame.time.delay(2000)
 
 def main():
+
     pygame.init()
 
     pygame.display.set_caption("Python Pals")
