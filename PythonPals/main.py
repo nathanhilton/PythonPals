@@ -669,12 +669,12 @@ def drawBackground(playerGroup, enemyGroup, width, height, level, correctOrWrong
             #pygame.mixer.Sound("correct.wav").play(0)
             display = text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5,
                                   theScreen.height * 0.4, int(theScreen.width * 0.02), ["Correct"])
-            pygame.draw.rect(screen, (0,255,0), (theScreen.width * 0.35, theScreen.height * 0.3, theScreen.width * 0.3, theScreen.height * 0.2))
+            pygame.draw.ellipse(screen, (0, 200, 0), (theScreen.width * 0.35, theScreen.height * 0.3, theScreen.width * 0.3, theScreen.height * 0.2))
         if correctOrWrong == "Wrong":
             #pygame.mixer.Sound("incorrect.wav").play(0)
             display = text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5,
                                   theScreen.height * 0.4, int(theScreen.width * 0.02), ["Incorrect"])
-            pygame.draw.rect(screen, (255, 0, 0), (theScreen.width * 0.35, theScreen.height * 0.3, theScreen.width * 0.3, theScreen.height * 0.2))
+            pygame.draw.ellipse(screen, (255, 0, 0), (theScreen.width * 0.35, theScreen.height * 0.3, theScreen.width * 0.3, theScreen.height * 0.2))
         display.draw(screen, int(theScreen.width * 1/16), True)
     # playerGroup.draw(screen)
     # enemyGroup.draw(screen)
@@ -1176,7 +1176,6 @@ def main():
 
         #  go to start, options, or quit
         if menuOption == "start":
-            lose(sound)
             damageStats.modify(50,10)
             levelChange(screen, 1, "Java", "coffee1.png", sound)
             result = theBattle(1, sound)
