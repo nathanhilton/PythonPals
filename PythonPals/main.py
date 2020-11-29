@@ -37,12 +37,17 @@ class Player(pygame.sprite.Sprite):
 
         self.index = 0
         self.image = self.images[self.index]
-        self.rect = pygame.Rect(250, 575, 600, 600)
+        # self.rect = pygame.Rect(250, 575, 600, 600)
+        self.rect = pygame.Rect(theScreen.width / 5, theScreen.height / 1.6, 600, 600)
 
-    def resize(self, scale):
-        self.height = self.height * scale
-        self.width = self.width * scale
-        self.image = pygame.transform.rotozoom(self.images[self.index], 0, scale)
+    # def resize(self, scale):
+    #     self.height = self.height * scale
+    #     self.width = self.width * scale
+    #     self.image = pygame.transform.rotozoom(self.images[self.index], 0, scale)
+
+    def resize(self):
+        self.rect = pygame.Rect(theScreen.width/5, theScreen.height/1.6, 600, 600)
+        # self.image = pygame.transform.rotozoom(self.images[self.index], 0, theScreen.width/200)
 
     def update(self):
         self.index += 1
@@ -50,10 +55,10 @@ class Player(pygame.sprite.Sprite):
             self.index = 0
         self.image = self.images[self.index]
 
-    def changeLocation(self, x, y):
-        self.x = x
-        self.y = y
-        self.rect = pygame.Rect(x, y, self.width, self.height)
+    # def changeLocation(self, x, y):
+    #     self.x = x
+    #     self.y = y
+    #     self.rect = pygame.Rect(x, y, self.width, self.height)
 
 class Coffee(pygame.sprite.Sprite):
     def __init__(self):
@@ -68,7 +73,8 @@ class Coffee(pygame.sprite.Sprite):
 
         self.index = 0
         self.image = self.images[self.index]
-        self.rect = pygame.Rect(1000, 450, 500, 500)
+        # self.rect = pygame.Rect(1000, 450, 500, 500)
+        self.rect = pygame.Rect(theScreen.width/1.5, theScreen.height/2, 600, 600)
 
     def update(self):
         self.index += 1
@@ -76,15 +82,18 @@ class Coffee(pygame.sprite.Sprite):
             self.index = 0
         self.image = self.images[self.index]
 
-    def resize(self, scale):
-        self.height = self.height * scale
-        self.width = self.width * scale
-        self.image = pygame.transform.rotozoom(self.images[self.index], 0, scale)
+    def resize(self):
+        self.rect = pygame.Rect(theScreen.width/1.5, theScreen.height/2, 600, 600)
 
-    def changeLocation(self, x, y):
-        self.x = x
-        self.y = y
-        self.rect = pygame.Rect(x, y, self.width, self.height)
+    # def resize(self, scale):
+    #     self.height = self.height * scale
+    #     self.width = self.width * scale
+    #     self.image = pygame.transform.rotozoom(self.images[self.index], 0, scale)
+    #
+    # def changeLocation(self, x, y):
+    #     self.x = x
+    #     self.y = y
+    #     self.rect = pygame.Rect(x, y, self.width, self.height)
 
 class Ruby(pygame.sprite.Sprite):
     def __init__(self):
@@ -102,7 +111,8 @@ class Ruby(pygame.sprite.Sprite):
 
         self.index = 0
         self.image = self.images[self.index]
-        self.rect = pygame.Rect(800, 350, 500, 500)
+        # self.rect = pygame.Rect(800, 350, 500, 500)
+        self.rect = pygame.Rect(theScreen.width / 2, theScreen.height / 2.5, 600, 600)
 
     def update(self):
         self.index += 1
@@ -110,15 +120,18 @@ class Ruby(pygame.sprite.Sprite):
             self.index = 0
         self.image = self.images[self.index]
 
-    def resize(self, scale):
-        self.height = self.height * scale
-        self.width = self.width * scale
-        self.image = pygame.transform.rotozoom(self.images[self.index], 0, scale)
+    def resize(self):
+        self.rect = pygame.Rect(theScreen.width/2, theScreen.height/2.5, 600, 600)
 
-    def changeLocation(self, x, y):
-        self.x = x
-        self.y = y
-        self.rect = pygame.Rect(x, y, self.width, self.height)
+    # def resize(self, scale):
+    #     self.height = self.height * scale
+    #     self.width = self.width * scale
+    #     self.image = pygame.transform.rotozoom(self.images[self.index], 0, scale)
+
+    # def changeLocation(self, x, y):
+    #     self.x = x
+    #     self.y = y
+    #     self.rect = pygame.Rect(x, y, self.width, self.height)
 
 class Eye(pygame.sprite.Sprite):
     def __init__(self):
@@ -132,7 +145,8 @@ class Eye(pygame.sprite.Sprite):
 
         self.index = 0
         self.image = self.images[self.index]
-        self.rect = pygame.Rect(850, 400, 500, 500)
+        # self.rect = pygame.Rect(850, 400, 500, 500)
+        self.rect = pygame.Rect(theScreen.width/2, theScreen.height/2.5, 600, 600)
 
     def update(self):
         self.index += 1
@@ -140,15 +154,18 @@ class Eye(pygame.sprite.Sprite):
             self.index = 0
         self.image = self.images[self.index]
 
-    def resize(self, scale):
-        self.height = self.height * scale
-        self.width = self.width * scale
-        self.image = pygame.transform.rotozoom(self.images[self.index], 0, scale)
+    def resize(self):
+        self.rect = pygame.Rect(theScreen.width/2, theScreen.height/2.5, 600, 600)
 
-    def changeLocation(self, x, y):
-        self.x = x
-        self.y = y
-        self.rect = pygame.Rect(x, y, self.width, self.height)
+    # def resize(self, scale):
+    #     self.height = self.height * scale
+    #     self.width = self.width * scale
+    #     self.image = pygame.transform.rotozoom(self.images[self.index], 0, scale)
+    #
+    # def changeLocation(self, x, y):
+    #     self.x = x
+    #     self.y = y
+    #     self.rect = pygame.Rect(x, y, self.width, self.height)
 
 #-----from questions.py-----#
 def initialize(filename):
@@ -524,7 +541,7 @@ def drawCategories(color, text_color):
     cat4.draw(screen, int(theScreen.width * 0.02), text_color, False)
     cat5.draw(screen, int(theScreen.width * 0.02), text_color, False)
 
-def chooseCategory(playerGroup, enemyGroup,level,color,text_color):
+def chooseCategory(playerGroup, enemyGroup,level,color,text_color,myPlayer,myEnemy):
     drawCategories(color, text_color)
     while True:
         for ev in pygame.event.get():
@@ -560,6 +577,10 @@ def chooseCategory(playerGroup, enemyGroup,level,color,text_color):
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resizeBattle(theScreen.width, theScreen.height)
+                myPlayer.resize()
+                playerGroup = pygame.sprite.Group(myPlayer)
+                myEnemy.resize()
+                enemyGroup = pygame.sprite.Group(myEnemy)
                 drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
                 drawCategories(color, text_color)
 
@@ -588,7 +609,7 @@ def drawAnswers(text_color):
     c.draw(screen, int(theScreen.width * 0.02), text_color, False)
     d.draw(screen, int(theScreen.width * 0.02), text_color, False)
 
-def chooseAnswer(playerGroup, enemyGroup, question ,level,q,A,B,C,D, text_color):
+def chooseAnswer(playerGroup, enemyGroup, question ,level,q,A,B,C,D, text_color,myPlayer,myEnemy):
     drawAnswers(text_color)
     while True:
         for ev in pygame.event.get():
@@ -617,6 +638,10 @@ def chooseAnswer(playerGroup, enemyGroup, question ,level,q,A,B,C,D, text_color)
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resizeBattle(theScreen.width, theScreen.height)
+                myPlayer.resize()
+                playerGroup = pygame.sprite.Group(myPlayer)
+                myEnemy.resize()
+                enemyGroup = pygame.sprite.Group(myEnemy)
                 drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
 
                 q.modify(theScreen.width * 0.25, theScreen.height * 1/9, 50, 50)
@@ -845,7 +870,7 @@ def theBattle(level, sound):
     cat_button_color = white
     ans_button_color = white
     text_color = white
-
+    # level = 3
     if level == 1:
         myEnemy = Coffee()
         if sound:
@@ -880,6 +905,8 @@ def theBattle(level, sound):
 
     battle = True
     while battle:
+        # myPlayer.resize()
+        # playerGroup = pygame.sprite.Group(myPlayer)
         clock.tick(27)
         userHealth.modify(0.02 * theScreen.width, 0.02 * theScreen.height, theScreen.width * 0.1,
                           theScreen.height * 0.03)
@@ -888,7 +915,7 @@ def theBattle(level, sound):
         # enemyGroup.draw(screen)
         # playerGroup.draw(screen)
         drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
-        choose = chooseCategory(playerGroup, enemyGroup, level, cat_button_color, text_color)
+        choose = chooseCategory(playerGroup, enemyGroup, level, cat_button_color, text_color,myPlayer,myEnemy)
         print(choose)
         questionNumber = load_question(choose)
         question = get_question(questionNumber, ws)
@@ -915,7 +942,7 @@ def theBattle(level, sound):
         C.draw(screen, int(theScreen.width*0.015), False)
         D.draw(screen, int(theScreen.width*0.015), False)
 
-        guess = chooseAnswer(playerGroup, enemyGroup, question,level,q,A,B,C,D, ans_button_color)
+        guess = chooseAnswer(playerGroup, enemyGroup, question,level,q,A,B,C,D, ans_button_color,myPlayer,myEnemy)
         is_correct = get_result(guess, question[5])
 
         if is_correct:
@@ -1209,7 +1236,7 @@ def main():
                 #redraw_sound_window()
             if sound_str == "unmuted":
                 sound = True
-                pygame.mixer.music.unpause()
+                #pygame.mixer.music.unpause()
                 #redraw_sound_window()
         elif menuOption == "quit":
             enter_game = False
