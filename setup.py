@@ -22,7 +22,9 @@ setup(
                                 "PythonPals/treasure.jpg", "PythonPals/Snake_Firemid.png", "PythonPals/Snake_start.png",
                                 "PythonPals/python_questions_capitals.xlsx", "PythonPals/python_questions_timeline.xlsx"
                                 , "PythonPals/JandaManateeSolid.ttf", "PythonPals/background_boss_music.wav",
-                                "PythonPals/background_laundr.wav", "Snake_fire_end.png","victoire.mp3","PythonPals/jungleBackground.jpg",
+                                "PythonPals/background_laundr.wav", "Snake_fire_end.png","victoire.mp3",
+                                "bluth.wav", "PythonPals/jungleBackground.jpg","PythonPals/correct.wav",
+                                "PythonPals/idle.wav", "PythonPals/defaite.mp3", "PythonPals/funke.mp3",
                                 "PythonPals/requirements.txt"])],
     url='https://github.com/nathanhilton/PythonPals/tree/development',
     author='Sheamus Cooper',
