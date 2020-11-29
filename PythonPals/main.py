@@ -341,7 +341,7 @@ class healthBar():
 
 #-----initialize objects etc-----#
 ws = initialize("python_questions.xlsx")
-screen = pygame.display.set_mode((0, 0), pygame.RESIZABLE)
+screen = pygame.display.set_mode((0,0), pygame.RESIZABLE)
 white = (255, 255, 255)
 purple = (110, 113, 198)
 blue = (64, 127, 194)
@@ -894,14 +894,11 @@ def theBattle(level, sound):
         drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
 
         q = text(text_color, theScreen.width * 0.25, theScreen.height * 1/9, 50, 50, 40, question[0].splitlines())
-        pygame.gfxdraw.box(screen, pygame.Rect(0, theScreen.height * 0.1, theScreen.width, 75),
-                           (77, 153, 83, 130))
         A = text(text_color, a.x, a.y, 50, 50, 40, question[1].splitlines())
         B = text(text_color, b.x, b.y, 50, 50, 40, question[2].splitlines())
         C = text(text_color, c.x, c.y, 50, 50, 40, question[3].splitlines())
         D = text(text_color, d.x, d.y, 50, 50, 40, question[4].splitlines())
-        pygame.gfxdraw.box(screen, pygame.Rect(theScreen.width * 0.1, theScreen.height * 0.15,
-                                               600, 300), (77, 153, 83, 130))
+
         q.draw(screen, int(theScreen.width*0.02), False)
         A.draw(screen, int(theScreen.width*0.015), False)
         B.draw(screen, int(theScreen.width*0.015), False)
@@ -1126,10 +1123,17 @@ def sound_settings_menu():
 
 def levelChange(screen, level, Enemy, enemyImg, sound):
 
-    level = text(black, theScreen.width * 0.25, theScreen.height * 0.1, theScreen.width * 0.5,
+    lev = text(black, theScreen.width * 0.25, theScreen.height * 0.1, theScreen.width * 0.5,
                         theScreen.height * 0.2, 200, ["LEVEL " + str(level)])
-    enemy = text(black, theScreen.width * 0.25, theScreen.height * 0.35, theScreen.width * 0.5,
-                        theScreen.height * 0.2, 100, ["Your enemy is " + Enemy])
+    if level == 1:
+        enemy = text(black, theScreen.width * 0.25, theScreen.height * 0.35, theScreen.width * 0.5,
+                     theScreen.height * 0.2, theScreen.width * 1/16, ["Warmup: Beat Java"])
+    elif level == 2:
+        enemy = text(black, theScreen.width * 0.25, theScreen.height * 0.35, theScreen.width * 0.5,
+                     theScreen.height * 0.2, theScreen.width * 1 / 16, ["Your enemy is Ruby"])
+    else:
+        enemy = text(black, theScreen.width * 0.25, theScreen.height * 0.35, theScreen.width * 0.5,
+                        theScreen.height * 0.2, theScreen.width * 0.01, ["Let's C if you can beat Eye"])
     screen.fill(gold)
 
     if sound:
@@ -1144,13 +1148,10 @@ def levelChange(screen, level, Enemy, enemyImg, sound):
             pygame.mixer.music.play(-1)
 
     enemyimg = pygame.image.load(enemyImg)
-    if Enemy == "Ruby":
-        enemyimg = pygame.transform.rotozoom(enemyimg, 0, 0.68)
-    elif Enemy == "Eye":
-        enemyimg = pygame.transform.rotozoom(enemyimg, 0, 0.85)
+    enemyimg = pygame.transform.rotozoom(enemyimg, 0, theScreen.width / 2000)
 
-    level.draw(screen, int(theScreen.width*0.2), True)
-    enemy.draw(screen, int(theScreen.width*0.1), True)
+    lev.draw(screen, int(theScreen.width*0.2), True)
+    enemy.draw(screen, int(theScreen.width*0.07), True)
     if Enemy != "Eye":
         screen.blit(enemyimg, (theScreen.width * 0.4, theScreen.height * 0.55))
     else:
