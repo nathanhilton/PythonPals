@@ -662,7 +662,7 @@ def drawBackground(playerGroup, enemyGroup, width, height, level, correctOrWrong
         bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1400)
     else:
         bg = pygame.image.load("ocean.jpg")
-        bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1900)
+        bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1850)
     screen.blit(bg,(0,0))
     if correctOrWrong != "":
         if correctOrWrong == "Correct":
