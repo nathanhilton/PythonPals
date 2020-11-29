@@ -1,9 +1,14 @@
-import Button
-import questions
+# import Button
+# import questions
 import pygame
 import pygame.gfxdraw
 import textwrap
-from player import Player, Coffee, Ruby, Eye
+import os
+import sys
+# from player import Player, Coffee, Ruby, Eye
+import random
+from openpyxl import load_workbook, Workbook
+from pygame.locals import *
 
 class Screen():
     def __init__(self, width, height):
@@ -19,12 +24,343 @@ class damage():
         self.userDamage = newUserDam
         self.enemyDamage = newEnemyDam
 
+class Player(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.images = []
+
+        self.images.append(pygame.image.load('snake1.png'))
+        self.images.append(pygame.image.load('Snake_start.png'))
+        self.images.append(pygame.image.load('Snake_Firemid.png'))
+        self.images.append(pygame.image.load('snake2.png'))
+        self.images.append(pygame.image.load('Snake_fire_end.png'))
+        self.images.append(pygame.image.load('snake4.png'))
+        self.images.append(pygame.image.load('snake6.png'))
+
+        self.index = 0
+        self.image = self.images[self.index]
+        self.rect = pygame.Rect(250, 575, 600, 600)
+
+    def resize(self, scale):
+        self.height = self.height * scale
+        self.width = self.width * scale
+        self.image = pygame.transform.rotozoom(self.images[self.index], 0, scale)
+
+    def update(self):
+        self.index += 1
+        if self.index >= len(self.images):
+            self.index = 0
+        self.image = self.images[self.index]
+
+    def changeLocation(self, x, y):
+        self.x = x
+        self.y = y
+        self.rect = pygame.Rect(x, y, self.width, self.height)
+
+class Coffee(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.images = []
+        self.images.append(pygame.image.load('coffee1.png'))
+        self.images.append(pygame.image.load('coffee2.png'))
+        self.images.append(pygame.image.load('coffee3.png'))
+        self.images.append(pygame.image.load('coffee4.png'))
+        self.images.append(pygame.image.load('coffee5.png'))
+        self.images.append(pygame.image.load('coffee6.png'))
+
+        self.index = 0
+        self.image = self.images[self.index]
+        self.rect = pygame.Rect(1000, 450, 500, 500)
+
+    def update(self):
+        self.index += 1
+        if self.index >= len(self.images):
+            self.index = 0
+        self.image = self.images[self.index]
+
+    def resize(self, scale):
+        self.height = self.height * scale
+        self.width = self.width * scale
+        self.image = pygame.transform.rotozoom(self.images[self.index], 0, scale)
+
+    def changeLocation(self, x, y):
+        self.x = x
+        self.y = y
+        self.rect = pygame.Rect(x, y, self.width, self.height)
+
+class Ruby(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.images = []
+        self.images.append(pygame.image.load('Ruby_idle.png'))
+        self.images.append(pygame.image.load('Ruby_left.png'))
+        self.images.append(pygame.image.load('Ruby_prep.png'))
+        self.images.append(pygame.image.load('Ruby_start.png'))
+        self.images.append(pygame.image.load('Ruby_fire.png'))
+        self.images.append(pygame.image.load('Ruby_start.png'))
+        self.images.append(pygame.image.load('Ruby_prep.png'))
+        self.images.append(pygame.image.load('Ruby_left.png'))
+        self.images.append(pygame.image.load('Ruby_hurt.png'))
+
+        self.index = 0
+        self.image = self.images[self.index]
+        self.rect = pygame.Rect(800, 350, 500, 500)
+
+    def update(self):
+        self.index += 1
+        if self.index >= len(self.images):
+            self.index = 0
+        self.image = self.images[self.index]
+
+    def resize(self, scale):
+        self.height = self.height * scale
+        self.width = self.width * scale
+        self.image = pygame.transform.rotozoom(self.images[self.index], 0, scale)
+
+    def changeLocation(self, x, y):
+        self.x = x
+        self.y = y
+        self.rect = pygame.Rect(x, y, self.width, self.height)
+
+class Eye(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.images = []
+        self.images.append(pygame.image.load('C1.png'))
+        self.images.append(pygame.image.load('C2.png'))
+        self.images.append(pygame.image.load('C3.png'))
+        self.images.append(pygame.image.load('C4.png'))
+
+
+        self.index = 0
+        self.image = self.images[self.index]
+        self.rect = pygame.Rect(850, 400, 500, 500)
+
+    def update(self):
+        self.index += 1
+        if self.index >= len(self.images):
+            self.index = 0
+        self.image = self.images[self.index]
+
+    def resize(self, scale):
+        self.height = self.height * scale
+        self.width = self.width * scale
+        self.image = pygame.transform.rotozoom(self.images[self.index], 0, scale)
+
+    def changeLocation(self, x, y):
+        self.x = x
+        self.y = y
+        self.rect = pygame.Rect(x, y, self.width, self.height)
+
+def initialize(filename):
+    wk = load_workbook(filename=filename)
+
+    ws = wk.active
+    return ws
+
+
+def load_question(category):
+    print("Question Categories: ")
+    print("1 Syntax\n2 Vocabulary\n3 Logic\n4 Number Conversion\n5 General\n")
+    value = 0
+
+    if category == int(1):
+        value = random.randrange(2, 7)
+    elif category == int(2):
+        value = random.randrange(7, 12)
+    elif category == int(3):
+        value = random.randrange(12, 17)
+    elif category == int(4):
+        value = random.randrange(17, 22)
+    else:
+        value = random.randrange(2, 22)
+
+    print(value)
+    return value
+
+
+'''
+def get_question(value):
+    question = ws['B' + str(value)].value
+    #print(ws[question].value)
+    choices = ws['D' + str(value)].value
+    #print(ws[choices].value)
+    answer = ws['E' + str(value)].value
+
+    return question, choices, answer 
+'''
+
+
+def get_result(guess, answer):
+    if guess == answer or guess == answer.capitalize() or guess == answer + '.' or guess == answer.capitalize() + '.':
+        # print("Correct!")
+        return True
+    else:
+        # print("Incorrect")
+        return False
+
+
+def get_question(value,ws):
+    # list returned has the info
+    # 0 has the question
+    # 1 has answer A
+    # 2 has answer B
+    # 3 has answer C
+    # 4 has answer D
+    # 5 has the correct answer (ex "A")
+    the_question = ["", "", "", "", "", ""]
+
+    question = 'B' + str(value)
+    the_question[0] = ws[question].value
+
+    choiceA = 'F' + str(value)
+    the_question[1] = ws[choiceA].value
+
+    choiceB = 'G' + str(value)
+    the_question[2] = ws[choiceB].value
+
+    choiceC = 'H' + str(value)
+    the_question[3] = ws[choiceC].value
+
+    choiceD = 'I' + str(value)
+    the_question[4] = ws[choiceD].value
+
+    the_question[5] = ws['E' + str(value)].value
+
+    return the_question
+
+
+def changeQuestionDeck(filename, ws):
+    wk = load_workbook(filename=filename)
+    ws = wk.active
+    print("Loaded")
+    return ws
+
+
+class button():
+    def __init__(self, color, x, y, width, height, text=''):
+        self.color = color
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.text = text
+
+    def modify(self, x, y, width, height):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+
+    def draw(self, screen, fontSize, text_color, center=False, outline=None):
+        # Call this method to draw the button on the screen
+        if outline:
+            pygame.draw.rect(screen, outline, (round(self.x - 2, self.y - 2), round(self.width + 4, self.height + 4)),
+                             0)
+
+        pygame.draw.rect(screen, self.color, (round(self.x), round(self.y), round(self.width), round(self.height)), 0)
+
+        if self.text != '':
+            font = pygame.font.Font('JandaManateeSolid.ttf', fontSize)
+            text = font.render(self.text, 1, text_color)
+            if center:
+                screen.blit(text, (round(self.x + (self.width / 2 - text.get_width() / 2)),
+                                   round(self.y + (self.height / 2 - text.get_height() / 2))))
+            else:
+                screen.blit(text, (round(self.x + self.width), round(self.y)))
+
+        pygame.display.update()
+
+    def isOver(self, pos):
+        if pos[0] > self.x and pos[0] < self.x + self.width:
+            if pos[1] > self.y and pos[1] < self.y + self.height:
+                return True
+
+        return False
+
+
+class text():
+    def __init__(self, color, x, y, width, height, textSize, text):
+        self.color = color
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.text = text
+        self.textSize = textSize
+
+    def modify(self, x, y, width, height):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+
+    def draw(self, screen, fontSize, center):
+        #pygame.draw.rect(screen, self.color, (round(self.x), round(self.y), round(self.width), round(self.height)), 0)
+
+        if len(self.text) != 0:
+            size = len(self.text)
+            font = pygame.font.Font("JandaManateeSolid.ttf", fontSize)
+            i = 0
+            if center:
+                for part in self.text:
+                    text = font.render(part, True, self.color)
+                    screen.blit(text, (round(self.x + (self.width / 2 - text.get_width() / 2)),
+                                   round(self.y + (self.height / 2 - text.get_height() / 2) + i)))
+                    i += 37
+            else:
+                for part in self.text:
+                    text = font.render(part, True, self.color)
+                    screen.blit(text, (round(self.x + self.width), round(self.y + i)))
+                    i += 37
+
+
+class healthBar():
+    def __init__(self, x, y, width, height, health, orientation):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.health = health
+        self.orientation = orientation
+
+    def modify(self, x, y, width, height):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+
+    def set_health(self, newHealth):
+        self.health = newHealth
+
+    def draw(self, screen):
+        pygame.draw.rect(screen, (255, 255, 255), (self.x - 2, self.y - 2, self.width + 4, self.height + 4))
+        pygame.draw.rect(screen, (0, 0, 0), (self.x, self.y, self.width, self.height))
+        if self.health != 0:
+            if self.health >= 55:
+                pygame.draw.rect(screen, (0, 128, 0),
+                                 (self.x, self.y, self.width - (self.width * ((100 - self.health) / 100)), self.height))
+            elif self.health < 25:
+                pygame.draw.rect(screen, (255, 0, 0),
+                                 (self.x, self.y, self.width - (self.width * ((100 - self.health) / 100)), self.height))
+            else:
+                pygame.draw.rect(screen, (255, 255, 0),
+                                 (self.x, self.y, self.width - (self.width * ((100 - self.health) / 100)), self.height))
+            # print(self.health)
+            # font = pygame.font.SysFont('comicsans', 40)
+            # text = font.render("HP:", 1, (0, 0, 0), (204,204,0))
+            # text_rect = text.get_rect()
+            # text_rect.center = (self.x + (self.width * 0.15), self.y + (self.height * 0.5))
+            # screen.blit(text, text_rect)
+        pygame.display.update()
+
+
 # class level():
 #     def __init__(self, level):
 #         self.level = level
 
 
-ws = questions.initialize("python_questions.xlsx")
+ws = initialize("python_questions.xlsx")
 screen = pygame.display.set_mode((0, 0), pygame.RESIZABLE)
 white = (255, 255, 255)
 purple = (110, 113, 198)
@@ -44,62 +380,62 @@ clock = pygame.time.Clock()
 
 theScreen = Screen(screen.get_width(), screen.get_height())
 
-userHealth = Button.healthBar(20, 20, 200, 30, 100, "left")
-enemyHealth = Button.healthBar(width - 20 - 200, 20, 200, 30, 100, "right")
+userHealth = healthBar(20, 20, 200, 30, 100, "left")
+enemyHealth = healthBar(width - 20 - 200, 20, 200, 30, 100, "right")
 damageStats = damage(50, 10)
 
 
 
-cat1 = Button.button(fuschia, 400, 200, 30, 30, " " + ws['C2'].value)
-cat2 = Button.button(fuschia, 650, 200, 30, 30, " " + ws['C7'].value)
-cat3 = Button.button(fuschia, 900, 200, 30, 30, " " + ws['C12'].value)
-cat4 = Button.button(fuschia, 450, 350, 30, 30, " " + ws['C17'].value)
-cat5 = Button.button(fuschia, 800, 350, 30, 30, " General")
+cat1 = button(fuschia, 400, 200, 30, 30, " " + ws['C2'].value)
+cat2 = button(fuschia, 650, 200, 30, 30, " " + ws['C7'].value)
+cat3 = button(fuschia, 900, 200, 30, 30, " " + ws['C12'].value)
+cat4 = button(fuschia, 450, 350, 30, 30, " " + ws['C17'].value)
+cat5 = button(fuschia, 800, 350, 30, 30, " General")
 
-a = Button.button(color_light, 200, 175, 25, 25)
-b = Button.button(color_light, 200, 225, 25, 25)
-c = Button.button(color_light, 200, 275, 25, 25)
-d = Button.button(color_light, 200, 325, 25, 25)
+a = button(color_light, 200, 175, 25, 25)
+b = button(color_light, 200, 225, 25, 25)
+c = button(color_light, 200, 275, 25, 25)
+d = button(color_light, 200, 325, 25, 25)
 
-chooseCat = Button.text(fuschia, (theScreen.width * 0.25), (theScreen.height * 0.5 / 12), (theScreen.width * 0.5),
+chooseCat = text(fuschia, (theScreen.width * 0.25), (theScreen.height * 0.5 / 12), (theScreen.width * 0.5),
                             (theScreen.height * 1 / 10),
                             100, ["Choose a category:"])
 
 #start menu buttons
-title = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
+title = text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
                     ["PYTHON PALS"])
-startButton = Button.button(color_light, (width * 0.25), (height * 3 / 12), (width * 0.5), (height * 2 / 10),
+startButton = button(color_light, (width * 0.25), (height * 3 / 12), (width * 0.5), (height * 2 / 10),
                                        "Start")
-optionsButton = Button.button(color_light, (width * 0.25), (height * 6 / 12), (width * 0.5), (height * 2 / 10),
+optionsButton = button(color_light, (width * 0.25), (height * 6 / 12), (width * 0.5), (height * 2 / 10),
                               "Options")
-quitButton = Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
+quitButton = button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
                                       "Quit")
 #options menu buttons
-optionsHeader = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
+optionsHeader = text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
                                ["OPTIONS"])
-choose_q_deck = Button.button(color_light, (width * 0.25), (height * 3 / 12), (width * 0.5), (height * 2 / 10),
+choose_q_deck = button(color_light, (width * 0.25), (height * 3 / 12), (width * 0.5), (height * 2 / 10),
                                       "Choose Question Deck")
-change_sound_settings = Button.button(color_light, (width * 0.25), (height * 6 / 12), (width * 0.5), (height * 2 / 10),
+change_sound_settings = button(color_light, (width * 0.25), (height * 6 / 12), (width * 0.5), (height * 2 / 10),
                                       "Change Sound Settings")
-back_to_main = Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
+back_to_main = button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
                                       "Back to Main Menu")
 
 #options -> return to options
-back_to_options = Button.button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
+back_to_options = button(color_light, (width * 0.25), (height * 9 / 12), (width * 0.5), (height * 2 / 10),
                                       "Back to Options Menu")
 
 #options -> choose question deck
-q_deck_header = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
+q_deck_header = text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
                                ["QUESTION DECKS"])
-changeCapitals = Button.button(color_light, (width * 0.25), (height * 3 / 14), (width * 0.5), (height * 2 / 14),
+changeCapitals = button(color_light, (width * 0.25), (height * 3 / 14), (width * 0.5), (height * 2 / 14),
                                       "Use Capitals Deck")
-changePython = Button.button(color_light, (width * 0.25), (height * 5.5 / 14), (width * 0.5), (height * 2 / 14),
+changePython = button(color_light, (width * 0.25), (height * 5.5 / 14), (width * 0.5), (height * 2 / 14),
                                       "Use Python Deck")
-changeHistory = Button.button(color_light, (width * 0.25), (height * 8 / 14), (width * 0.5), (height * 2 / 14),
+changeHistory = button(color_light, (width * 0.25), (height * 8 / 14), (width * 0.5), (height * 2 / 14),
                                       "Use History Deck")
 
 #options -> change sound settings
-sound_header = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
+sound_header = text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
                                ["SOUND SETTINGS"])
 
 
@@ -186,14 +522,14 @@ def startscreen():
         pygame.display.update()
 
 def drawCategories(color, text_color):
-    chooseCat = Button.text(color, (theScreen.width * 0.25), (theScreen.height * 0.5 / 12), (theScreen.width * 0.5),
+    chooseCat = text(color, (theScreen.width * 0.25), (theScreen.height * 0.5 / 12), (theScreen.width * 0.5),
                             (theScreen.height * 1 / 10),
                             100, ["Choose a category:"])
-    cat1 = Button.button(color, theScreen.width * 0.25, theScreen.height * 0.22, theScreen.width * 0.025, theScreen.height * 0.025, " " + ws['C2'].value)
-    cat2 = Button.button(color, theScreen.width * 0.41, theScreen.height * 0.22, theScreen.width * 0.025, theScreen.height * 0.025, " " + ws['C7'].value)
-    cat3 = Button.button(color, theScreen.width * 0.56, theScreen.height * 0.22, theScreen.width * 0.025, theScreen.height * 0.025, " " + ws['C12'].value)
-    cat4 = Button.button(color, theScreen.width * 0.25, theScreen.height * 0.4, theScreen.width * 0.025, theScreen.height * 0.025, " " + ws['C17'].value)
-    cat5 = Button.button(color, theScreen.width * 0.5, theScreen.height * 0.4, theScreen.width * 0.025, theScreen.height * 0.025, " General")
+    cat1 = button(color, theScreen.width * 0.25, theScreen.height * 0.22, theScreen.width * 0.025, theScreen.height * 0.025, " " + ws['C2'].value)
+    cat2 = button(color, theScreen.width * 0.41, theScreen.height * 0.22, theScreen.width * 0.025, theScreen.height * 0.025, " " + ws['C7'].value)
+    cat3 = button(color, theScreen.width * 0.56, theScreen.height * 0.22, theScreen.width * 0.025, theScreen.height * 0.025, " " + ws['C12'].value)
+    cat4 = button(color, theScreen.width * 0.25, theScreen.height * 0.4, theScreen.width * 0.025, theScreen.height * 0.025, " " + ws['C17'].value)
+    cat5 = button(color, theScreen.width * 0.5, theScreen.height * 0.4, theScreen.width * 0.025, theScreen.height * 0.025, " General")
 
     chooseCat.draw(screen, int(theScreen.width * 0.07), True)
     cat1.draw(screen, int(theScreen.width * 0.02), text_color, False)
@@ -333,12 +669,12 @@ def drawBackground(playerGroup, enemyGroup, width, height, level, correctOrWrong
     if correctOrWrong != "":
         if correctOrWrong == "Correct":
             pygame.mixer.Sound("correct.wav").play()
-            display = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5,
+            display = text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5,
                                   theScreen.height * 0.4, int(theScreen.width * 0.02), ["Correct"])
             pygame.draw.rect(screen, (0,255,0), (theScreen.width * 0.35, theScreen.height * 0.3, theScreen.width * 0.3, theScreen.height * 0.2))
         if correctOrWrong == "Wrong":
             pygame.mixer.Sound("incorrect.wav").play()
-            display = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5,
+            display = text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5,
                                   theScreen.height * 0.4, int(theScreen.width * 0.02), ["Incorrect"])
             pygame.draw.rect(screen, (255, 0, 0), (theScreen.width * 0.35, theScreen.height * 0.3, theScreen.width * 0.3, theScreen.height * 0.2))
         display.draw(screen, int(theScreen.width * 1/16), True)
@@ -554,18 +890,18 @@ def theBattle(level):
         drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
         choose = chooseCategory(playerGroup, enemyGroup, level, cat_button_color, text_color)
         print(choose)
-        questionNumber = questions.load_question(choose)
-        question = questions.get_question(questionNumber, ws)
+        questionNumber = load_question(choose)
+        question = get_question(questionNumber, ws)
 
         drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
 
-        q = Button.text(text_color, theScreen.width * 0.25, theScreen.height * 1/9, 50, 50, 40, question[0].splitlines())
+        q = text(text_color, theScreen.width * 0.25, theScreen.height * 1/9, 50, 50, 40, question[0].splitlines())
         pygame.gfxdraw.box(screen, pygame.Rect(0, theScreen.height * 0.1, theScreen.width, 75),
                            (77, 153, 83, 130))
-        A = Button.text(text_color, a.x, a.y, 50, 50, 40, question[1].splitlines())
-        B = Button.text(text_color, b.x, b.y, 50, 50, 40, question[2].splitlines())
-        C = Button.text(text_color, c.x, c.y, 50, 50, 40, question[3].splitlines())
-        D = Button.text(text_color, d.x, d.y, 50, 50, 40, question[4].splitlines())
+        A = text(text_color, a.x, a.y, 50, 50, 40, question[1].splitlines())
+        B = text(text_color, b.x, b.y, 50, 50, 40, question[2].splitlines())
+        C = text(text_color, c.x, c.y, 50, 50, 40, question[3].splitlines())
+        D = text(text_color, d.x, d.y, 50, 50, 40, question[4].splitlines())
         pygame.gfxdraw.box(screen, pygame.Rect(theScreen.width * 0.1, theScreen.height * 0.15,
                                                600, 300), (77, 153, 83, 130))
         q.draw(screen, int(theScreen.width*0.02), False)
@@ -575,7 +911,7 @@ def theBattle(level):
         D.draw(screen, int(theScreen.width*0.015), False)
 
         guess = chooseAnswer(playerGroup, enemyGroup, question,level,q,A,B,C,D, ans_button_color)
-        is_correct = questions.get_result(guess, question[5])
+        is_correct = get_result(guess, question[5])
 
         if is_correct:
             enemy_health = enemy_health - damageStats.userDamage
@@ -628,7 +964,7 @@ def win():
     snake.convert()
     # snake = pygame.transform.rotozoom(snake, 0, 0.7)
     screen.blit(snake, (theScreen.width * 0.43, theScreen.height * 0.6))
-    winScreen = Button.text(gold, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5),
+    winScreen = text(gold, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5),
                             (theScreen.height * 2 / 10), 150,
                             ["You win!"])
     winScreen.draw(screen, int(theScreen.width*0.1), True)
@@ -646,7 +982,7 @@ def lose():
     snake.convert()
     #snake = pygame.transform.rotozoom(snake, 0, 0.7)
     screen.blit(snake, (theScreen.width * 0.4, theScreen.height * 0.6))
-    gameOver = Button.text(gold, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5), (theScreen.height * 2 / 10),
+    gameOver = text(gold, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5), (theScreen.height * 2 / 10),
                            150,
                            ["GameOver"])
     gameOver.draw(screen, int(theScreen.width*0.1), True)
@@ -718,15 +1054,15 @@ def q_deck_menu():
                     options()
                     opt = False
                 if changeCapitals.isOver(pos):
-                    globals()['ws'] = questions.changeQuestionDeck("python_questions_capitals.xlsx", ws)
+                    globals()['ws'] = changeQuestionDeck("python_questions_capitals.xlsx", ws)
                     options()
                     opt = False
                 if changePython.isOver(pos):
-                    globals()['ws'] = questions.changeQuestionDeck("python_questions.xlsx", ws)
+                    globals()['ws'] = changeQuestionDeck("python_questions.xlsx", ws)
                     options()
                     opt = False
                 if changeHistory.isOver(pos):
-                    globals()['ws'] = questions.changeQuestionDeck("python_questions_timeline.xlsx", ws)
+                    globals()['ws'] = changeQuestionDeck("python_questions_timeline.xlsx", ws)
                     options()
                     opt = False
             if ev.type == pygame.VIDEORESIZE:
@@ -774,9 +1110,9 @@ def sound_settings_menu():
                 redraw_sound_window()
 
 def levelChange(screen, level, Enemy, enemyImg):
-    level = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.1, theScreen.width * 0.5,
+    level = text(black, theScreen.width * 0.25, theScreen.height * 0.1, theScreen.width * 0.5,
                         theScreen.height * 0.2, 200, ["LEVEL " + str(level)])
-    enemy = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.35, theScreen.width * 0.5,
+    enemy = text(black, theScreen.width * 0.25, theScreen.height * 0.35, theScreen.width * 0.5,
                         theScreen.height * 0.2, 100, ["Your enemy is " + Enemy])
     screen.fill(gold)
     enemyimg = pygame.image.load(enemyImg)
