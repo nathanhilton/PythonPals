@@ -1,4 +1,4 @@
-from Button import button
+import Button
 import questions
 import pygame
 import pygame.gfxdraw
@@ -48,11 +48,12 @@ userHealth = Button.healthBar(20, 20, 200, 30, 100, "left")
 enemyHealth = Button.healthBar(width - 20 - 200, 20, 200, 30, 100, "right")
 damageStats = damage(50, 10)
 
+
 cat1 = Button.button(fuschia, 400, 200, 30, 30, " " + ws['C2'].value)
 cat2 = Button.button(fuschia, 650, 200, 30, 30, " " + ws['C7'].value)
 cat3 = Button.button(fuschia, 900, 200, 30, 30, " " + ws['C12'].value)
 cat4 = Button.button(fuschia, 450, 350, 30, 30, " " + ws['C17'].value)
-cat5 = Button.button(fuschia, 800, 350, 30, 30, "General")
+cat5 = Button.button(fuschia, 800, 350, 30, 30, " General")
 
 a = Button.button(color_light, 200, 175, 25, 25)
 b = Button.button(color_light, 200, 225, 25, 25)
@@ -91,9 +92,9 @@ q_deck_header = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0
                                ["QUESTION DECKS"])
 changeCapitals = Button.button(color_light, (width * 0.25), (height * 3 / 14), (width * 0.5), (height * 2 / 14),
                                       "Use Capitals Deck")
-changePython = Button.button(color_light, (width * 0.25), (height * 6 / 14), (width * 0.5), (height * 2 / 14),
+changePython = Button.button(color_light, (width * 0.25), (height * 5.5 / 14), (width * 0.5), (height * 2 / 14),
                                       "Use Python Deck")
-changeHistory = Button.button(color_light, (width * 0.25), (height * 9 / 14), (width * 0.5), (height * 2 / 14),
+changeHistory = Button.button(color_light, (width * 0.25), (height * 8 / 14), (width * 0.5), (height * 2 / 14),
                                       "Use History Deck")
 
 #options -> change sound settings
@@ -102,16 +103,12 @@ sound_header = Button.text(black, (width * 0.25), (height * 0 / 12), (width * 0.
 
 
 def resize(startWidth, startHeight):
-    # battle scene
-    cat1 = Button.button(fuschia, 400, 200, 30, 30, " " + ws['C2'].value)
-    cat2 = Button.button(fuschia, 650, 200, 30, 30, " " + ws['C7'].value)
-    cat3 = Button.button(fuschia, 900, 200, 30, 30, " " + ws['C12'].value)
-    cat4 = Button.button(fuschia, 450, 350, 30, 30, " " + ws['C17'].value)
-    cat5 = Button.button(fuschia, 800, 350, 30, 30, " General")
-
     # category/answer buttons
-    cat1.modify((startWidth * 0.25), (startHeight * 9 / 12), (startWidth * 0.5),
-                (startHeight * 2 / 10))
+    cat1.modify(0.25 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
+    cat2.modify(0.41 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
+    cat3.modify(0.56 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
+    cat4.modify(0.25 * startWidth, 0.4 * startHeight, startWidth * 0.025, startHeight * 0.025)
+    cat5.modify(0.5 * startWidth, 0.4 * startHeight, startWidth * 0.025, startHeight * 0.025)
 
     #start menu
     title.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
@@ -142,14 +139,13 @@ def resize(startWidth, startHeight):
     chooseCat.modify((theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5),
                      (theScreen.height * 1 / 10))
 
-
 def reDrawStartWindow():
 
     screen.fill(gold)
     title.draw(screen, int(theScreen.width*0.1), True)
-    startButton.draw(screen, int(theScreen.width*0.05), True)
-    optionsButton.draw(screen, int(theScreen.width*0.05), True)
-    quitButton.draw(screen, int(theScreen.width*0.05), True)
+    startButton.draw(screen, int(theScreen.width*0.05), black, True)
+    optionsButton.draw(screen, int(theScreen.width*0.05), black, True)
+    quitButton.draw(screen, int(theScreen.width*0.05), black, True)
 
 def startscreen():
     reDrawStartWindow()
@@ -162,16 +158,12 @@ def startscreen():
                 pygame.quit()
                 quit()
             if ev.type == pygame.VIDEORESIZE:
-                # not sure what the commented part is?
-
-                # if (ev.w != theScreen.width):
-                #     theScreen.width = ev.w
-                #     theScreen.height = int(theScreen.width * 900 / 1600)
-                # else:
-                #     theScreen.height = ev.h
-                #     theScreen.width = int(theScreen.height * 1600 / 900)
-                theScreen.width = ev.w
-                theScreen.height = ev.h
+                if (ev.w != theScreen.width):
+                    theScreen.width = ev.w
+                    theScreen.height = int(theScreen.width * 900 / 1600)
+                else:
+                    theScreen.height = ev.h
+                    theScreen.width = int(theScreen.height * 1600 / 900)
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resize(theScreen.width, theScreen.height)
@@ -189,22 +181,25 @@ def startscreen():
 
         pygame.display.update()
 
-def drawCategories():
-    cat1 = Button.button(fuschia, 400, 200, 30, 30, " " + ws['C2'].value)
-    cat2 = Button.button(fuschia, 650, 200, 30, 30, " " + ws['C7'].value)
-    cat3 = Button.button(fuschia, 900, 200, 30, 30, " " + ws['C12'].value)
-    cat4 = Button.button(fuschia, 450, 350, 30, 30, " " + ws['C17'].value)
-    cat5 = Button.button(fuschia, 800, 350, 30, 30, " General")
+def drawCategories(color, text_color):
+    chooseCat = Button.text(color, (theScreen.width * 0.25), (theScreen.height * 0.5 / 12), (theScreen.width * 0.5),
+                            (theScreen.height * 1 / 10),
+                            100, ["Choose a category:"])
+    cat1 = Button.button(color, theScreen.width * 0.25, theScreen.height * 0.22, theScreen.width * 0.025, theScreen.height * 0.025, " " + ws['C2'].value)
+    cat2 = Button.button(color, theScreen.width * 0.41, theScreen.height * 0.22, theScreen.width * 0.025, theScreen.height * 0.025, " " + ws['C7'].value)
+    cat3 = Button.button(color, theScreen.width * 0.56, theScreen.height * 0.22, theScreen.width * 0.025, theScreen.height * 0.025, " " + ws['C12'].value)
+    cat4 = Button.button(color, theScreen.width * 0.25, theScreen.height * 0.4, theScreen.width * 0.025, theScreen.height * 0.025, " " + ws['C17'].value)
+    cat5 = Button.button(color, theScreen.width * 0.5, theScreen.height * 0.4, theScreen.width * 0.025, theScreen.height * 0.025, " General")
 
     chooseCat.draw(screen, int(theScreen.width * 0.07), True)
-    cat1.draw(screen, int(theScreen.width * 0.02))
-    cat2.draw(screen, int(theScreen.width * 0.02))
-    cat3.draw(screen, int(theScreen.width * 0.02))
-    cat4.draw(screen, int(theScreen.width * 0.02))
-    cat5.draw(screen, int(theScreen.width * 0.02))
+    cat1.draw(screen, int(theScreen.width * 0.02), text_color, False)
+    cat2.draw(screen, int(theScreen.width * 0.02), text_color, False)
+    cat3.draw(screen, int(theScreen.width * 0.02), text_color, False)
+    cat4.draw(screen, int(theScreen.width * 0.02), text_color, False)
+    cat5.draw(screen, int(theScreen.width * 0.02), text_color, False)
 
-def chooseCategory(playerGroup, enemyGroup,level):
-    drawCategories()
+def chooseCategory(playerGroup, enemyGroup,level,color,text_color):
+    drawCategories(color, text_color)
     while True:
         for ev in pygame.event.get():
             pos = pygame.mouse.get_pos()
@@ -229,21 +224,17 @@ def chooseCategory(playerGroup, enemyGroup,level):
                     return 5
 
             if ev.type == pygame.VIDEORESIZE:
-                # not sure what the commented part is?
-
-                # if (ev.w != theScreen.width):
-                #     theScreen.width = ev.w
-                #     theScreen.height = int(theScreen.width * 900 / 1600)
-                # else:
-                #     theScreen.height = ev.h
-                #     theScreen.width = int(theScreen.height * 1600 / 900)
-                theScreen.width = ev.w
-                theScreen.height = ev.h
+                if (ev.w != theScreen.width):
+                    theScreen.width = ev.w
+                    theScreen.height = int(theScreen.width * 900 / 1600)
+                else:
+                    theScreen.height = ev.h
+                    theScreen.width = int(theScreen.height * 1600 / 900)
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resizeBattle(theScreen.width, theScreen.height)
                 drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
-                drawCategories()
+                drawCategories(color, text_color)
 
 def resizeBattle(startWidth, startHeight):
     userHealth.modify(0.02 * startWidth, 0.02 * startHeight, startWidth * 0.1, startHeight * 0.03)
@@ -255,11 +246,6 @@ def resizeBattle(startWidth, startHeight):
     d.modify(0.125 * startWidth, 0.36 * startHeight, startWidth * 0.021, startHeight * 0.021)
 
     chooseCat.modify(0.25 * startWidth, 1/24 * startHeight, startWidth * 0.5, startHeight * 0.1)
-    cat1 = Button.button(fuschia, 400, 200, 30, 30, " " + ws['C2'].value)
-    cat2 = Button.button(fuschia, 650, 200, 30, 30, " " + ws['C7'].value)
-    cat3 = Button.button(fuschia, 900, 200, 30, 30, " " + ws['C12'].value)
-    cat4 = Button.button(fuschia, 450, 350, 30, 30, " " + ws['C17'].value)
-    cat5 = Button.button(fuschia, 800, 350, 30, 30, " General")
 
     cat1.modify(0.25 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
     cat2.modify(0.41 * startWidth, 0.22 * startHeight, startWidth * 0.025, startHeight * 0.025)
@@ -269,14 +255,14 @@ def resizeBattle(startWidth, startHeight):
 
     pygame.display.update()
 
-def drawAnswers():
-    a.draw(screen, int(theScreen.width * 0.02))
-    b.draw(screen, int(theScreen.width * 0.02))
-    c.draw(screen, int(theScreen.width * 0.02))
-    d.draw(screen, int(theScreen.width * 0.02))
+def drawAnswers(text_color):
+    a.draw(screen, int(theScreen.width * 0.02), text_color, False)
+    b.draw(screen, int(theScreen.width * 0.02), text_color, False)
+    c.draw(screen, int(theScreen.width * 0.02), text_color, False)
+    d.draw(screen, int(theScreen.width * 0.02), text_color, False)
 
-def chooseAnswer(playerGroup, enemyGroup, question,level,q,A,B,C,D):
-    drawAnswers()
+def chooseAnswer(playerGroup, enemyGroup, question ,level,q,A,B,C,D, text_color):
+    drawAnswers(text_color)
     while True:
         for ev in pygame.event.get():
             pos = pygame.mouse.get_pos()
@@ -293,27 +279,27 @@ def chooseAnswer(playerGroup, enemyGroup, question,level,q,A,B,C,D):
                 elif d.isOver(pos):
                     return 'd'
             if ev.type == pygame.VIDEORESIZE:
-                # not sure what the commented part is?
-
-                # if (ev.w != theScreen.width):
-                #     theScreen.width = ev.w
-                #     theScreen.height = int(theScreen.width * 900 / 1600)
-                # else:
-                #     theScreen.height = ev.h
-                #     theScreen.width = int(theScreen.height * 1600 / 900)
-                theScreen.width = ev.w
-                theScreen.height = ev.h
+                if (ev.w != theScreen.width):
+                    theScreen.width = ev.w
+                    theScreen.height = int(theScreen.width * 900 / 1600)
+                else:
+                    theScreen.height = ev.h
+                    theScreen.width = int(theScreen.height * 1600 / 900)
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resizeBattle(theScreen.width, theScreen.height)
                 drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
-                q.draw(screen, int(theScreen.width * 0.02), False)
+                q.modify(theScreen.width * 0.25, theScreen.height * 1/9, 50, 50)
+                A.modify(a.x, a.y, 50, 50)
+                B.modify(b.x, b.y, 50, 50)
+                C.modify(c.x, c.y, 50, 50)
+                D.modify(d.x, d.y, 50, 50)
                 q.draw(screen, int(theScreen.width * 0.02), False)
                 A.draw(screen, int(theScreen.width * 0.015), False)
                 B.draw(screen, int(theScreen.width * 0.015), False)
                 C.draw(screen, int(theScreen.width * 0.015), False)
                 D.draw(screen, int(theScreen.width * 0.015), False)
-                drawAnswers()
+                drawAnswers(text_color)
 
 def drawBattle(playerGroup, enemyGroup, w, h,level):
     screen.fill((0,0,0))
@@ -340,8 +326,8 @@ def drawBackground(playerGroup, enemyGroup, width, height,level, correctOrWrong=
         bg = pygame.image.load("jungleBackground.jpg")
         bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1380)
     elif level == 2:
-        bg = pygame.image.load("treasure.jpg")
-        bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1920)
+        bg = pygame.image.load("goldmine.jpg")
+        bg = pygame.transform.rotozoom(bg, 0, theScreen.width / 1400)
     else:
         bg = pygame.image.load("lava.png")
         bg = pygame.transform.rotozoom(bg, 0, theScreen.height / 727)
@@ -349,13 +335,13 @@ def drawBackground(playerGroup, enemyGroup, width, height,level, correctOrWrong=
     if correctOrWrong != "":
         if correctOrWrong == "Correct":
             display = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5,
-                                  theScreen.height * 0.4, 100, ["Correct"])
+                                  theScreen.height * 0.4, int(theScreen.width * 0.02), ["Correct"])
             pygame.draw.rect(screen, (0,255,0), (theScreen.width * 0.35, theScreen.height * 0.3, theScreen.width * 0.3, theScreen.height * 0.2))
         if correctOrWrong == "Wrong":
             display = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.2, theScreen.width * 0.5,
-                                  theScreen.height * 0.4, 100, ["Incorrect"])
+                                  theScreen.height * 0.4, int(theScreen.width * 0.02), ["Incorrect"])
             pygame.draw.rect(screen, (255, 0, 0), (theScreen.width * 0.35, theScreen.height * 0.3, theScreen.width * 0.3, theScreen.height * 0.2))
-        display.draw(screen, 100, True)
+        display.draw(screen, int(theScreen.width * 1/16), True)
     # playerGroup.draw(screen)
     # enemyGroup.draw(screen)
     enemyHealth.draw(screen)
@@ -528,15 +514,30 @@ def theBattle(level):
     playerGroup = pygame.sprite.Group(myPlayer)
     # playerGroup.draw(screen)
 
+    cat_button_color = white
+    ans_button_color = white
+    text_color = white
     if level == 1:
+        text_color = black
+        cat_button_color = fuschia
+        ans_button_color = color_light
+
         myEnemy = Coffee()
         pygame.mixer.music.load('jazz.mp3')
         pygame.mixer.music.play(-1)
     elif level == 2:
+        cat_button_color = (240,208,79)
+        text_color = color_light
+        ans_button_color = color_dark
+
         myEnemy = Ruby()
         pygame.mixer.music.load('funke.mp3')
         pygame.mixer.music.play(-1)
     else:
+        cat_button_color = color_dark
+        text_color = color_light
+        ans_button_color = color_dark
+
         myEnemy = Eye()
         pygame.mixer.music.load('bluth.wav')
         pygame.mixer.music.play(-1)
@@ -554,20 +555,20 @@ def theBattle(level):
         # enemyGroup.draw(screen)
         # playerGroup.draw(screen)
         drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
-        choose = chooseCategory(playerGroup, enemyGroup,level)
+        choose = chooseCategory(playerGroup, enemyGroup, level, cat_button_color, text_color)
         print(choose)
         questionNumber = questions.load_question(choose)
         question = questions.get_question(questionNumber, ws)
 
         drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
 
-        q = Button.text(black, 400, 100, 50, 50, 40, question[0].splitlines())
+        q = Button.text(text_color, theScreen.width * 0.25, theScreen.height * 1/9, 50, 50, 40, question[0].splitlines())
         pygame.gfxdraw.box(screen, pygame.Rect(0, theScreen.height * 0.1, theScreen.width, 75),
                            (77, 153, 83, 130))
-        A = Button.text(black, a.x, a.y, 50, 50, 40, question[1].splitlines())
-        B = Button.text(black, b.x, b.y, 50, 50, 40, question[2].splitlines())
-        C = Button.text(black, c.x, c.y, 50, 50, 40, question[3].splitlines())
-        D = Button.text(black, d.x, d.y, 50, 50, 40, question[4].splitlines())
+        A = Button.text(text_color, a.x, a.y, 50, 50, 40, question[1].splitlines())
+        B = Button.text(text_color, b.x, b.y, 50, 50, 40, question[2].splitlines())
+        C = Button.text(text_color, c.x, c.y, 50, 50, 40, question[3].splitlines())
+        D = Button.text(text_color, d.x, d.y, 50, 50, 40, question[4].splitlines())
         pygame.gfxdraw.box(screen, pygame.Rect(theScreen.width * 0.1, theScreen.height * 0.15,
                                                600, 300), (77, 153, 83, 130))
         q.draw(screen, int(theScreen.width*0.02), False)
@@ -576,7 +577,7 @@ def theBattle(level):
         C.draw(screen, int(theScreen.width*0.015), False)
         D.draw(screen, int(theScreen.width*0.015), False)
 
-        guess = chooseAnswer(playerGroup, enemyGroup, question,level,q,A,B,C,D)
+        guess = chooseAnswer(playerGroup, enemyGroup, question,level,q,A,B,C,D, ans_button_color)
         is_correct = questions.get_result(guess, question[5])
 
         if is_correct:
@@ -659,9 +660,9 @@ def lose():
 def reDrawOptionsWindow():
     screen.fill(purple)
     optionsHeader.draw(screen, int(theScreen.width*0.1), True)
-    choose_q_deck.draw(screen, int(theScreen.width*0.05), True)
-    change_sound_settings.draw(screen, int(theScreen.width*0.05), True)
-    back_to_main.draw(screen, int(theScreen.width*0.05), True)
+    choose_q_deck.draw(screen, int(theScreen.width*0.04), black, True)
+    change_sound_settings.draw(screen, int(theScreen.width*0.04), black, True)
+    back_to_main.draw(screen, int(theScreen.width*0.04), black, True)
     pygame.display.update()
 
 def options():
@@ -685,8 +686,12 @@ def options():
                     opt = False
                     break
             if ev.type == pygame.VIDEORESIZE:
-                theScreen.width = ev.w
-                theScreen.height = ev.h
+                if (ev.w != theScreen.width):
+                    theScreen.width = ev.w
+                    theScreen.height = int(theScreen.width * 900 / 1600)
+                else:
+                    theScreen.height = ev.h
+                    theScreen.width = int(theScreen.height * 1600 / 900)
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resize(theScreen.width, theScreen.height)
@@ -696,10 +701,10 @@ def options():
 def redraw_q_deck_window():
     screen.fill(blue)
     q_deck_header.draw(screen, int(theScreen.width*0.1), True)
-    changeCapitals.draw(screen, int(theScreen.width*0.05), True)
-    changePython.draw(screen, int(theScreen.width*0.05), True)
-    changeHistory.draw(screen, int(theScreen.width*0.05), True)
-    back_to_options.draw(screen, int(theScreen.width*0.05), True)
+    changeCapitals.draw(screen, int(theScreen.width*0.04), black, True)
+    changePython.draw(screen, int(theScreen.width*0.04), black, True)
+    changeHistory.draw(screen, int(theScreen.width*0.04), black, True)
+    back_to_options.draw(screen, int(theScreen.width*0.04), black, True)
     pygame.display.update()
 
 def q_deck_menu():
@@ -728,8 +733,12 @@ def q_deck_menu():
                     options()
                     opt = False
             if ev.type == pygame.VIDEORESIZE:
-                theScreen.width = ev.w
-                theScreen.height = ev.h
+                if (ev.w != theScreen.width):
+                    theScreen.width = ev.w
+                    theScreen.height = int(theScreen.width * 900 / 1600)
+                else:
+                    theScreen.height = ev.h
+                    theScreen.width = int(theScreen.height * 1600 / 900)
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resize(theScreen.width, theScreen.height)
@@ -739,7 +748,7 @@ def q_deck_menu():
 def redraw_sound_window():
     screen.fill(blue)
     sound_header.draw(screen, int(theScreen.width*0.1), True)
-    back_to_options.draw(screen, int(theScreen.width*0.05), True)
+    back_to_options.draw(screen, int(theScreen.width*0.04), black, True)
     pygame.display.update()
 
 def sound_settings_menu():
@@ -756,13 +765,16 @@ def sound_settings_menu():
                     options()
                     opt = False
             if ev.type == pygame.VIDEORESIZE:
-                theScreen.width = ev.w
-                theScreen.height = ev.h
+                if (ev.w != theScreen.width):
+                    theScreen.width = ev.w
+                    theScreen.height = int(theScreen.width * 900 / 1600)
+                else:
+                    theScreen.height = ev.h
+                    theScreen.width = int(theScreen.height * 1600 / 900)
 
                 pygame.display.set_mode((theScreen.width, theScreen.height), pygame.RESIZABLE)
                 resize(theScreen.width, theScreen.height)
                 redraw_sound_window()
-
 
 def levelChange(screen, level, Enemy, enemyImg):
     level = Button.text(black, theScreen.width * 0.25, theScreen.height * 0.1, theScreen.width * 0.5,
@@ -793,21 +805,21 @@ def main():
     pygame.display.set_caption("Python Pals")
 
     enter_game = True
+    restart_music = True
     while enter_game:
-        pygame.mixer.music.load('idle.wav')
-        pygame.mixer.music.play(-1)
+        if(restart_music == True):
+            pygame.mixer.music.load('idle.wav')
+            pygame.mixer.music.play(-1)
 
         # start screen
         menuOption = startscreen()
-
-        print(width)
-        print(height)
 
         #  go to start, options, or quit
         if menuOption == "start":
             damageStats.modify(50,10)
             levelChange(screen, 1, "Java", "coffee1.png")
             result = theBattle(1)
+            restart_music = True
             if result == "win":
                 levelChange(screen, 2, "Ruby", "Ruby_idle.png")
                 damageStats.modify(25,25)
@@ -826,8 +838,10 @@ def main():
                 lose()
         elif menuOption == "options":
             options()
+            restart_music = False
         elif menuOption == "quit":
             enter_game = False
+            restart_music = False
     # pygame.mixer.music.stop()
     pygame.quit()
 
