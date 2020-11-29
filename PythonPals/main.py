@@ -956,11 +956,11 @@ def win(sound):
     screen.fill(gold)
     fw = pygame.image.load("fireworks.png")
     fw = pygame.transform.rotozoom(fw, 0, theScreen.width / 820)
-    screen.blit(fw, (theScreen.width * 0.25, theScreen.height * 0.25))
+    screen.blit(fw, (theScreen.width * 0.2, theScreen.height * 0.25))
     snake = pygame.image.load("snake6.png")
     snake.convert()
     snake = pygame.transform.rotozoom(snake, 0, theScreen.height / 600)
-    screen.blit(snake, (theScreen.width * 0.43, theScreen.height * 0.6))
+    screen.blit(snake, (theScreen.width * 0.4, theScreen.height * 0.6))
     winScreen = text(black, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5),
                             (theScreen.height * 2 / 10), 150,
                             ["You win!"])
@@ -981,7 +981,7 @@ def lose(sound):
     snake = pygame.image.load("snake5.png")
     snake.convert()
     snake = pygame.transform.rotozoom(snake, 0, theScreen.height / 600)
-    screen.blit(snake, (theScreen.width * 0.4, theScreen.height * 0.6))
+    screen.blit(snake, (theScreen.width * 0.34, theScreen.height * 0.6))
     gameOver = text(indigo, (theScreen.width * 0.25), (theScreen.height * 0 / 12), (theScreen.width * 0.5), (theScreen.height * 2 / 10),
                            150,
                            ["GameOver"])
@@ -1176,6 +1176,8 @@ def main():
 
         #  go to start, options, or quit
         if menuOption == "start":
+            win(sound)
+            lose(sound)
             damageStats.modify(50,10)
             levelChange(screen, 1, "Java", "coffee1.png", sound)
             result = theBattle(1, sound)
