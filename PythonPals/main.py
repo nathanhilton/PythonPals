@@ -949,15 +949,12 @@ def win(sound):
         pygame.mixer.music.load('victoire.mp3')
         pygame.mixer.music.play(-1)
 
-<<<<<<< HEAD
     print("Victory!")
-    screen.fill((100, 100, 100))
-=======
+
     screen.fill(gold)
     fw = pygame.image.load("fireworks.png")
     fw = pygame.transform.rotozoom(fw, 0, theScreen.width / 820)
     screen.blit(fw, (theScreen.width * 0.2, theScreen.height * 0.25))
->>>>>>> 476cbcfa7cf696ddb908809add60befd75b6004c
     snake = pygame.image.load("snake6.png")
     snake.convert()
     snake = pygame.transform.rotozoom(snake, 0, theScreen.height / 600)
@@ -975,15 +972,12 @@ def lose(sound):
         pygame.mixer.music.load('defaite.mp3')
         pygame.mixer.music.play(-1)
 
-<<<<<<< HEAD
     print("Defeat")
-    screen.fill((100, 100, 100))
-=======
     screen.fill(color_light)
     rain = pygame.image.load("rain.png")
     rain = pygame.transform.rotozoom(rain, 0, theScreen.width / 2000)
     screen.blit(rain, (theScreen.width * 0.4, theScreen.height * 0.25))
->>>>>>> 476cbcfa7cf696ddb908809add60befd75b6004c
+
     snake = pygame.image.load("snake5.png")
     snake.convert()
     snake = pygame.transform.rotozoom(snake, 0, theScreen.height / 600)
