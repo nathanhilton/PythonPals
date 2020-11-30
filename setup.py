@@ -9,7 +9,7 @@ def readme():
 
 setup(
     name='PythonPals',
-    version='2.1',
+    version='2.1.2',
     packages=setuptools.find_packages(),
     include_package_data=True,
     data_files=[('PythonPals', ["PythonPals/python_questions.xlsx", "PythonPals/coffee1.png", "PythonPals/coffee2.png",

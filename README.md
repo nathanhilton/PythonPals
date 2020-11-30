@@ -10,10 +10,11 @@ the player loses if their own HP reaches zero. The production release now also i
 questions to History and Geography categories as well as multiple levels and sound effects for feedback.
 
 `**Note about bugs: Possible issue with pip installation in which relative file paths are not recognized. To run from 
-the .tgz file, cd into PythonPals-VersionNumber, then Python Pals and then run python main.py`
+the .tgz file, cd into "PythonPals-VersionNumber", then cd into "Python Pals" and then run python main.py from the
+present directory`
 
 ## Package name for PIP installation
-May need to run as administrator on Windows from PythonPals-2.1
+May need to run as administrator on Windows from PythonPals-2.1.2
 pip install . 
 
 
