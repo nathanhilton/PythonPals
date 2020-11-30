@@ -1174,29 +1174,29 @@ def sound_settings_menu():
                     sound_settings_menu()
                     return "unmuted"
                 if music_choice_1.isOver(pos):
-                    sound_settings_menu()
                     pygame.mixer.music.load('8bit_game.mp3')
                     pygame.mixer.music.play(-1)
+                    sound_settings_menu()
                     return "8bit"
                 if music_choice_2.isOver(pos):
-                    sound_settings_menu()
                     pygame.mixer.music.load('idle.wav')
                     pygame.mixer.music.play(-1)
+                    sound_settings_menu()
                     return "elf"
                 if music_choice_3.isOver(pos):
-                    sound_settings_menu()
                     pygame.mixer.music.load('latin.wav')
                     pygame.mixer.music.play(-1)
+                    sound_settings_menu()
                     return "latin"
                 if music_choice_4.isOver(pos):
-                    sound_settings_menu()
                     pygame.mixer.music.load('elevator_music_16bit.wav')
                     pygame.mixer.music.play(-1)
+                    sound_settings_menu()
                     return "sinatra"
                 if music_choice_5.isOver(pos):
-                    sound_settings_menu()
                     pygame.mixer.music.load('lobby_rick_roll.wav')
                     pygame.mixer.music.play(-1)
+                    sound_settings_menu()
                     return "rick_roll"
 
             if ev.type == pygame.VIDEORESIZE:
