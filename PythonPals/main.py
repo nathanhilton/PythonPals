@@ -1170,35 +1170,35 @@ def sound_settings_menu():
                     pygame.mixer.music.load('8bit_game.mp3')
                     pygame.mixer.music.play(-1)
                     sound_settings_menu()
-                    return "8bit"
+                    return True, "8bit"
                 if music_choice_2.isOver(pos):
                     pygame.mixer.music.load('idle.wav')
                     pygame.mixer.music.play(-1)
                     sound_settings_menu()
-                    return "elf"
+                    return True, "elf"
                 if music_choice_3.isOver(pos):
                     pygame.mixer.music.load('latin.wav')
                     pygame.mixer.music.play(-1)
                     sound_settings_menu()
-                    return "latin"
+                    return True, "latin"
                 if music_choice_4.isOver(pos):
                     pygame.mixer.music.load('elevator_music_16bit.wav')
                     pygame.mixer.music.play(-1)
                     sound_settings_menu()
-                    return "sinatra"
+                    return True, "sinatra"
                 if music_choice_5.isOver(pos):
                     pygame.mixer.music.load('lobby_rick_roll.wav')
                     pygame.mixer.music.play(-1)
                     sound_settings_menu()
-                    return "rick_roll"
-                if mute_button.isOver(pos):
-                    pygame.mixer.music.pause()
-                    sound_settings_menu()
-                    return "muted"
+                    return True, "rick_roll"
                 if unmute_button.isOver(pos):
                     pygame.mixer.music.unpause()
                     sound_settings_menu()
-                    return "unmuted"
+                    return False, "" #"unmuted"
+                if mute_button.isOver(pos):
+                    pygame.mixer.music.pause()
+                    sound_settings_menu()
+                    return True, "" #"muted"
 
             if ev.type == pygame.VIDEORESIZE:
                 if (ev.w != theScreen.width):
@@ -1295,18 +1295,20 @@ def main():
             else:
                 lose(sound)
         elif menuOption == "options":
-            restart_music = False
+            sound = options()
             sound_str = options()
+            restart_music = False
+            '''
             if sound_str == "muted":
                 sound = False
             elif sound_str == "unmuted":
                 sound = True
             elif sound_str != "":
                 sound = True
-                restart_music = False
             else: #sound_str == ""
-                #sound = True
+                sound = True
                 restart_music = False
+            '''
         elif menuOption == "quit":
             enter_game = False
             #restart_music = False
