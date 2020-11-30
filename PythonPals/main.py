@@ -352,10 +352,6 @@ class healthBar():
             # screen.blit(text, text_rect)
         pygame.display.update()
 
-# class level():
-#     def __init__(self, level):
-#         self.level = level
-
 #-----initialize objects etc-----#
 ws = initialize("python_questions.xlsx")
 screen = pygame.display.set_mode((0,0), pygame.RESIZABLE)
@@ -371,7 +367,6 @@ gold = (197, 179, 88)
 lime = (153, 255, 51)
 width = screen.get_width()
 height = screen.get_height()
-#screen.fill(lime)
 
 clock = pygame.time.Clock()
 theScreen = Screen(screen.get_width(), screen.get_height())
@@ -431,14 +426,23 @@ changeHistory = button(color_light, (width * 0.25), (height * 8 / 14), (width * 
 #options -> change sound settings
 sound_header = text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
                                ["SOUND SETTINGS"])
-mute_button = button(color_light, (width * 0.24), (height * 3 / 12), (width * 0.25), (height * 2 / 10),
+mute_button = button(color_light, (width * 0.24), (height * 2.5 / 12), (width * 0.25), (height * 1 / 14),
                                       "Mute")
-unmute_button = button(color_light, (width * 0.51), (height * 3 / 12), (width * 0.25), (height * 2 / 10),
+unmute_button = button(color_light, (width * 0.51), (height * 2.5 / 12), (width * 0.25), (height * 1 / 14),
                                       "Unmute")
-volume_label = text(black,(width * 0.25), (height * 6 / 12), (width * 0.5), (height * 2 / 10), 100,
-                               ["Volume"])
-#volume_minus
-#volume_plus
+music_label = text(black,(width * 0.25), (height * 3.25 / 12), (width * 0.5), (height * 2 / 14), 75,
+                               ["Choose lobby music:"])
+music_choice_1 = button(color_light, (width * 0.235), (height * 4.8 / 12), (width * 0.167), (height * 2 / 14),
+                                      "8-bit")
+music_choice_2 = button(color_light, (width * 0.4175), (height * 4.8 / 12), (width * 0.167), (height * 2 / 14),
+                                      "Elf")
+music_choice_3 = button(color_light, (width * 0.6), (height * 4.8 / 12), (width * 0.167), (height * 2 / 14),
+                                      "Latin")
+music_choice_4 = button(color_light, (width * 0.24), (height * 6.8 / 12), (width * 0.25), (height * 2 / 14),
+                                      "Sinatra")
+music_choice_5 = button(color_light, (width * 0.51), (height * 6.8 / 12), (width * 0.25), (height * 2 / 14),
+                                      "Rick n' Roll")
+
 
 def resize(startWidth, startHeight):
     #screen
@@ -477,9 +481,14 @@ def resize(startWidth, startHeight):
 
     #options -> change sound settings menu
     sound_header.modify((startWidth * 0.25), (startHeight * 0 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
-    mute_button.modify((startWidth * 0.24), (startHeight * 3 / 12), (startWidth * 0.25), (startHeight * 2 / 10))
-    unmute_button.modify((startWidth * 0.51), (startHeight * 3 / 12), (startWidth * 0.25), (startHeight * 2 / 10))
-    volume_label.modify((startWidth * 0.25), (startHeight * 6 / 12), (startWidth * 0.5), (startHeight * 2 / 10))
+    mute_button.modify((startWidth * 0.24), (startHeight * 2.5 / 12), (startWidth * 0.25), (startHeight * 1 / 14))
+    unmute_button.modify((startWidth * 0.51), (startHeight * 2.5 / 12), (startWidth * 0.25), (startHeight * 1 / 14))
+    music_label.modify((startWidth * 0.25), (startHeight * 3.25 / 12), (startWidth * 0.5), (startHeight * 2 / 14))
+    music_choice_1.modify((startWidth * 0.235), (startHeight * 4.8 / 12), (startWidth * 0.167), (startHeight * 2 / 14))
+    music_choice_2.modify((startWidth * 0.4175), (startHeight * 4.8 / 12), (startWidth * 0.167), (startHeight * 2 / 14))
+    music_choice_3.modify((startWidth * 0.6), (startHeight * 4.8 / 12), (startWidth * 0.167), (startHeight * 2 / 14))
+    music_choice_4.modify((startWidth * 0.24), (startHeight * 6.8 / 12), (startWidth * 0.25), (startHeight * 2 / 14))
+    music_choice_5.modify((startWidth * 0.51), (startHeight * 6.8 / 12), (startWidth * 0.25), (startHeight * 2 / 14))
 
 def reDrawStartWindow():
     screen.fill(gold)
@@ -1131,9 +1140,14 @@ def q_deck_menu():
 def redraw_sound_window():
     screen.fill(blue)
     sound_header.draw(screen, int(theScreen.width*0.1), True)
-    unmute_button.draw(screen, int(theScreen.width*0.06), black, True)
-    mute_button.draw(screen, int(theScreen.width*0.06), black, True)
-    volume_label.draw(screen, int(theScreen.width*0.06), True)
+    unmute_button.draw(screen, int(theScreen.width*0.032), black, True)
+    mute_button.draw(screen, int(theScreen.width*0.032), black, True)
+    music_label.draw(screen, int(theScreen.width*0.05), True)
+    music_choice_1.draw(screen, int(theScreen.width*0.04), black, True)
+    music_choice_2.draw(screen, int(theScreen.width * 0.04), black, True)
+    music_choice_3.draw(screen, int(theScreen.width * 0.04), black, True)
+    music_choice_4.draw(screen, int(theScreen.width * 0.04), black, True)
+    music_choice_5.draw(screen, int(theScreen.width * 0.04), black, True)
     back_to_options.draw(screen, int(theScreen.width*0.04), black, True)
     pygame.display.update()
 
@@ -1146,6 +1160,7 @@ def sound_settings_menu():
             if ev.type == pygame.QUIT:
                 pygame.quit()
                 quit()
+
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if back_to_options.isOver(pos):
                     options()
@@ -1158,6 +1173,32 @@ def sound_settings_menu():
                     pygame.mixer.music.unpause()
                     sound_settings_menu()
                     return "unmuted"
+                if music_choice_1.isOver(pos):
+                    sound_settings_menu()
+                    pygame.mixer.music.load('8bit_game.mp3')
+                    pygame.mixer.music.play(-1)
+                    return "8bit"
+                if music_choice_2.isOver(pos):
+                    sound_settings_menu()
+                    pygame.mixer.music.load('idle.wav')
+                    pygame.mixer.music.play(-1)
+                    return "elf"
+                if music_choice_3.isOver(pos):
+                    sound_settings_menu()
+                    pygame.mixer.music.load('latin.wav')
+                    pygame.mixer.music.play(-1)
+                    return "latin"
+                if music_choice_4.isOver(pos):
+                    sound_settings_menu()
+                    pygame.mixer.music.load('elevator_music_16bit.wav')
+                    pygame.mixer.music.play(-1)
+                    return "sinatra"
+                if music_choice_5.isOver(pos):
+                    sound_settings_menu()
+                    pygame.mixer.music.load('lobby_rick_roll.wav')
+                    pygame.mixer.music.play(-1)
+                    return "rick_roll"
+
             if ev.type == pygame.VIDEORESIZE:
                 if (ev.w != theScreen.width):
                     theScreen.width = ev.w
@@ -1208,10 +1249,24 @@ def main():
     enter_game = True
     restart_music = True
     sound = True
+    sound_str = ""
     while enter_game:
         if(sound and restart_music):
-            pygame.mixer.music.load('idle.wav')
-            pygame.mixer.music.play(-1)
+            if (sound_str == "8bit"):
+                pygame.mixer.music.load('8bit_game.mp3')
+                pygame.mixer.music.play(-1)
+            elif (sound_str == "latin"):
+                pygame.mixer.music.load('latin.wav')
+                pygame.mixer.music.play(-1)
+            elif (sound_str == "sinatra"):
+                pygame.mixer.music.load('elevator_music_16bit.wav')
+                pygame.mixer.music.play(-1)
+            elif (sound_str == "rick_roll"):
+                pygame.mixer.music.load('lobby_rick_roll.wav')
+                pygame.mixer.music.play(-1)
+            else: #sound_str == "elf" or ""
+                pygame.mixer.music.load('idle.wav')
+                pygame.mixer.music.play(-1)
 
         #start screen
         menuOption = startscreen()
@@ -1243,8 +1298,14 @@ def main():
             sound_str = options()
             if sound_str == "muted":
                 sound = False
-            if sound_str == "unmuted":
+            elif sound_str == "unmuted":
                 sound = True
+            #elif sound_str != "":
+                #sound = True
+                #restart_music = False
+            else: #sound_str == ""
+                sound = True
+                restart_music = False
         elif menuOption == "quit":
             enter_game = False
             #restart_music = False
