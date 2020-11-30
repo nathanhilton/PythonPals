@@ -934,7 +934,7 @@ def theBattle(level, sound):
 
         drawBattle(playerGroup, enemyGroup, theScreen.width, theScreen.height,level)
 
-        #boxes
+        #ellipse
         pygame.draw.ellipse(screen, box_color, (0, int(theScreen.height * 0.1), int(theScreen.width), int(theScreen.height * 0.1)))
 
         q = text(text_color, theScreen.width * 0.25, theScreen.height * 1/9, 50, 50, 40, question[0].splitlines())
@@ -943,7 +943,7 @@ def theBattle(level, sound):
         C = text(text_color, c.x, c.y, 50, 50, 40, question[3].splitlines())
         D = text(text_color, d.x, d.y, 50, 50, 40, question[4].splitlines())
 
-        #more boxes
+        #question box
         #pygame.gfxdraw.box(screen, pygame.Rect(theScreen.width * 0.1, theScreen.height * 0.15,
                                                #600, 300), box_color)
 
