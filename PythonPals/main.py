@@ -21,6 +21,17 @@ class damage():
         self.userDamage = newUserDam
         self.enemyDamage = newEnemyDam
 
+class music():
+    def __init__(self):
+        self.play = True
+        self.name = "elf"
+    def mute(self):
+        self.play = False
+    def unmute(self):
+        self.play = True
+    def change(self, new_name):
+        self.name = new_name
+
 #-----from player.py-----#
 class Player(pygame.sprite.Sprite):
     def __init__(self):
@@ -370,6 +381,7 @@ height = screen.get_height()
 
 clock = pygame.time.Clock()
 theScreen = Screen(screen.get_width(), screen.get_height())
+sounds = music()
 
 userHealth = healthBar(20, 20, 200, 30, 100, "left")
 enemyHealth = healthBar(width - 20 - 200, 20, 200, 30, 100, "right")
@@ -424,7 +436,6 @@ changeHistory = button(color_light, (width * 0.25), (height * 8 / 14), (width * 
                                       "Use History Deck")
 
 #options -> change sound settings
-sound = True
 sound_header = text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
                                ["SOUND SETTINGS"])
 mute_button = button(color_light, (width * 0.24), (height * 2.5 / 12), (width * 0.25), (height * 1 / 14),
@@ -876,7 +887,7 @@ def animationController(playerGroup, enemyGroup, width, height, clock, level, an
         enemyGroup.draw(screen)
         pygame.display.update()
 
-def theBattle(level, sound):
+def theBattle(level, play):
     health = 100
     enemy_health = 100
     userHealth.set_health(health)
@@ -895,7 +906,7 @@ def theBattle(level, sound):
     # level = 3
     if level == 1:
         myEnemy = Coffee()
-        if sound:
+        if play:
             pygame.mixer.music.load('jazz.mp3')
             pygame.mixer.music.play(-1)
         text_color = black
@@ -904,7 +915,7 @@ def theBattle(level, sound):
         box_color = (77, 160, 83, 130)
     elif level == 2:
         myEnemy = Ruby()
-        if sound:
+        if play:
             pygame.mixer.music.load('funke.mp3')
             pygame.mixer.music.play(-1)
         cat_button_color = (240,208,79)
@@ -913,7 +924,7 @@ def theBattle(level, sound):
         box_color = (0,0,0,0)
     else:
         myEnemy = Eye()
-        if sound:
+        if play:
             pygame.mixer.music.load('bluth.wav')
             pygame.mixer.music.play(-1)
         cat_button_color = (12,37,99)
@@ -1003,14 +1014,14 @@ def theBattle(level, sound):
                 animationController(playerGroup, enemyGroup, theScreen.width, theScreen.height, clock,level, "coffee break")
             return "win"
 
-def win(sound):
-    if sound:
+def win(play):
+    if play:
         pygame.mixer.music.load('victoire.mp3')
         pygame.mixer.music.play(-1)
 
     print("Victory!")
 
-    screen.fill(gold)
+    screen.fill(purple) #gold
     fw = pygame.image.load("fireworks.png")
     fw = pygame.transform.rotozoom(fw, 0, theScreen.width / 820)
     screen.blit(fw, (theScreen.width * 0.2, theScreen.height * 0.25))
@@ -1026,13 +1037,13 @@ def win(sound):
     pygame.display.update()
     pygame.time.delay(4000)
 
-def lose(sound):
-    if sound:
+def lose(play):
+    if play:
         pygame.mixer.music.load('defaite.mp3')
         pygame.mixer.music.play(-1)
 
     print("Defeat")
-    screen.fill(color_light)
+    screen.fill(blue) #color_light
     rain = pygame.image.load("rain.png")
     rain = pygame.transform.rotozoom(rain, 0, theScreen.width / 2000)
     screen.blit(rain, (theScreen.width * 0.4, theScreen.height * 0.25))
@@ -1074,8 +1085,9 @@ def options():
                     q_deck_menu()
                     opt = False
                 if change_sound_settings.isOver(pos):
-                    #sound_settings_menu()
-                    return sound_settings_menu()
+                    sound_settings_menu()
+                    #return sound_settings_menu()
+                    opt = False
 
             if ev.type == pygame.VIDEORESIZE:
                 if (ev.w != theScreen.width):
@@ -1169,36 +1181,50 @@ def sound_settings_menu():
                 if music_choice_1.isOver(pos):
                     pygame.mixer.music.load('8bit_game.mp3')
                     pygame.mixer.music.play(-1)
-                    sound_settings_menu()
-                    return True, "8bit"
+                    #sound_settings_menu()
+                    #return "8bit"
+                    sounds.change("8bit")
+                    opt = True
                 if music_choice_2.isOver(pos):
                     pygame.mixer.music.load('idle.wav')
                     pygame.mixer.music.play(-1)
-                    sound_settings_menu()
-                    return True, "elf"
+                    #sound_settings_menu()
+                    #return "elf"
+                    sounds.change("elf")
+                    opt = True
                 if music_choice_3.isOver(pos):
                     pygame.mixer.music.load('latin.wav')
                     pygame.mixer.music.play(-1)
-                    sound_settings_menu()
-                    return True, "latin"
+                    #sound_settings_menu()
+                    #return "latin"
+                    sounds.change("latin")
+                    opt = True
                 if music_choice_4.isOver(pos):
                     pygame.mixer.music.load('elevator_music_16bit.wav')
                     pygame.mixer.music.play(-1)
-                    sound_settings_menu()
-                    return True, "sinatra"
+                    #sound_settings_menu()
+                    #return "sinatra"
+                    sounds.change("sinatra")
+                    opt = True
                 if music_choice_5.isOver(pos):
                     pygame.mixer.music.load('lobby_rick_roll.wav')
                     pygame.mixer.music.play(-1)
-                    sound_settings_menu()
-                    return True, "rick_roll"
+                    #sound_settings_menu()
+                    #return "rick_roll"
+                    sounds.change("rick_roll")
+                    opt = True
                 if unmute_button.isOver(pos):
                     pygame.mixer.music.unpause()
-                    sound_settings_menu()
-                    return False, "" #"unmuted"
+                    #sound_settings_menu()
+                    sounds.unmute()
+                    opt = True
+                    #return False #"unmuted"
                 if mute_button.isOver(pos):
                     pygame.mixer.music.pause()
-                    sound_settings_menu()
-                    return True, "" #"muted"
+                    #sound_settings_menu()
+                    sounds.mute()
+                    opt = True
+                    #return True #"muted"
 
             if ev.type == pygame.VIDEORESIZE:
                 if (ev.w != theScreen.width):
@@ -1249,23 +1275,22 @@ def main():
 
     enter_game = True
     restart_music = True
-    sound = True
-    sound_str = ""
+
     while enter_game:
-        if(sound and restart_music):
-            if (sound_str == "8bit"):
+        if sounds.play and restart_music:
+            if sounds.name == "8bit":
                 pygame.mixer.music.load('8bit_game.mp3')
                 pygame.mixer.music.play(-1)
-            elif (sound_str == "latin"):
+            elif sounds.name == "latin":
                 pygame.mixer.music.load('latin.wav')
                 pygame.mixer.music.play(-1)
-            elif (sound_str == "sinatra"):
+            elif sounds.name == "sinatra":
                 pygame.mixer.music.load('elevator_music_16bit.wav')
                 pygame.mixer.music.play(-1)
-            elif (sound_str == "rick_roll"):
+            elif sounds.name == "rick_roll":
                 pygame.mixer.music.load('lobby_rick_roll.wav')
                 pygame.mixer.music.play(-1)
-            else: #sound_str == "elf" or ""
+            else: #sounds.name == "elf" #or ""
                 pygame.mixer.music.load('idle.wav')
                 pygame.mixer.music.play(-1)
 
@@ -1275,36 +1300,37 @@ def main():
         #go to start, options, or quit
         if menuOption == "start":
             damageStats.modify(50,10)
-            levelChange(screen, 1, "Java", "coffee1.png", sound)
-            result = theBattle(1, sound)
+            levelChange(screen, 1, "Java", "coffee1.png", sounds.play)
+            result = theBattle(1, sounds.play)
             restart_music = True
             if result == "win":
-                levelChange(screen, 2, "Ruby", "Ruby_idle.png", sound)
+                levelChange(screen, 2, "Ruby", "Ruby_idle.png", sounds.play)
                 damageStats.modify(25,25)
-                result2 = theBattle(2, sound)
+                result2 = theBattle(2, sounds.play)
                 if result2 == "win":
-                    levelChange(screen, 3, "Eye", "C1.png", sound)
+                    levelChange(screen, 3, "Eye", "C1.png", sounds.play)
                     damageStats.modify(17,25)
-                    result3 = theBattle(3, sound)
+                    result3 = theBattle(3, sounds.play)
                     if result3 == "win":
-                        win(sound)
+                        win(sounds.play)
                     else:
-                        lose(sound)
+                        lose(sounds.play)
                 else:
-                    lose(sound)
+                    lose(sounds.play)
             else:
-                lose(sound)
+                lose(sounds.play)
         elif menuOption == "options":
-            sound = options()
-            sound_str = options()
+            #sound = options()
+            #sound_str = options()
+            options()
             restart_music = False
             '''
-            if sound_str == "muted":
+            if sound_str == "unmuted":
+                sound = True
+            elif sound_str == "muted":
                 sound = False
-            elif sound_str == "unmuted":
-                sound = True
-            elif sound_str != "":
-                sound = True
+            #elif sound_str != "":
+                #sound = True
             else: #sound_str == ""
                 sound = True
                 restart_music = False
