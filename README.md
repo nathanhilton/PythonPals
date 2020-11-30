@@ -16,11 +16,11 @@ May need to run as administrator on Windows from PythonPals-2.1.2
 pip install . 
 
 
+
 ## Run executable command 
 python-pals
 
-To run from 
-the .tgz file, cd into "PythonPals-VersionNumber", then cd into "Python Pals" and then run python main.py from the
-present directory
+To run from the .tgz file, cd into "PythonPals-VersionNumber", then cd into "Python Pals" and then run "python main.py"
+or "python-pals" from the present directory
 ## GitHub repository:
 https://github.com/nathanhilton/PythonPals
