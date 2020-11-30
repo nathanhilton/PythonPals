@@ -3,8 +3,7 @@ import pygame
 import sys
 
 
-<<<<<<< Updated upstream
-=======
+
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -132,4 +131,4 @@ class Eye(pygame.sprite.Sprite):
         self.x = x
         self.y = y
         self.rect = pygame.Rect(x, y, self.width, self.height)
->>>>>>> Stashed changes
+

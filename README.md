@@ -13,7 +13,7 @@ questions to History and Geography categories as well as multiple levels and sou
 the .tgz file, cd into PythonPals-VersionNumber, then Python Pals and then run python main.py`
 
 ## Package name for PIP installation
-May need to run as administrator on Windows from PythonPals-//VersionNumber
+May need to run as administrator on Windows from PythonPals-2.1
 pip install . 
 
 
