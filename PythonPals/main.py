@@ -424,6 +424,7 @@ changeHistory = button(color_light, (width * 0.25), (height * 8 / 14), (width * 
                                       "Use History Deck")
 
 #options -> change sound settings
+sound = True
 sound_header = text(black, (width * 0.25), (height * 0 / 12), (width * 0.5), (height * 2 / 10), 150,
                                ["SOUND SETTINGS"])
 mute_button = button(color_light, (width * 0.24), (height * 2.5 / 12), (width * 0.25), (height * 1 / 14),
@@ -1165,14 +1166,6 @@ def sound_settings_menu():
                 if back_to_options.isOver(pos):
                     options()
                     opt = False
-                if mute_button.isOver(pos):
-                    pygame.mixer.music.pause()
-                    sound_settings_menu()
-                    return "muted"
-                if unmute_button.isOver(pos):
-                    pygame.mixer.music.unpause()
-                    sound_settings_menu()
-                    return "unmuted"
                 if music_choice_1.isOver(pos):
                     pygame.mixer.music.load('8bit_game.mp3')
                     pygame.mixer.music.play(-1)
@@ -1198,6 +1191,14 @@ def sound_settings_menu():
                     pygame.mixer.music.play(-1)
                     sound_settings_menu()
                     return "rick_roll"
+                if mute_button.isOver(pos):
+                    pygame.mixer.music.pause()
+                    sound_settings_menu()
+                    return "muted"
+                if unmute_button.isOver(pos):
+                    pygame.mixer.music.unpause()
+                    sound_settings_menu()
+                    return "unmuted"
 
             if ev.type == pygame.VIDEORESIZE:
                 if (ev.w != theScreen.width):
@@ -1300,11 +1301,11 @@ def main():
                 sound = False
             elif sound_str == "unmuted":
                 sound = True
-            #elif sound_str != "":
-                #sound = True
-                #restart_music = False
-            else: #sound_str == ""
+            elif sound_str != "":
                 sound = True
+                restart_music = False
+            else: #sound_str == ""
+                #sound = True
                 restart_music = False
         elif menuOption == "quit":
             enter_game = False
